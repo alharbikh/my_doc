@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بحث سوقي: إضافة Chrome لحضوري سمارت برو (HSP)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hsp-primary: #1a5694;
+            --hsp-secondary: #2d8659;
+            --hsp-accent: #c8821e;
+            --hsp-dark: #1a2b3c;
+            --hsp-light: #f0f4f8;
+            --hsp-danger: #c0392b;
+            --hsp-warning: #e67e22;
+        }
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background-color: var(--hsp-light);
+            color: var(--hsp-dark);
+            line-height: 1.8;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, var(--hsp-primary) 0%, var(--hsp-dark) 100%);
+            color: white;
+            padding: 60px 0 40px;
+            border-radius: 0 0 30px 30px;
+        }
+        .section-title {
+            color: var(--hsp-primary);
+            font-weight: 700;
+            border-bottom: 3px solid var(--hsp-accent);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .card-header {
+            background-color: var(--hsp-primary);
+            color: white;
+            font-weight: 700;
+            border-radius: 12px 12px 0 0 !important;
+        }
+        .card-header.bg-success { background-color: var(--hsp-secondary) !important; }
+        .card-header.bg-warning { background-color: var(--hsp-accent) !important; }
+        .card-header.bg-danger { background-color: var(--hsp-danger) !important; }
+        .competitor-table {
+            font-size: 0.85rem;
+        }
+        .competitor-table th {
+            background-color: var(--hsp-primary);
+            color: white;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+        .competitor-table td {
+            vertical-align: middle;
+        }
+        .competitor-table tr:hover {
+            background-color: #e8f0fe;
+        }
+        .badge-installs {
+            background-color: var(--hsp-secondary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .badge-rating {
+            background-color: var(--hsp-accent);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .badge-direct {
+            background-color: var(--hsp-danger);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+        }
+        .badge-indirect {
+            background-color: #6c757d;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+        }
+        .feature-card {
+            border-right: 4px solid var(--hsp-secondary);
+        }
+        .risk-card {
+            border-right: 4px solid var(--hsp-danger);
+        }
+        .opportunity-card {
+            border-right: 4px solid var(--hsp-accent);
+        }
+        .mvp-phase {
+            border-right: 4px solid var(--hsp-primary);
+        }
+        .stat-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--hsp-primary);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .positioning-box {
+            background: linear-gradient(135deg, var(--hsp-secondary) 0%, #1e6b3e 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        .positioning-box h3 {
+            color: white;
+            border: none;
+        }
+        .toc-list a {
+            color: var(--hsp-primary);
+            text-decoration: none;
+            display: block;
+            padding: 6px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .toc-list a:hover {
+            color: var(--hsp-accent);
+            padding-right: 8px;
+        }
+        .compliance-check {
+            color: var(--hsp-secondary);
+            font-weight: 700;
+        }
+        .compliance-x {
+            color: var(--hsp-danger);
+            font-weight: 700;
+        }
+        footer {
+            background-color: var(--hsp-dark);
+            color: #aaa;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-radius: 15px 15px 0 0;
+        }
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .alert-recommendation {
+            background: linear-gradient(135deg, #1a5694 0%, #2d8659 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        .alert-recommendation h3, .alert-recommendation h4 {
+            color: white;
+        }
+        .nav-tabs .nav-link {
+            color: var(--hsp-primary);
+            font-weight: 600;
+        }
+        .nav-tabs .nav-link.active {
+            color: white;
+            background-color: var(--hsp-primary);
+            border-color: var(--hsp-primary);
+        }
+    </style>
+</head>
+<body>
+<style>.home-nav{position:sticky;top:0;z-index:1100;background:rgba(255,255,255,.94);border-bottom:1px solid #dce5ee;backdrop-filter:blur(10px)}.home-nav-inner{max-width:1140px;margin:auto;padding:.6rem 1rem}.home-nav a{display:inline-block;padding:.38rem .9rem;border-radius:.55rem;background:#e8f0fe;color:#1a5694;text-decoration:none;font-family:Cairo,system-ui,sans-serif;font-weight:700}.home-nav a:hover{background:#d8e6fb}@media(max-width:575.98px){body{overflow-x:hidden}.table-responsive{max-width:100%;overflow-x:auto}}</style>
+<nav class="home-nav" aria-label="التنقل الرئيسي"><div class="home-nav-inner"><a href="./index.html">الرئيسية</a></div></nav>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="fw-bold mb-3">بحث سوقي: إضافة Chrome لحضوري سمارت برو</h1>
+                <p class="lead mb-0">دراسة جدوى ومنافسة شاملة لفرصة بناء إضافة متصفح تعمل كمساعد مكتبي لمديري المدارس على نظام "حضوري" وغيره من أنظمة الحضور السعودي</p>
+            </div>
+            <div class="col-lg-4 text-center d-none d-lg-block">
+                <div class="text-center"><span class="badge bg-primary p-3 fs-4">تقرير</span></div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-3 col-6 mb-2">
+                <div class="stat-box">
+                    <div class="stat-number">120+</div>
+                    <div class="stat-label">منتج وإضافة تم تحليلها</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <div class="stat-box">
+                    <div class="stat-number">228</div>
+                    <div class="stat-label">صفحة متجر Chrome تم قراءتها</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <div class="stat-box">
+                    <div class="stat-number">~1,200</div>
+                    <div class="stat-label">عدد تثبيت المنافسين المباشرين</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <div class="stat-box">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">سقف السوق (إضافة تحضيري)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+
+<!-- Table of Contents -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">فهرس المحتويات</h5>
+    </div>
+    <div class="card-body toc-list">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="#summary">1. الملخص التنفيذي</a>
+                <a href="#method">2. منهجية البحث</a>
+                <a href="#landscape">3. خريطة المشهد التنافسي</a>
+                <a href="#direct">4. المنافسون المباشرون (إضافات حضوري)</a>
+                <a href="#adjacent">5. المنافسون المجاورون (إضافات سعودية)</a>
+            </div>
+            <div class="col-md-6">
+                <a href="#global">6. المنافسون العالميون غير المباشرين</a>
+                <a href="#opportunities">7. فرص السوق والفجوات</a>
+                <a href="#compliance">8. قيود الامتثال وسياسات Chrome</a>
+                <a href="#positioning">9. Positioning واستراتيجية الدخول</a>
+                <a href="#mvp">10. خارطة MVP والتوصية النهائية</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 1. Executive Summary -->
+<div id="summary" class="mt-5">
+    <h2 class="section-title">1. الملخص التنفيذي</h2>
+    <div class="card">
+        <div class="card-body">
+            <p>كشف البحث عن نتيجة محورية واحدة: <strong>يوجد عنقود منافسة مباشر على نظام حضوري نفسه، لكنه صغير جدًا (~1,200 تثبيت إجمالي)</strong>، مما يؤكد أن السوق غير مشبع بل معروض بشكل ضعيف.</p>
+            
+            <p>في المقابل، الفئة المجاورة (إضافات منصة مدرستي ونور) أكبر بـ <strong>10 إلى 100 مرة</strong> — إضافة <a href="https://chromewebstore.google.com/detail/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1%D9%8A/iclelabpkphlfifajflffldnlffhnigl" target="_blank">تحضيري</a> لديها 50,000 مستخدم وإضافة <a href="https://chromewebstore.google.com/detail/%D9%85%D8%AF%D8%B1%D8%B3%D8%AA%D9%8A-%D8%A8%D9%84%D8%B3/maogiolhkdhjobnlobpkcpnmamnmilno" target="_blank">مدرستي بلس</a> 10,000 مستخدم — لكن <strong>جميع الإضافات عالية التثبيت موجهة للطلاب والدرجات، ولا توجد إضافة واحدة مخصصة لشؤون الموظفين والحضور للمدير</strong>.</p>
+
+            <p>الفرصة التي يمكن لحضوري سمارت برو امتلاكها: أن تكون <strong>أول مساعد مكتبي محلي مخصص لمدير المدرسة</strong> على الجانب الوظيفي (وليس الجانب الطلابي)، يقدم تحليلات الحضور، تتبع التأخير والغياب، إدارة الإجازات والاستئذان، سجلات الموظفين، وتقارير Excel/PDF بالعربية — كل ذلك محليًا على جهاز المدير دون إرسال بيانات لخوادم خارجية.</p>
+
+            <div class="alert alert-success mt-3" style="border-radius: 10px;">
+                <h5 class="alert-heading">التوصية المبدئية</h5>
+                <p class="mb-0"><strong>نعم، الإضافة تستحق البناء</strong> — السوق غير مشبع، الطلب موجود (مثبت بحجم الفئة المجاورة)، الفجوة واضحة (لا يوجد مساعد موظفين)، وقيود الخصوصية تشكل ميزة تنافسية حقيقية يتقبلها السوق السعودي بالفعل.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 2. Methodology -->
+<div id="method" class="mt-5">
+    <h2 class="section-title">2. منهجية البحث</h2>
+    <div class="card">
+        <div class="card-body">
+            <ul>
+                <li><strong>البحث في Chrome Web Store:</strong> تم تنفيذ أكثر من 40 استعلام بحثي (عربي وإنجليزي) مقيدين بنطاق <code>chromewebstore.google.com</code>، ثم <strong>فتح 228 صفحة متجر فردي</strong> مباشرةً لاستخراج عدد التثبيتات والتقييمات والأوصاف الكاملة.</li>
+                <li><strong>الأنظمة الحكومية السعودية:</strong> تمت قراءة الصفحات الرسمية لـ <a href="https://sites.moe.gov.sa/intranet/Ministry/services/service-18/" target="_blank">نظام حضوري</a>، <a href="https://noor.moe.gov.sa/Landing/about.html" target="_blank">نظام نور</a>، <a href="https://sites.moe.gov.sa/intranet/Ministry/services/service-6/" target="_blank">نظام فارس</a>، ومنصات مدد وقوى والتأمينات الاجتماعية.</li>
+                <li><strong>المنافسون العالميون:</strong> تم فتح صفحات التسعير والمنتجات لـ BambooHR، Clockify، Toggl، Harvest، Web Scraper، Data Miner، وغيرها من المصادر الأولية.</li>
+                <li><strong>سياسات Chrome:</strong> تمت قراءة <a href="https://developer.chrome.com/docs/webstore/troubleshooting" target="_blank">دليل استكشاف أخطاء Chrome Web Store</a> وتحديثات سياسات <a href="https://developer.chrome.com/blog/cws-policy-updates-2026" target="_blank">يوليو 2026</a> السارية اعتبارًا من 1 أغسطس 2026.</li>
+            </ul>
+            <div class="alert alert-info" style="border-radius: 10px; font-size: 0.85rem;">
+                <strong>محدودية البحث:</strong> صفحات البحث في Chrome Web Store محجوبة ضد الوصول الآلي، لذا تم الاكتشاف عبر بحث نطاقي ثم فتح كل صفحة متجر على حدة. أعداد التثبيتات هي أعداد تقريبية من فئات Google المقرّبة (مثل "10,000 users"). بعض المواقع (mudad.com.sa، UKG) تحجب الوصول الآلي وتم الاستعاضة عنها بأدلة بديلة.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Competitive Landscape -->
+<div id="landscape" class="mt-5">
+    <h2 class="section-title">3. خريطة المشهد التنافسي</h2>
+    <p>يتكون المشهد التنافسي من ثلاث حلقات متراكزة:</p>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header bg-danger">
+                    <h5 class="mb-0">الحلقة 1: مساعدو حضوري</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="text-danger fw-bold">~1,200</h3>
+                    <p class="mb-0">إجمالي التثبيتات<br><small class="text-muted">3 إضافات فقط، جميعها ضيقة النطاق</small></p>
+                    <p class="mt-2"><strong>الحالة:</strong> مفتوح تمامًا</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">الحلقة 2: إضافات سعودية مجاورة</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="text-warning fw-bold">~75,000</h3>
+                    <p class="mb-0">إجمالي التثبيتات<br><small class="text-muted">~20 إضافة، كلها طلابية/درجات</small></p>
+                    <p class="mt-2"><strong>الحالة:</strong> تثبت حجم السوق</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h5 class="mb-0">الحلقة 3: بدائل عالمية</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="fw-bold" style="color: var(--hsp-primary);">ملايين</h3>
+                    <p class="mb-0">إجمالي التثبيتات<br><small class="text-muted">لكن صفر منطق سعودي/عربي</small></p>
+                    <p class="mt-2"><strong>الحالة:</strong> ليست تهديدًا حقيقيًا</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 4. Direct Competitors -->
+<div id="direct" class="mt-5">
+    <h2 class="section-title">4. المنافسون المباشرون (إضافات على نظام حضوري)</h2>
+    
+    <div class="card mb-3">
+        <div class="card-header bg-danger">
+            <h5 class="mb-0">① حضوري اكسترا - Smart Report</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><strong>النوع:</strong> إضافة Chrome — <span class="badge-installs">602 مستخدم</span> <span class="badge-rating">4.7★ (13 تقييم)</span></p>
+                    <p><strong>الرابط:</strong> <a href="https://chromewebstore.google.com/detail/%D8%AD%D8%B6%D9%88%D8%B1%D9%8A-%D8%A7%D9%83%D8%B3%D8%AA%D8%B1%D8%A7-smart-report/dacifimgdjonapcjnnkjdkpcbknfpbbp" target="_blank">صفحة المتجر</a></p>
+                    <p><strong>الميزات:</strong> نظام تقارير ذكي لإدارة الحضور والانصراف؛ حسابات دقيقة؛ تصدير Excel/PDF؛ تفعيل فوري؛ مسجل بالملكية الفكرية.</p>
+                    <p><strong>نقاط القوة:</strong> الإضافة الوحيدة في عنقود حضوري بتوجه "تقارير شاملة"؛ أفضل نسبة تقييم/تثبيت؛ تسجيل الملكية الفكرية يشير لمنتج تجاري مدعوم.</p>
+                    <p><strong>نقاط الضعف:</strong> تقارير فقط — لا توجد بيانات موظفين أساسية، لا إدارة إجازات، لا جدولة، لا تحليلات تتبعية؛ قاعدة تثبيت صغيرة؛ "تفعيل فوري" يشير لبوابة ترخيص مدفوعة.</p>
+                    <p><strong>المنافسة:</strong> <span class="badge-direct">مباشر</span> — نفس المنصة، نفس المستخدم، نفس الوظيفة الأساسية</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-warning" style="border-radius: 10px; font-size: 0.85rem;">
+                        <strong>السعر:</strong> غير منشور؛ لغة "التفعيل الفوري" توحي بكونه مدفوعًا/مرخصًا
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-danger">
+            <h5 class="mb-0">② مساعد حضوري (Hudury Assistant)</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><strong>النوع:</strong> إضافة Chrome — <span class="badge-installs">564 مستخدم</span> <span class="badge-rating">5.0★ (2 تقييم)</span></p>
+                    <p><strong>الرابط:</strong> <a href="https://chromewebstore.google.com/detail/%D9%85%D8%B3%D8%A7%D8%B9%D8%AF-%D8%AD%D8%B6%D9%88%D8%B1%D9%8A/fcciehnilalgimppgikbmlmpklaeckmj" target="_blank">صفحة المتجر</a> | <a href="https://hudury.tahdir.net/" target="_blank">موقع المطور</a></p>
+                    <p><strong>الميزات:</strong> يربط نظام حضوري بمنصة التحضير الذكي؛ استيراد تلقائي لبيانات الحضور؛ إرسال رسائل غياب/تأخير/انصراف مبكر؛ إنشاء وإرسال مساءلات؛ استقبال ردود الموظفين.</p>
+                    <p><strong>نقاط القوة:</strong> أعمق سير عمل بين إضافات حضوري (استيراد → تنبيه → مساءلة → استجابة)؛ مدعوم بمطور تجاري راسخ بدفاتر ورسائل واتساب.</p>
+                    <p><strong>نقاط الضعف:</strong> عديم الفائدة بدون اشتراك مدفوع في التحضير الذكي — هو جسر وليس منتجًا؛ البيانات تغادر المتصفح لخوادم المطور (يعارض وعد الخصوصية لـ HSP).</p>
+                    <p><strong>المنافسة:</strong> <span class="badge-direct">مباشر</span> — يستهدف نفس سير عمل مدير المدرسة على حضوري</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-warning" style="border-radius: 10px; font-size: 0.85rem;">
+                        <strong>السعر:</strong> الإضافة مجانية لكن تتطلب منصة التحضير الذكي المدفوعة
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-danger">
+            <h5 class="mb-0">③ أداة حساب التأخير حضوري</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><strong>النوع:</strong> إضافة Chrome — <span class="badge-installs">61 مستخدم</span> <span class="badge-rating">5.0★</span></p>
+                    <p><strong>الرابط:</strong> <a href="https://chromewebstore.google.com/detail/%D8%A3%D8%AF%D8%A7%D8%A9-%D8%AD%D8%B3%D8%A7%D8%A8-%D8%A7%D9%84%D8%AA%D8%A3%D8%AE%D9%8A%D8%B1-%D8%AD%D8%B6%D9%88%D8%B1%D9%8A/mecjhobehljdifdebanjadbjghbamijd" target="_blank">صفحة المتجر</a></p>
+                    <p><strong>الميزات:</strong> أداة مساعدة لحساب دقائق التأخير وكشف الغياب من نظام حضوري، مع إمكانية تصدير التقارير.</p>
+                    <p><strong>نقاط القوة:</strong> تحل أكثر عملية حسابية يدوية مؤلمة في حضوري؛ 5.0★؛ مجانية وبسيطة.</p>
+                    <p><strong>نقاط الضعف:</strong> أداة مصغرة (حساب واحد)؛ 61 تثبيت فقط؛ لا توجد بيانات دائمة أو لوحة تحكم أو تحليلات.</p>
+                    <p><strong>المنافسة:</strong> <span class="badge-direct">مباشر</span> — مجموعة فرعية على مستوى الميزة من نطاق "تحليلات الحضور" لـ HSP</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success" style="border-radius: 10px; font-size: 0.85rem;">
+                        <strong>السعر:</strong> مجاني
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4 mb-3">جدول مقارنة المنافسين المباشرين والمجاورين</h4>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover competitor-table">
+            <thead>
+                <tr>
+                    <th>الإضافة</th>
+                    <th>التثبيتات</th>
+                    <th>التقييم</th>
+                    <th>الوظيفة الأساسية</th>
+                    <th>المنافسة</th>
+                    <th>الرابط</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>حضوري اكسترا - Smart Report</td>
+                    <td><span class="badge-installs">602</span></td>
+                    <td><span class="badge-rating">4.7★</span></td>
+                    <td>تقارير حضور + تصدير Excel/PDF</td>
+                    <td><span class="badge-direct">مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D8%AD%D8%B6%D9%88%D8%B1%D9%8A-%D8%A7%D9%83%D8%B3%D8%AA%D8%B1%D8%A7-smart-report/dacifimgdjonapcjnnkjdkpcbknfpbbp" target="_blank">رابط</a></td>
+                </tr>
+                <tr>
+                    <td>مساعد حضوري</td>
+                    <td><span class="badge-installs">564</span></td>
+                    <td><span class="badge-rating">5.0★</span></td>
+                    <td>جسر لحضوري ← التحضير الذكي</td>
+                    <td><span class="badge-direct">مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D9%85%D8%B3%D8%A7%D8%B9%D8%AF-%D8%AD%D8%B6%D9%88%D8%B1%D9%8A/fcciehnilalgimppgikbmlmpklaeckmj" target="_blank">رابط</a></td>
+                </tr>
+                <tr>
+                    <td>أداة حساب التأخير حضوري</td>
+                    <td><span class="badge-installs">61</span></td>
+                    <td><span class="badge-rating">5.0★</span></td>
+                    <td>حاسبة دقائق التأخير</td>
+                    <td><span class="badge-direct">مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D8%A3%D8%AF%D8%A7%D8%A9-%D8%AD%D8%B3%D8%A7%D8%A8-%D8%A7%D9%84%D8%AA%D8%A3%D8%AE%D9%8A%D8%B1-%D8%AD%D8%B6%D9%88%D8%B1%D9%8A/mecjhobehljdifdebanjadbjghbamijd" target="_blank">رابط</a></td>
+                </tr>
+                <tr style="background-color: #fff3cd;">
+                    <td><strong>تحضيري</strong></td>
+                    <td><span class="badge-installs">50,000</span></td>
+                    <td><span class="badge-rating">3.5★</span></td>
+                    <td>تحضير دروس على مدرستي</td>
+                    <td><span class="badge-indirect">غير مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1%D9%8A/iclelabpkphlfifajflffldnlffhnigl" target="_blank">رابط</a></td>
+                </tr>
+                <tr style="background-color: #fff3cd;">
+                    <td><strong>مدرستي بلس</strong></td>
+                    <td><span class="badge-installs">10,000</span></td>
+                    <td><span class="badge-rating">4.4★</span></td>
+                    <td>مساعد معلمين إداريين (درجات/سلوك)</td>
+                    <td><span class="badge-indirect">غير مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D9%85%D8%AF%D8%B1%D8%B3%D8%AA%D9%8A-%D8%A8%D9%84%D8%B3/maogiolhkdhjobnlobpkcpnmamnmilno" target="_blank">رابط</a></td>
+                </tr>
+                <tr style="background-color: #fff3cd;">
+                    <td>تقارير حاضر | Hadir Reports</td>
+                    <td><span class="badge-installs">286</span></td>
+                    <td><span class="badge-rating">5.0★</span></td>
+                    <td>لجان اختبارات + استيراد Excel من نور</td>
+                    <td><span class="badge-indirect">غير مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D8%AA%D9%82%D8%A7%D8%B1%D9%8A%D8%B1-%D8%AD%D8%A7%D8%B6%D8%B1-hadir-reports/lljebaknfecgmmihpdbpnpjafidbcmkk" target="_blank">رابط</a></td>
+                </tr>
+                <tr style="background-color: #fff3cd;">
+                    <td>التحضير الذكي v3</td>
+                    <td><span class="badge-installs">614</span></td>
+                    <td><span class="badge-rating">4.4★</span></td>
+                    <td>رفع غياب الطلاب/المعلمين إلى نور</td>
+                    <td><span class="badge-indirect">غير مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1-%D8%A7%D9%84%D8%B0%D9%83%D9%8A-v3/ladgmenhepkfonbblbmepcccimhfcjmk" target="_blank">رابط</a></td>
+                </tr>
+                <tr style="background-color: #fff3cd;">
+                    <td>راصد السلوك المتميز</td>
+                    <td><span class="badge-installs">4,000</span></td>
+                    <td><span class="badge-rating">4.4★</span></td>
+                    <td>إدخال سلوك ومواظبة جماعي في نور</td>
+                    <td><span class="badge-indirect">غير مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D8%B1%D8%A7%D8%B5%D8%AF-%D8%A7%D9%84%D8%B3%D9%84%D9%88%D9%83-%D8%A7%D9%84%D9%85%D8%AA%D9%85%D9%8A%D8%B2/hhajopkmekemflljgohkmjdlgddmhmdg" target="_blank">رابط</a></td>
+                </tr>
+                <tr style="background-color: #fff3cd;">
+                    <td>سلوكي لرصد السلوك والمواظبة</td>
+                    <td><span class="badge-installs">107</span></td>
+                    <td><span class="badge-rating">5.0★</span></td>
+                    <td>سلوك/مواظبة + تصدير CSV — "لا تجمع بيانات"</td>
+                    <td><span class="badge-indirect">غير مباشر</span></td>
+                    <td><a href="https://chromewebstore.google.com/detail/%D8%B3%D9%84%D9%88%D9%83%D9%8A-%D9%84%D8%B1%D8%B5%D8%AF-%D8%A7%D9%84%D8%B3%D9%84%D9%88%D9%83-%D9%88%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B8/jobkafjlocjhahdefolmngbdfmpeiboh" target="_blank">رابط</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 5. Adjacent Saudi Extensions -->
+<div id="adjacent" class="mt-5">
+    <h2 class="section-title">5. المنافسون المجاورون (السوق السعودي)</h2>
+    <div class="card">
+        <div class="card-body">
+            <p>الفئة المجاورة تثبت أن المربين السعوديين يثبتون إضافات Chrome بأحجام كبيرة، لكن <strong>كل حجم التثبيتات العالية يجلس على نور ومدرستي</strong> (موجهة للطلاب: درجات، سلوك، واجبات) — <strong>لا على حضوري</strong> (موجهة للموظفين: حضور، تأخير، إجازات).</p>
+            
+            <h5 class="mt-3">الأنظمة الحكومية السعودية ذات الصلة:</h5>
+            <ul>
+                <li><strong>نظام حضوري:</strong> أطلق في 17 أغسطس 2025، يعتمد على GPS وبصمة الوجه/الصوت/الأصبع، هو النظام الرسمي لجميع مدارس الحكومة — <a href="https://sites.moe.gov.sa/intranet/Ministry/services/service-18/" target="_blank">صفحة وزارة التعليم</a> | <a href="https://play.google.com/store/apps/details?id=com.t2.AvailoHader&hl=ar" target="_blank">تطبيق Google Play</a></li>
+                <li><strong>نظام نور:</strong> نظام الإدارة التعليمية الأكبر (10 ملايين+ مستخدم، 40,000+ مدرسة) — <a href="https://noor.moe.gov.sa/Landing/about.html" target="_blank">الموقع الرسمي</a></li>
+                <li><strong>منصة مدرستي:</strong> نظام التعلم الإلكتروني (6 ملايين+ طالب) — <a href="https://schools.madrasati.sa/" target="_blank">الموقع</a></li>
+                <li><strong>نظام فارس:</strong> الموارد البشرية والذاتية لموظفي التعليم — <a href="https://sites.moe.gov.sa/intranet/Ministry/services/service-6/" target="_blank">صفحة الخدمة</a></li>
+            </ul>
+
+            <h5 class="mt-4">المنافس التجاري الأبرز: التحضير الذكي</h5>
+            <p><a href="https://tahdir.net/" target="_blank">التحضير الذكي</a> — منصة سعودية تجارية متكاملة (أجهزة بصمة + تطبيقات + إضافتين Chrome) تقدم إدارة حضور الطلاب والمعلمين، تكامل مباشر مع نظام نور، تنبيهات واتساب، وتقارير قابلة للتصدير. هو <strong>المنافس التجاري الوحيد الذي يحاول استثمار سير عمل حضوري</strong> عبر إضافة "مساعد حضوري".</p>
+            <p><strong>نقاط ضعفه:</strong> منصة مدفوعة تتطلب مشتريات وتدريب؛ ثقيلة بالنسبة لمدير يريد فقط عرضًا أفضل لبيانات الشهر الحالي؛ بيانات الموظفين تُخزن على خوادم خارجية؛ دعم حضوري هو إضافة ملحقة وليس تجربة أصلية.</p>
+
+            <h5 class="mt-4">اللاعبون الآخرون:</h5>
+            <ul>
+                <li><a href="https://naqar.net/" target="_blank">نقار</a> — مساعد ذكي لمنصة مدرستي ونور، يركز على مديري المدارس، نموذج تجريبي مجاني ثم مدفوع</li>
+                <li><a href="https://dawammy.com.sa/" target="_blank">دوامي</a> — منصة سحابية لأجهزة البصمة، تهدف للقطاع الخاص وليس مدارس الحكومة</li>
+                <li><a href="https://dc-edux.com/blog/best-school-management-system-saudi-arabia-2026.html" target="_blank">EduX</a> — نظام إدارة مدارس سحابي متكامل مع نور، يدعم RTL والتقويم الهجري</li>
+                <li><a href="https://www.jisr.net/en" target="_blank">Jisr</a> و <a href="https://palmhr.net/en" target="_blank">Palm HR</a> — أنظمة HR سعودية للشركات، لا تقرأ بوابة حضوري</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 6. Global Competitors -->
+<div id="global" class="mt-5">
+    <h2 class="section-title">6. المنافسون العالميون غير المباشرين</h2>
+    
+    <ul class="nav nav-tabs mb-3" id="globalTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-hr" type="button" role="tab">أنظمة HR</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-time" type="button" role="tab">تتبع الوقت</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-export" type="button" role="tab">أدوات تصدير/استخراج</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-overlay" type="button" role="tab">تحسينات مواقع</button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="tab-hr" role="tabpanel">
+            <div class="table-responsive">
+                <table class="table table-striped competitor-table">
+                    <thead>
+                        <tr><th>المنتج</th><th>النوع</th><th>التسعير</th><th>الصلة بـ HSP</th><th>الرابط</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>BambooHR</td><td>SaaS HRIS</td><td>$10-$25/موظف/شهر</td><td>لا يوجد منطق سعودي/عربي</td><td><a href="https://www.bamboohr.com/pricing/" target="_blank">رابط</a></td></tr>
+                        <tr><td>UKG (Kronos)</td><td>Enterprise HCM</td><td>غير منشور</td><td>مؤسسات كبيرة فقط</td><td><a href="https://www.ukg.com/" target="_blank">رابط</a></td></tr>
+                        <tr><td>ADP Workforce Now</td><td>SaaS HCM</td><td>غير منشور</td><td>لا يوجد منطق سعودي</td><td><a href="https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx" target="_blank">رابط</a></td></tr>
+                        <tr><td>Clockify</td><td>متتبع وقت</td><td>مجاني ≤5 / $3.99-$7.99/مقعد/شهر</td><td>نموذج freemium للمرجعية</td><td><a href="https://clockify.me/pricing" target="_blank">رابط</a></td></tr>
+                        <tr><td>Jibble</td><td>متتبع حضور</td><td>"100% مجاني" (freemium)</td><td>أقوى مرجعية "مجاني"</td><td><a href="https://www.jibble.io/pricing" target="_blank">رابط</a></td></tr>
+                        <tr><td>TimeCamp</td><td>متتبع وقت</td><td>طبقة مجانية + مدفوع</td><td>الأقرب ميزاتيًا (حضور+إجازات)</td><td><a href="https://www.timecamp.com/pricing/" target="_blank">رابط</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-2 text-muted"><small>لماذا لا يهددون HSP: كلها أنظمة تسجيل تتطلب من المدرسة إدخال الحضور يدويًا، بينما مصدر بيانات HSP هو نظام حكومي إلزامي لا يمكن استبداله. التسعير لكل موظف لا يناسب ميزانية مدرسة حكومية.</small></p>
+        </div>
+
+        <div class="tab-pane fade" id="tab-time" role="tabpanel">
+            <div class="table-responsive">
+                <table class="table table-striped competitor-table">
+                    <thead>
+                        <tr><th>الإضافة</th><th>التثبيتات</th><th>التقييم</th><th>التسعير</th><th>الرابط</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Toggl Track</td><td>300,000</td><td>4.4★</td><td>Freemium</td><td><a href="https://chromewebstore.google.com/detail/toggl-track-productivity/oejgccbfbmkkpaidnkphaiaecficdnfn" target="_blank">رابط</a></td></tr>
+                        <tr><td>Clockify Time Tracker</td><td>300,000</td><td>3.5★</td><td>مجاني ≤5</td><td><a href="https://chromewebstore.google.com/detail/clockify-time-tracker/pmjeegjhjdlccodhacdgbgfagbpmccpe" target="_blank">رابط</a></td></tr>
+                        <tr><td>Webtime Tracker</td><td>100,000</td><td>4.7★</td><td>مجاني</td><td><a href="https://chromewebstore.google.com/detail/webtime-tracker/ppaojnbmmaigjmlpjaldnkgnklhicppk" target="_blank">رابط</a></td></tr>
+                        <tr><td>Harvest Time Tracker</td><td>30,000</td><td>2.9★</td><td>$9-$17.50/مقعد/شهر</td><td><a href="https://chromewebstore.google.com/detail/harvest-time-tracker/fbpiglieekigmkeebmeohkelfpjjlaia" target="_blank">رابط</a></td></tr>
+                        <tr><td>Jibble Time Tracker</td><td>20,000</td><td>4.3★</td><td>"100% مجاني"</td><td><a href="https://chromewebstore.google.com/detail/jibble-time-tracker/npekhgpoojmdohcodipnbaccbfglfnog" target="_blank">رابط</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-2 text-muted"><small>هذه الإضافات تتبع وقت المستخدم نفسه، بينما HSP يقرأ حضور أشخاص آخرين من مصدر موثوق. لكنها تثبت أن إضافة مجانية بصرية جيدة يمكن أن تصل إلى مئات الآلاف من التثبيتات.</small></p>
+        </div>
+
+        <div class="tab-pane fade" id="tab-export" role="tabpanel">
+            <div class="table-responsive">
+                <table class="table table-striped competitor-table">
+                    <thead>
+                        <tr><th>الأداة</th><th>التثبيتات</th><th>التقييم</th><th>الوظيفة</th><th>الرابط</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Instant Data Scraper</td><td>1,000,000</td><td>4.9★</td><td>استخراج بيانات بأي نقرة</td><td><a href="https://chromewebstore.google.com/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah" target="_blank">رابط</a></td></tr>
+                        <tr><td>Web Scraper</td><td>800,000</td><td>4.1★</td><td>استخراج متقدم + سحابة مدفوعة</td><td><a href="https://chromewebstore.google.com/detail/web-scraper-free-web-scra/jnhgnonknehpejjnehehllkliplmbmhn" target="_blank">رابط</a></td></tr>
+                        <tr><td>Data Miner</td><td>300,000</td><td>3.9★</td><td>500 صفحة مجانية/شهر</td><td><a href="https://chromewebstore.google.com/detail/data-scraper-easy-web-scr/nndknepjnldbdbepjfgmncbggmopgden" target="_blank">رابط</a></td></tr>
+                        <tr><td>Table Capture</td><td>200,000</td><td>4.3★</td><td>تصدير جداول HTML إلى Excel</td><td><a href="https://chromewebstore.google.com/detail/table-capture/iebpjdmgckacbodjpijphcplhebcmeop" target="_blank">رابط</a></td></tr>
+                        <tr><td>Save as PDF</td><td>300,000</td><td>3.2★</td><td>تحويل صفحة إلى PDF</td><td><a href="https://chromewebstore.google.com/detail/save-as-pdf/kpdjmbiefanbdgnkcikhllpmjnnllbbc" target="_blank">رابط</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-2 text-muted"><small>هذه هي البديل التقني الأخير — مدير مدرسة تقني يمكنه بالفعل سحب جدول حضوري إلى Excel مجانًا. HSP يفوز فقط بإضافة المنطق المجالي (يوم مدرسي سعودي، حدود تأخير، حصص استئذان، تجميع شهري لكل موظف، قوالب تقارير عربية).</small></p>
+        </div>
+
+        <div class="tab-pane fade" id="tab-overlay" role="tabpanel">
+            <div class="table-responsive">
+                <table class="table table-striped competitor-table">
+                    <thead>
+                        <tr><th>الإضافة</th><th>التثبيتات</th><th>التقييم</th><th>النمط</th><th>الرابط</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Google Meet Enhancement Suite</td><td>100,000</td><td>4.0★</td><td>40 ميزة على منتج Google</td><td><a href="https://chromewebstore.google.com/detail/google-meet-enhancement-s/ljojmlmdapmnibgflmmminacbjebjpno" target="_blank">رابط</a></td></tr>
+                        <tr><td>Enhance Salesforce Dashboard</td><td>10,000</td><td>4.3★</td><td>تراكب على لوحة تحكم SaaS</td><td><a href="https://chromewebstore.google.com/detail/enhance-salesforce-dashbo/mogildlgjglckdcfclpbcbidpdkjgeeb" target="_blank">رابط</a></td></tr>
+                        <tr><td>Orah Roll Checks</td><td>—</td><td>—</td><td>حضور مدرسي في لوحة جانبية</td><td><a href="https://www.orah.com/blog/orah-browser-extension-duo" target="_blank">رابط</a></td></tr>
+                        <tr><td>PixieBrix (HR)</td><td>—</td><td>—</td><td>أتمتة HR في شريط جانبي</td><td><a href="https://www.pixiebrix.com/role/hr-generalist" target="_blank">رابط</a></td></tr>
+                        <tr><td>Track: Keka Time Logger</td><td>88</td><td>5.0★</td><td>لوحة تحكم حضور غير رسمية لـ Keka</td><td><a href="https://chromewebstore.google.com/detail/keka-attendance-dashboard/onpaadhefkkhnpogpkhncalieojnjjcf" target="_blank">رابط</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-2 text-muted"><small>النمط المثبت: "حزمة تحسينات على موقع واحد لا تملكه" فئة منتج قابلة للتثبيت بنقرة واحدة. HSP يجب أن يُطرح كـ "حضوري Enhancement Suite" — حزمة مكاسب صغيرة على صفحة واحدة — وليس ميزة واحدة.</small></p>
+        </div>
+    </div>
+</div>
+
+<!-- 7. Market Opportunities -->
+<div id="opportunities" class="mt-5">
+    <h2 class="section-title">7. فرص السوق والفجوات</h2>
+
+    <h4>ما لا تقدمه المنتجات الحالية؟</h4>
+    <div class="row mt-3">
+        <div class="col-md-6 mb-3">
+            <div class="card opportunity-card h-100">
+                <div class="card-body">
+                    <h5>1. جانب الموظفين (وليس الطلاب)</h5>
+                    <p class="mb-0">كل إضافة سعودية عالية التثبيت موجهة للطلاب (درجات، سلوك، واجبات). لا يوجد مساعد HR مكتبي للمدير على جانب الموظفين.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card opportunity-card h-100">
+                <div class="card-body">
+                    <h5>2. التحليلات + التنظيم المحلي</h5>
+                    <p class="mb-0">أدوات حضوري الحالية أحادية الغرض. لا تقدم سجلات موظفين دائمة، جداول، تتبع إجازات، وتحليلات اتجاهات في مساحة عمل محلية واحدة.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card opportunity-card h-100">
+                <div class="card-body">
+                    <h5>3. الاستقلالية</h5>
+                    <p class="mb-0">مساعد حضوري موجود أساسًا لتوجيه المدارس لمنصة التحضير الذكي التجارية. أداة مستقلة بدون حساب وبدون بيع إضافي = تميز واضح.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card opportunity-card h-100">
+                <div class="card-body">
+                    <h5>4. الخصوصية كميزة</h5>
+                    <p class="mb-0">إضافتان سعوديتان من الأعلى تقييمًا تعلنان الخصوصية صراحةً. قيود HSP المعلنة (لا كلمات مرور، لا تسريب بيانات) تطابق الرسالة التي تكسب 4.4-5.0★.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card opportunity-card h-100">
+                <div class="card-body">
+                    <h5>5. جودة ضعيفة في القمة</h5>
+                    <p class="mb-0">أكبر إضافة سعودية (تحضيري) 3.5★ فقط. أكبر إضافة حضور عالمية (Meet Attendance) 2.8★. الجودة هي إسفين قابل للتطبيق.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card opportunity-card h-100">
+                <div class="card-body">
+                    <h5>6. التقويم الهجري + RTL أصيل</h5>
+                    <p class="mb-0">الأنظمة العالمية لها واجهة عربية ضعيفة. EduX يسوق صراحةً لـ "RTL كامل وليس ترجمة جزئية" كتفريق. HSP يولد عربيًا أصيلًا.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4">جدول فرص الميزات</h4>
+    <div class="table-responsive">
+        <table class="table table-striped competitor-table">
+            <thead>
+                <tr><th>الميزة</th><th>القيمة للمدير</th><th>القوة التنافسية</th><th>مستوى المخاطرة</th><th>التوصية</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>تحليلات التأخير والغياب</td><td>عالية جدًا</td><td>عالية (لا يقدمها أحد جيدًا)</td><td>منخفضة</td><td><span class="badge bg-success">MVP</span></td></tr>
+                <tr><td>تصدير Excel/PDF عربي</td><td>عالية</td><td>متوسطة (بديل عام موجود)</td><td>منخفضة</td><td><span class="badge bg-success">MVP</span></td></tr>
+                <tr><td>سجلات موظفين محلية + استيراد Excel</td><td>عالية</td><td>عالية (نمط مثبت)</td><td>منخفضة</td><td><span class="badge bg-success">MVP</span></td></tr>
+                <tr><td>تتبع استئذان (حصص شهرية)</td><td>عالية</td><td>عالية جدًا (لا منافس)</td><td>منخفضة</td><td><span class="badge bg-success">MVP</span></td></tr>
+                <tr><td>تقويم هجري + ميلادي</td><td>متوسطة</td><td>عالية (تفريق عالمي)</td><td>منخفضة</td><td><span class="badge bg-success">MVP</span></td></tr>
+                <tr><td>لوحة اتجاهات شهرية/فصلية</td><td>عالية</td><td>عالية</td><td>منخفضة</td><td>المرحلة 2</td></tr>
+                <tr><td>تنبيهات داخل المتصفح</td><td>متوسطة</td><td>متوسطة</td><td>منخفضة</td><td>المرحلة 2</td></tr>
+                <tr><td>قوالب تقارير للمدير</td><td>عالية</td><td>عالية</td><td>منخفضة</td><td>المرحلة 2</td></tr>
+                <tr><td>تكامل واتساب (إرسال يدوي)</td><td>عالية</td><td>متوسطة</td><td>متوسطة</td><td>المرحلة 3</td></tr>
+                <tr><td>أتمتة تسجيل دخول</td><td>—</td><td>—</td><td>عالية جدًا</td><td><span class="badge bg-danger">تجنب</span></td></tr>
+                <tr><td>تخزين كلمات مرور</td><td>—</td><td>—</td><td>عالية جدًا</td><td><span class="badge bg-danger">تجنب</span></td></tr>
+                <tr><td>إرسال بيانات لخادم خارجي</td><td>—</td><td>—</td><td>عالية جدًا</td><td><span class="badge bg-danger">تجنب</span></td></tr>
+                <tr><td>تسجيل وصول تلقائي (Auto check-in)</td><td>—</td><td>—</td><td>عالية جدًا</td><td><span class="badge bg-danger">تجنب</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 8. Compliance -->
+<div id="compliance" class="mt-5">
+    <h2 class="section-title">8. قيود الامتثال وسياسات Chrome</h2>
+    
+    <div class="card mb-3">
+        <div class="card-header bg-warning">
+            <h5 class="mb-0">سياسات Chrome Web Store (سارية اعتبارًا من 1 أغسطس 2026)</h5>
+        </div>
+        <div class="card-body">
+            <p>وفقًا لـ <a href="https://developer.chrome.com/blog/cws-policy-updates-2026" target="_blank">تحديثات سياسات Chrome Web Store</a>، هناك أربعة تحديثات حرجة:</p>
+            <ul>
+                <li><strong>سياسة الاستخدام المحدود:</strong> أي بيانات يجمعها المستخدم يجب أن تكون ضرورية تمامًا للغرض المفصح عنه للإضافة. جمع البيانات لأغراض أخرى ممنوع.</li>
+                <li><strong>متطلبات الإفصاح:</strong> كل جمع بيانات يجب إفصاحه للمستخدم بوضوح، بغض النظر عن ارتباطه بغرض الإضافة. يجب إخطار المستخدمين استباقيًا عند تغير ممارسات معالجة البيانات.</li>
+                <li><strong>المنتجات الضارة والمحظورة:</strong> إضافات مصممة لتجاوز ضمانات الأمان أو قيود الاستخدام أو التدابير الوقائية ممنوعة صراحةً.</li>
+                <li><strong>الصلاحيات الزائدة:</strong> الإضافة التي تطلب صلاحية لا تستخدمها أو لا تحتاجها ستُرفض/تُزال (<a href="https://developer.chrome.com/docs/webstore/troubleshooting" target="_blank">دليل استكشاف الأخطاء</a>).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-3 risk-card">
+        <div class="card-header bg-danger">
+            <h5 class="mb-0">ميزات عالية المخاطر أو مخالفة — يجب تجنبها</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead>
+                    <tr><th>الميزة</th><th>الخطر</th><th>الحكم</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>أتمتة تسجيل الدخول لحضوري</td><td>مخالفة لشروط الاستخدام + سياسة تجاوز الضمانات</td><td><span class="compliance-x">ممنوع</span></td></tr>
+                    <tr><td>تخزين كلمات مرور أو رموز مصادقة</td><td>مخالفة سياسة الاستخدام المحدود + خطر أمني</td><td><span class="compliance-x">ممنوع</span></td></tr>
+                    <tr><td>إرسال بيانات موظفين لخادم خارجي</td><td>مخالفة PDPL السعودي + سياسة الإفصاح</td><td><span class="compliance-x">ممنوع</span></td></tr>
+                    <tr><td>تسجيل وصول تلقائي (Auto check-in)</td><td>احتيال على النظام الحكومي</td><td><span class="compliance-x">ممنوع</span></td></tr>
+                    <tr><td>إرسال واتساب تلقائي بدون تدخل المستخدم</td><td>مخالفة شروط واتساب + خطر ثقة</td><td><span class="compliance-x">ممنوع</span></td></tr>
+                    <tr><td>الادعاء بأنها التطبيق الرسمي لحضوري</td><td>انتحال هوية حكومية + مخالفة علامة تجارية</td><td><span class="compliance-x">ممنوع</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card feature-card">
+        <div class="card-header bg-success">
+            <h5 class="mb-0">مبادئ الامتثال لـ HSP</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead>
+                    <tr><th>المبدأ</th><th>التطبيق</th><th>الحكم</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>قراءة فقط (Read-only)</td><td>قراءة صفحة حضوري التي يصرح بها المستخدم بالفعل</td><td><span class="compliance-check">نعم</span></td></tr>
+                    <tr><td>محلي أولاً (Local-first)</td><td>كل البيانات في chrome.storage.local</td><td><span class="compliance-check">نعم</span></td></tr>
+                    <tr><td>أقل صلاحيات ممكنة</td><td>activeTab + storage فقط؛ host_permissions لحضوري فقط</td><td><span class="compliance-check">نعم</span></td></tr>
+                    <tr><td>لا حسابات مطلوبة</td><td>بدون تسجيل دخول أو اشتراك للميزات الأساسية</td><td><span class="compliance-check">نعم</span></td></tr>
+                    <tr><td>إفصاح كامل</td><td>سياسة خصوصية واضحة بالعربية داخل الإضافة</td><td><span class="compliance-check">نعم</span></td></tr>
+                    <tr><td>صلاحية activeTab</td><td>وصول مؤقت للتبويب عند استدعاء المستخدم فقط</td><td><span class="compliance-check">موصى به</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 9. Positioning -->
+<div id="positioning" class="mt-5">
+    <h2 class="section-title">9. Positioning واستراتيجية الدخول</h2>
+
+    <div class="positioning-box">
+        <h3>الجملة التسويقية المقترحة</h3>
+        <p class="lead">"مساعدك المكتبي الذكي على نظام حضوري — تحليلات حضور، تتبع تأخير، تنظيم موظفين، وتقارير عربية احترافية. كل ذلك على جهازك، بدون حسابات وبدون إرسال بيانات."</p>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">المستخدم المثالي</h5>
+                </div>
+                <div class="card-body">
+                    <p>مدير مدرسة حكومية في السعودية (أو وكيل/مساعد إداري) يستخدم نظام حضوري يوميًا لمتابعة حضور الموظفين، ويحتاج إلى:</p>
+                    <ul>
+                        <li>عرض يومي/شهري لحضور وانصراف الموظفين</li>
+                        <li>حساب دقائق التأخير تلقائيًا</li>
+                        <li>تتبع الإجازات والاستئذان</li>
+                        <li>تقارير Excel/PDF للإدارة العليا</li>
+                        <li>تحليلات اتجاهات (أكثر المتأخرين، أنماط الغياب)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">المشكلة التي نحلها</h5>
+                </div>
+                <div class="card-body">
+                    <p>نظام حضوري يسجل الحضور بدقة لكنه <strong>لا يقدم تقارير أو تحليلات أو إدارة موظفين محلية</strong>. المدير يضطر لـ:</p>
+                    <ul>
+                        <li>نسخ ولصق يدوي من شاشة حضوري إلى Excel</li>
+                        <li>حساب دقائق التأخير بالآلة الحاسبة</li>
+                        <li>تتبع الإجازات في دفاتر ورقية</li>
+                        <li>إعداد تقارير شهرية يدويًا (ساعات طويلة)</li>
+                        <li>لا يوجد عرض اتجاهي أو تحليلي</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5 class="mb-0">لماذا يستخدمه المدير بدل الطرق اليدوية؟</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <div class="badge bg-success fs-5 p-2 mb-2">سرعة</div>
+                    <p class="mt-2">تثبيت بنقرة، بدون مشتريات أو تدريب</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="badge bg-success fs-5 p-2 mb-2">خصوصية</div>
+                    <p class="mt-2">كل البيانات على جهاز المدير، لا خوادم</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="badge bg-success fs-5 p-2 mb-2">ذكاء مجالي</div>
+                    <p class="mt-2">منطق يوم مدرسي سعودي وتقويم هجري</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="badge bg-success fs-5 p-2 mb-2">مجاني أساسي</div>
+                    <p class="mt-2">طبقة أساسية مجانية بدون حساب</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4">استراتيجيات الدخول للسوق</h4>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-success"><h5 class="mb-0">المرحلة 1: مجاني محدود</h5></div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li>قراءة حضوري + عرض يومي</li>
+                        <li>تصدير Excel أساسي</li>
+                        <li>حاسبة تأخير</li>
+                        <li>خصوصية كاملة، بدون حساب</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-warning"><h5 class="mb-0">المرحلة 2: Pro</h5></div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li>تحليلات شهرية/فصلية</li>
+                        <li>تتبع استئذان بحصص</li>
+                        <li>قوالب تقارير PDF احترافية</li>
+                        <li>ترخيص سنوي ثابت لكل مدرسة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header"><h5 class="mb-0">المرحلة 3: توسع</h5></div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li>تكامل واتساب (إرسال يدوي)</li>
+                        <li>دعم أنظمة حضور أخرى</li>
+                        <li>قوالب مخصصة للإدارة</li>
+                        <li>تنبيهات داخل المتصفح</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 10. MVP Roadmap -->
+<div id="mvp" class="mt-5">
+    <h2 class="section-title">10. خارطة MVP والتوصية النهائية</h2>
+
+    <div class="alert alert-recommendation mb-4">
+        <h3>التوصية النهائية</h3>
+        <p><strong>نعم، إضافة Chrome لحضوري سمارت برو تستحق البناء.</strong></p>
+        <p>السوق غير مشبع (~1,200 تثبيت فقط للمنافسين المباشرين)، الطلب موجود (مثبت بحجم 50,000-75,000 تثبيت في الفئة المجاورة)، الفجوة واضحة (لا مساعد موظفين على حضوري)، وقيود الخصوصية تشكل ميزة تنافسية حقيقية. المخاطر الرئيسية (امتصاص المنصة، رد فعل tahdir.net) يمكن تخفيفها بالسرعة والتركيز على التحليلات المحلية التي لا يقدمها لوحة تحكم حضوري.</p>
+    </div>
+
+    <h4>أول 5 ميزات يجب تنفيذها (MVP)</h4>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card mvp-phase h-100">
+                <div class="card-body">
+                    <h5>1. تحليلات التأخير والغياب</h5>
+                    <p class="mb-0">قراءة صفحة حضوري عند استدعاء المستخدم، حساب دقائق التأخير تلقائيًا، عرض ملخص يومي لكل موظف، إبراز المتأخرين والغائبين. هذه هي الميزة الوحيدة التي تقدمها كل إضافات حضوري ولا يقدمها أي منها جيدًا.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card mvp-phase h-100">
+                <div class="card-body">
+                    <h5>2. تصدير Excel/PDF بالعربية</h5>
+                    <p class="mb-0">قوالب تقارير عربية احترافية بتنسيق RTL: تقرير يومي، تقرير شهري، كشف تأخير، كشف غياب. التصدير محلي بالكامل. حضوري نفسه لا يقدم تقارير، وديوان المظالم يعتبر "استخراج التقارير" قدرة أساسية.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card mvp-phase h-100">
+                <div class="card-body">
+                    <h5>3. سجلات موظفين محلية + استيراد Excel</h5>
+                    <p class="mb-0">قاعدة بيانات محلية للموظفين (اسم، رقم وظيفي، المسمى) مع استيراد جماعي من Excel. النمط مثبت بواسطة Hadir Reports و Dawammy و مدرستي بلس. البيانات تبقى في chrome.storage.local.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card mvp-phase h-100">
+                <div class="card-body">
+                    <h5>4. تتبع الاستئذان (الحصص الشهرية)</h5>
+                    <p class="mb-0">مرآة لنظام استئذان حضوري: حصة شهرية متجددة، سجل طلبات بحالة (موافق/مرفوض)، عرض الرصيد المتبقي. حاليًا لا يقدمه أي منافس على الإطلاق — فئة بدون منافسة.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-3">
+            <div class="card mvp-phase h-100">
+                <div class="card-body">
+                    <h5>5. تقويم هجري + ميلادي + واجهة عربية أصيلة</h5>
+                    <p class="mb-0">عرض التواريخ بالتقويمين الهجري والميلادي جنباً إلى جنب، واجهة RTL كاملة (وليس ترجمة جزئية)، أسماء أشهر عربية، ودعم أيام الأسبوع. هذا هو التفريق الذي يسوق له EduX صراحةً ضد الأنظمة العالمية.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4">الميزات التي يجب تأجيلها</h4>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead><tr><th>الميزة</th><th>سبب التأجيل</th></tr></thead>
+                <tbody>
+                    <tr><td>لوحة اتجاهات شهرية/فصلية متقدمة</td><td>تحتاج بيانات تاريخية متراكمة؛ أفضل في المرحلة 2</td></tr>
+                    <tr><td>تنبيهات داخل المتصفح</td><td>قيمة محدودة في MVP؛ تحتاج إذن notifications إضافي</td></tr>
+                    <tr><td>قوالب تقارير مخصصة للمدير</td><td>تحتاج بحث مستخدم أعمق؛ المرحلة 2</td></tr>
+                    <tr><td>تكامل واتساب (إرسال يدوي)</td><td>مخاطر سياسات + تعقيد تقني؛ المرحلة 3</td></tr>
+                    <tr><td>دعم أنظمة حضور أخرى</td><td>تشتت التركيز؛ ابدأ بحضوري فقط</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h4 class="mt-4">المخاطر السوقية والسياساتية</h4>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card risk-card h-100">
+                <div class="card-header bg-danger"><h5 class="mb-0">خطر امتصاص المنصة</h5></div>
+                <div class="card-body">
+                    <p>وزارة التعليم يمكن أن تضيف تقارير وتحليلات لحضوري في أي وقت (كما فعلت Google مع حضور Meet).</p>
+                    <p><strong>التخفيف:</strong> امتلك التنظيم المحلي، السجل التاريخي، والتحليلات التي لا يقدمها لوحة التحكم الرسمية. لا تكن بديلاً لحضوري — كن طبقة إضافية.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card risk-card h-100">
+                <div class="card-header bg-danger"><h5 class="mb-0">رد فعل المنافس الحالي</h5></div>
+                <div class="card-body">
+                    <p>tahdir.net يملك بالفعل إضافتين على حضوري ومكدس كامل (أجهزة + تطبيقات + تكامل نور).</p>
+                    <p><strong>التخفيف:</strong> السرعة وزاوية الخصوصية/بدون حساب هي دفاعات HSP. المساعد الحالي يحتاج اشتراكًا مدفوعًا ويرسل بيانات لخوادمه.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card risk-card h-100">
+                <div class="card-header bg-danger"><h5 class="mb-0">تصادم العلامة التجارية</h5></div>
+                <div class="card-body">
+                    <p>"حضوري سمارت برو" قريب من "حضوري" (حكومي) و"التحضير الذكي" (تجاري). حضوري اكسترا مسجل بالملكية الفكرية.</p>
+                    <p><strong>التخفيف:</strong> مراجعة علامة تجارية قبل الإطلاق. لا تستخدم شعار أو ألوان حضوري الرسمية.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card risk-card h-100">
+                <div class="card-header bg-danger"><h5 class="mb-0">سياسات Chrome المتغيرة</h5></div>
+                <div class="card-body">
+                    <p>سياسات أغسطس 2026 تزيد قيود جمع البيانات والإفصاح. الإضافات غير المتوافقة تواجه إزالة.</p>
+                    <p><strong>التخفيف:</strong> التزام صارم بـ activeTab + storage فقط، إفصاح كامل بالعربية، ومراجعة دورية للسياسات.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4">كيف ننافس بدون ادعاء أننا التطبيق الرسمي لحضوري؟</h4>
+    <div class="card">
+        <div class="card-body">
+            <ul>
+                <li><strong>الرسائل الواضحة:</strong> "مساعد غير رسمي" و"أداة مساعدة" في كل مكان — كما يفعل <a href="https://chromewebstore.google.com/detail/keka-attendance-dashboard/onpaadhefkkhnpogpkhncalieojnjjcf" target="_blank">Track: Keka</a> ("Unofficial Keka Attendance Dashboard") و <a href="https://chromewebstore.google.com/detail/%D9%86%D8%B8%D8%A7%D9%85-%D8%A7%D9%84%D8%AF%D8%B1%D8%AC%D8%A7%D8%AA/nhdbhbonjbmiappkbggcgancpgioiein" target="_blank">نظام الدرجات</a> ("for authorized staff")</li>
+                <li><strong>عدم استخدام شعار أو ألوان حضوري الرسمية</strong> — هوية بصرية مستقلة</li>
+                <li><strong>عدم تخزين أو تمرير بيانات اعتماد</strong> — لا كلمات مرور، لا tokens</li>
+                <li><strong>التركيز على القيمة المضافة</strong> — التحليلات والتنظيم المحلي الذي لا يقدمه النظام الرسمي</li>
+                <li><strong>الإفصاح الكامل</strong> — صفحة خصوصية عربية واضحة داخل الإضافة وفي صفحة المتجر</li>
+                <li><strong>النموذج المعتمد:</strong> هو نفسه نمط "Enhancement Suite" المثبت عالميًا — Google Meet Enhancement Suite (100,000 تثبيت) لا يدعي أنه Google الرسمي</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Summary Card -->
+<div class="mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="mb-0">ملخص الخارطة المقترحة</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr><th>المرحلة</th><th>الميزات</th><th>المدة المقترحة</th><th>السعر</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>MVP (المرحلة 1)</strong></td>
+                            <td>تحليلات تأخير/غياب + تصدير Excel/PDF عربي + سجلات موظفين + تتبع استئذان + تقويم هجري</td>
+                            <td>2-3 أشهر</td>
+                            <td>مجاني</td>
+                        </tr>
+                        <tr>
+                            <td><strong>المرحلة 2</strong></td>
+                            <td>لوحة اتجاهات متقدمة + تنبيهات + قوالب مخصصة + تصدير PDF احترافي</td>
+                            <td>2-3 أشهر</td>
+                            <td>ترخيص سنوي لكل مدرسة</td>
+                        </tr>
+                        <tr>
+                            <td><strong>المرحلة 3</strong></td>
+                            <td>تكامل واتساب (يدوي) + دعم أنظمة حضور أخرى + لوحة إدارة متعددة المدارس</td>
+                            <td>3-4 أشهر</td>
+                            <td>ترخيص مؤسسي</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="mt-5">
+    <div class="container text-center">
+        <p class="mb-1"><strong>بحث سوقي: إضافة Chrome لحضوري سمارت برو (HSP)</strong></p>
+        <p class="mb-1">تاريخ البحث: 25 يوليو 2026</p>
+        <p class="mb-1">عدد المنتجات والإضافات التي تم تحليلها: 120+ منتج، 228 صفحة متجر Chrome</p>
+        <p class="mb-0"><small>المنهجية: بحث نطاقي على Chrome Web Store + فتح صفحات المتجر مباشرة + قراءة المصادر الحكومية والتجارية الأولية</small></p>
+    </div>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

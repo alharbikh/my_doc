@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <title>تقرير مقارنة نسخ إضافة Haduri Smart Pro</title>
+  <style>
+    :root{--navy:#102a43;--blue:#1463ff;--cyan:#0ea5a8;--bg:#f4f7fb;--card:#fff;--text:#172b3a;--muted:#627487;--line:#dce5ee;--red:#c9363e;--amber:#b76e00;--green:#087a55;--shadow:0 10px 30px rgba(16,42,67,.08)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo","Tajawal","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.85}
+    a{color:inherit}.hero{background:linear-gradient(135deg,#0b2035,#143f68 60%,#126d74);color:#fff;padding:44px 24px 38px}.hero-inner{max-width:1240px;margin:auto}.eyebrow{font-size:.84rem;color:#b9e7e9;letter-spacing:.04em}.hero h1{margin:8px 0 10px;font-size:clamp(1.75rem,4vw,3rem);line-height:1.35}.hero p{max-width:850px;margin:0;color:#d8e6f2}.status{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding:9px 14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);border-radius:999px;font-weight:700}.dot{width:10px;height:10px;border-radius:50%;background:#ffbf47;box-shadow:0 0 0 5px rgba(255,191,71,.16)}
+    .layout{max-width:1240px;margin:24px auto 60px;padding:0 20px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px}.toc{position:sticky;top:18px;align-self:start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.toc strong{display:block;margin-bottom:8px}.toc a{display:block;text-decoration:none;color:var(--muted);font-size:.91rem;padding:7px 9px;border-radius:8px}.toc a:hover{background:#edf4ff;color:var(--blue)}.toc .actions{display:grid;gap:8px;margin-top:15px}.btn{border:0;border-radius:10px;padding:10px 12px;cursor:pointer;font:inherit;font-weight:700}.primary{background:var(--blue);color:#fff}.secondary{background:#eef3f8;color:var(--navy)}
+    main{min-width:0}.summary-grid,.cards,.decision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.summary-card,.card,.section,.callout{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.summary-card{padding:18px}.summary-card .k{color:var(--muted);font-size:.82rem}.summary-card .v{font-size:1.1rem;font-weight:800;margin-top:4px}.good{color:var(--green)}.warn{color:var(--amber)}.bad{color:var(--red)}
+    .section{margin-top:18px;padding:25px;scroll-margin-top:18px}.section h2{margin:0 0 14px;color:var(--navy);font-size:1.45rem}.section h3{margin:22px 0 8px;color:#234e70;font-size:1.08rem}.section p{margin:8px 0}.muted{color:var(--muted)}.callout{padding:18px;margin:18px 0;border-right:5px solid var(--blue)}.callout.warning{border-right-color:#f0a429;background:#fffaf0}.callout.danger{border-right-color:var(--red);background:#fff7f7}.callout.success{border-right-color:var(--green);background:#f3fcf8}.callout h3{margin:0 0 5px}
+    .cards{grid-template-columns:repeat(2,1fr)}.card{padding:18px;box-shadow:none}.card h3{margin:0 0 8px}.tag{display:inline-block;padding:3px 9px;border-radius:999px;background:#eaf2ff;color:#174ea6;font-size:.78rem;font-weight:700;margin:2px}.tag.red{background:#ffeded;color:#a61d24}.tag.green{background:#e8f8f1;color:#086a4a}.tag.amber{background:#fff2d8;color:#8b5700}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin:13px 0}table{width:100%;border-collapse:collapse;min-width:760px;background:#fff;font-size:.9rem}th,td{padding:13px 12px;text-align:right;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#eaf1f8;color:var(--navy);position:sticky;top:0}tr:last-child td{border-bottom:0}tbody tr:hover{background:#f8fbfe}
+    ul,ol{padding-right:22px;margin:8px 0}li{margin:5px 0}code{direction:ltr;unicode-bidi:embed;background:#edf2f7;border-radius:6px;padding:2px 6px;font-family:Consolas,monospace;font-size:.86em}.flow{direction:ltr;text-align:center;background:#0d2033;color:#dff7f5;padding:14px;border-radius:12px;font-family:Consolas,monospace;overflow:auto}.decision-grid{grid-template-columns:repeat(3,1fr)}.decision{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff}.decision.recommended{border:2px solid var(--green);position:relative}.decision.recommended:before{content:"الموصى به";position:absolute;top:-12px;right:16px;background:var(--green);color:#fff;padding:3px 10px;border-radius:999px;font-size:.75rem;font-weight:800}
+    details{border-top:1px solid var(--line);padding:13px 0}details:first-of-type{border-top:0}summary{cursor:pointer;font-weight:800;color:var(--navy)}.notes{background:linear-gradient(180deg,#fff,#f7fbff)}.footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:24px}
+    @media(max-width:950px){.layout{grid-template-columns:1fr}.toc{position:relative;top:0}.toc nav{columns:2}.summary-grid,.decision-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+    @media(max-width:560px){.hero{padding:30px 18px}.layout{padding:0 12px}.section{padding:18px}.toc nav{columns:1}}
+    @media print{body{background:#fff}.hero{padding:22px;background:#173a5e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.layout{display:block;max-width:none;margin:0}.toc,.btn{display:none}.section,.card,.summary-card,.callout{box-shadow:none;break-inside:avoid}.section{border:0;border-bottom:1px solid #ccc}.table-wrap{overflow:visible}table{min-width:0;font-size:8.5pt}th{position:static}}
+  </style>
+</head>
+<body>
+  <style>.home-nav{position:sticky;top:0;z-index:1100;padding:.65rem max(1rem,calc((100% - 1240px)/2));background:rgba(255,255,255,.94);border-bottom:1px solid #dce5ee;backdrop-filter:blur(10px);font-family:Cairo,system-ui,sans-serif}.home-nav a{display:inline-block;padding:.38rem .9rem;border-radius:.55rem;background:#eaf2ff;color:#174ea6;text-decoration:none;font-weight:700}.home-nav a:hover{background:#dceaff}.home-nav~.layout{margin-top:24px}@media(max-width:575.98px){body{overflow-x:hidden}.table-wrap,table{max-width:100%}table{display:block;overflow-x:auto}}</style>
+  <nav class="home-nav" aria-label="التنقل الرئيسي"><a href="./index.html">الرئيسية</a></nav>
+  <header class="hero"><div class="hero-inner">
+    <div class="eyebrow">HADURI SMART PRO · مراجعة تقنية للقراءة فقط</div>
+    <h1>تقرير مقارنة النسخة الحالية مع نسخ Legacy</h1>
+    <p>عرض مبسّط ومنظم لنتائج فحص أربع نسخ من إضافة حضوري، مع قرار خط الأساس وخطة التطوير والمخاطر التي يجب إغلاقها قبل الاشتراك أو النشر.</p>
+    <div class="status"><span class="dot"></span> الحكم: NEEDS TARGETED VERIFICATION — يحتاج تحققًا مستهدفًا</div>
+  </div></header>
+
+  <div class="layout">
+    <aside class="toc"><strong>محتويات التقرير</strong><nav>
+      <a href="#executive">الملخص التنفيذي</a><a href="#inventory">1. جرد النسخ</a><a href="#functions">2. وظائف النسخ</a><a href="#matrix">3. مصفوفة المقارنة</a><a href="#architecture">4. الفروق المعمارية</a><a href="#pros-cons">5. المزايا والعيوب</a><a href="#security">6. الفحص الأمني</a><a href="#baseline">7. الأصل الأفضل</a><a href="#strategy">8. استراتيجية التطوير</a><a href="#options">9. خيارات التطوير</a><a href="#features">10. قائمة الميزات</a><a href="#decisions">11. القرارات المطلوبة</a><a href="#notes">ملاحظات المراجع</a>
+    </nav><div class="actions"><button class="btn primary" onclick="window.print()">طباعة / حفظ PDF</button><button class="btn secondary" onclick="toggleAll()">فتح/طي التفاصيل</button></div></aside>
+
+    <main>
+      <section id="executive" class="section">
+        <h2>الملخص التنفيذي</h2>
+        <div class="summary-grid">
+          <div class="summary-card"><div class="k">النسخة الأساسية المقترحة</div><div class="v good">Current</div></div>
+          <div class="summary-card"><div class="k">مسار التطوير</div><div class="v good">إعادة هيكلة مدروسة فوق Current</div></div>
+          <div class="summary-card"><div class="k">أكبر مانع حالي</div><div class="v bad">الجلسة وجسر الرسائل</div></div>
+        </div>
+        <div class="callout success"><h3>القرار الأقوى في التقرير</h3><p>لا يتم دمج أي نسخة Legacy كاملة. نستمر من <b>Current</b>، ونستخدم Legacy C لمكونات التقارير، وLegacy B كمرجع لتنظيم الواجهة، وLegacy A لاستخراج متطلبات الأعمال فقط.</p></div>
+        <p class="muted">نطاق الفحص: لم تُشغّل الإضافات أو واجهات API أو حساب حضوري، ولم تُعدّل الملفات. كانت حالة Git على الفرع <code>temp/stable-test</code> عند <code>3b7c283</code>، ومجلد <code>legacy/</code> غير متتبع.</p>
+      </section>
+
+      <section id="inventory" class="section"><h2>1. جرد النسخ</h2>
+        <div class="cards">
+          <article class="card"><h3>Current</h3><span class="tag green">الأساس المقترح</span><span class="tag">MV3 · 3.0.0</span><p><b>Haduri Smart Pro v3 Cleanup</b><br>جذر المشروع · نحو 399 ملفًا / 5 MB<br>لوحة iframe داخل موقع حضوري.</p></article>
+          <article class="card"><h3>Legacy A</h3><span class="tag red">مخاطر مرتفعة</span><span class="tag">MV3 · 9.0.0</span><p><code>legacy/Haduri Extra</code><br>374 ملفًا / 8.9 MB<br>Popup وواجهة داخل الموقع، مع آثار دفع وإجازات.</p></article>
+          <article class="card"><h3>Legacy B</h3><span class="tag amber">مرجع معماري</span><span class="tag">MV3 · 2.0.0</span><p><code>legacy/HSP4</code><br>4,537 ملفًا / 45 MB بسبب node_modules<br>Popup وShadow DOM وشاشات منفصلة.</p></article>
+          <article class="card"><h3>Legacy C</h3><span class="tag amber">قريب جدًا من Current</span><span class="tag">MV3 · 3.0.0</span><p><code>legacy/HSP_clean</code><br>2,596 ملفًا / 15.8 MB<br>نفس خط Current تقريبًا مع تقارير إضافية.</p></article>
+        </div>
+        <div class="callout warning"><b>فروق الصلاحيات:</b> Current وLegacy C محصوران في <code>https://hather-ui.moe.gov.sa/*</code>. Legacy B يضيف <code>notifications</code> و<code>alarms</code>. Legacy A يطلب <code>unlimitedStorage</code> ويحمل هوية تحديث تاريخية لا ينبغي نقلها.</div>
+      </section>
+
+      <section id="functions" class="section"><h2>2. اكتشاف وظيفة كل نسخة</h2>
+        <details open><summary>Current — الوظائف الحالية</summary><ul><li>التقاط سياق الجلسة ثم جلب الموظفين وحركات الحضور.</li><li>خط معالجة <code>raw → index → summary</code>.</li><li>متابعة يومية ومركز حركات وموظفون وإعدادات.</li><li>نماذج الغياب والتأخر، والطباعة وPDF وExcel.</li><li>واجهة RTL داخل iframe.</li></ul><p class="muted">غير مثبت تشغيليًا في هذا الفحص. شاشة الأذونات معلوماتية، وبعض التقارير مخفية أو تجريبية، ولا يوجد اشتراك أو Backend.</p></details>
+        <details><summary>Legacy A — Haduri Extra</summary><ul><li>اعتراض fetch وXHR وفحص تخزين الصفحة بحثًا عن دلائل جلسة.</li><li>تقارير وتصدير ومعاينات ونماذج.</li><li>Popup للإجازات مع قبول ورفض فردي وجماعي.</li><li>مواد دفع/ترخيص تحمل اسم Moyasar.</li></ul><div class="callout danger">ينفذ endpoint لتغيير بيانات الإجازات <code>Leaves/ApproveRejectLeave</code>. لا يجوز نقله أو تشغيله بلا تفويض صريح ومراجعة مستقلة.</div></details>
+        <details><summary>Legacy B — HSP4</summary><ul><li>أفضل تنظيم بنيوي: content entry وShadow DOM وshell وشاشات وstores منفصلة.</li><li>متابعة وموظفون ونماذج وإجازات.</li><li>polling كل 5 دقائق وإشعارات وشارة للطلبات.</li><li>عدد من مجلدات domain هو placeholder، ولذلك التنظيم لا يعني اكتمال الوظائف.</li></ul></details>
+        <details><summary>Legacy C — HSP_clean</summary><ul><li>Manifest وservice worker وpage hook وbroker مطابقة فعليًا لـCurrent.</li><li>نفس iframe والجلسة والموظفين والحركات والتقارير.</li><li>يمتاز بمكونات تقارير: <code>official_notice_v2_adapter.js</code> و<code>official_notice_shared_shell.js</code> و<code>official_notice_template_v2.js</code>.</li></ul></details>
+      </section>
+
+      <section id="matrix" class="section"><h2>3. مصفوفة المقارنة</h2><div class="table-wrap"><table>
+        <thead><tr><th>المجال</th><th>Current</th><th>Legacy A</th><th>Legacy B</th><th>Legacy C</th></tr></thead><tbody>
+        <tr><td>الوظائف</td><td>موظفون وحركات وتقارير</td><td>غنية لكن متداخلة</td><td>واسعة نظريًا وبعضها placeholder</td><td>Current + تقارير إضافية</td></tr>
+        <tr><td>الواجهة</td><td>iframe + Bootstrap RTL</td><td>Popup وواجهة صفحة</td><td>Shadow DOM وشاشات منفصلة</td><td>مثل Current</td></tr>
+        <tr><td>التقارير</td><td>PDF/Excel ونماذج</td><td>معاينات واسعة</td><td>شاشات ونماذج أساسية</td><td>أفضل مرجع لإضافات التقارير</td></tr>
+        <tr><td>المصادقة</td><td class="bad">Bearer محلي</td><td class="bad">اعتراض وفحص التخزين</td><td class="bad">Bearer محلي</td><td class="bad">مثل Current</td></tr>
+        <tr><td>الصلاحيات</td><td>storage, scripting, tabs</td><td class="bad">unlimitedStorage</td><td class="warn">+ notifications, alarms</td><td>مثل Current</td></tr>
+        <tr><td>الصيانة</td><td>تراكم sw.js وapp.js</td><td>ملف مركزي ضخم</td><td>فصل أفضل، نضج متفاوت</td><td>تراكم ووثائق كثيرة</td></tr>
+        <tr><td>الاختبارات</td><td>لا harness</td><td>لا harness</td><td>Puppeteer كاعتماد بلا suite موثقة</td><td>لا harness</td></tr>
+        <tr><td>الاشتراك</td><td>لا يوجد</td><td>مواد غير موثقة</td><td>لا يوجد فعليًا</td><td>لا يوجد</td></tr>
+        <tr><td>جاهزية المتجر</td><td class="bad">محجوبة بـP0</td><td class="bad">ضعيفة جدًا</td><td class="bad">ضعيفة</td><td class="bad">محجوبة بنفس المخاطر</td></tr>
+      </tbody></table></div></section>
+
+      <section id="architecture" class="section"><h2>4. الفروق البرمجية والمعمارية</h2>
+        <h3>Current وLegacy C</h3><p>هما خط كود واحد تقريبًا، وليس قاعدتين مستقلتين. الاختلاف الأهم في <code>ui/js/app.js</code> ومكونات إشعارات/تقارير رسمية إضافية في Legacy C. لذلك لا يُدمج Legacy C كاملًا.</p>
+        <h3>Legacy B وCurrent</h3><div class="flow">content entry → bridge → Shadow DOM → shell controller → screens / stores</div><p>هذا الفصل أفضل من اعتماد Current الكبير على <code>app.js</code>، لكن B يعيد مخاطر الجلسة والـbroker ويضيف صلاحيات وعمليات مؤثرة.</p>
+        <h3>Legacy A</h3><p>الأكثر اختلافًا: منطق مركزي ضخم، Popup للإجازات، مكتبات XLSX وExcelJS وPDF وQR وMoyasar، وصلاحية تخزين غير محدودة. الدمج المباشر منه عالي الخطورة.</p>
+      </section>
+
+      <section id="pros-cons" class="section"><h2>5. المزايا والعيوب</h2><div class="table-wrap"><table><thead><tr><th>النسخة</th><th>ما يستحق الحفاظ عليه</th><th>ما يعاد تنفيذه</th><th>ما يُستبعد</th></tr></thead><tbody>
+        <tr><td><b>Current</b></td><td>النطاق الضيق، MV3، raw/index/summary، التقارير</td><td>الجلسة والجسر والاختبارات</td><td>broker العام وتخزين Bearer</td></tr>
+        <tr><td><b>Legacy A</b></td><td>متطلبات تصفية الإجازات وأفكار التصدير فقط</td><td>أي إجازات أو تصدير معتمد</td><td>فحص التخزين، عمليات الكتابة، مواد الدفع، unlimitedStorage</td></tr>
+        <tr><td><b>Legacy B</b></td><td>فصل shell/screens/stores وShadow DOM</td><td>الإشعارات والإجازات إن اعتمدت</td><td>broker وBearer وplaceholders وnode_modules</td></tr>
+        <tr><td><b>Legacy C</b></td><td>مكونات official notices ووثائق trace</td><td>أي تحسين يمس الجلسة والرسائل</td><td>الأرشيفات ونسخ الواجهة وأدوات التطوير</td></tr>
+      </tbody></table></div></section>
+
+      <section id="security" class="section"><h2>6. الفحص الأمني</h2>
+        <div class="callout danger"><h3>ثلاثة مخاطر مشتركة يجب إغلاقها أولًا</h3><ol><li>Bearer أو Authorization مخزن محليًا في النسخ الأربع.</li><li><code>window.postMessage("*")</code> وجسر رسائل عام في Current وLegacy B وC.</li><li>broker يقبل URL وheaders وbody بدل عمليات ثابتة محددة.</li></ol></div>
+        <ul><li>Legacy A وB ينفذان اعتماد/رفض إجازات، وهي عمليات كتابة مؤثرة.</li><li>Legacy B يستورد خط Google عن بعد؛ يجب استخدام أصول محلية.</li><li>Legacy A يطلب <code>unlimitedStorage</code>، وLegacy B يطلب الإشعارات والمنبهات.</li><li>مفتاح Manifest في A هو هوية حزمة عامة، وليس سرًا، لكنه لا ينبغي نقله.</li><li>لا يمكن إعلان خلو المشروع من الأسرار دون فحص شامل لاحقًا للملفات والبناء والحزمة.</li></ul>
+      </section>
+
+      <section id="baseline" class="section"><h2>7. الأصل الأفضل للنسخة المطورة</h2><div class="callout success"><h3>Current هو الأساس — بثقة عالية</h3><p>Legacy C لا يزيل المخاطر لأنه نفس الخط تقريبًا؛ Legacy B أجمل تنظيمًا لكنه غير مكتمل وأوسع صلاحيات؛ Legacy A غني وظيفيًا لكنه الأعلى مخاطرة.</p></div>
+        <ul><li><b>من Legacy C:</b> تقييم مكونات official notices والتقارير فقط.</li><li><b>من Legacy B:</b> استلهام فصل shell/screens/stores وShadow DOM، لا نسخ الملفات.</li><li><b>من Legacy A:</b> استخراج متطلبات الأعمال للتصفية والتصدير، لا الجلسة أو الدفع أو عمليات الاعتماد.</li></ul>
+      </section>
+
+      <section id="strategy" class="section"><h2>8. استراتيجية التطوير المقترحة</h2><ol>
+        <li><b>تثبيت خط الأساس وحماية البيانات والجلسة:</b> معالجة Bearer والاحتفاظ والمحو وعقد الرسائل، مع اختبارات logout و401 والرسائل السلبية.</li>
+        <li><b>استعادة الميزات القيمة بشكل محكوم:</b> تقارير Legacy C، وميزات الإجازات فقط إذا اعتمدت وبصلاحيات واضحة.</li>
+        <li><b>توحيد الواجهة والتقارير والطباعة:</b> إزالة placeholders واختبار RTL وPDF وExcel ببيانات اصطناعية.</li>
+        <li><b>إنشاء اختبارات آلية وتشغيلية:</b> الرسائل والتخزين والحسابات وواجهة MV3 ودورة حياة service worker.</li>
+        <li><b>المعمارية التجارية والاشتراك:</b> بعد تحديد الحسابات والخطط والخادم والدفع، مع entitlement خادمي.</li>
+        <li><b>الحماية والحزمة:</b> ZIP مطابق، فحص أسرار وتراخيص، ومراجعة المتجر على الحزمة النهائية ذاتها.</li>
+      </ol></section>
+
+      <section id="options" class="section"><h2>9. خيارات التطوير</h2><div class="decision-grid">
+        <article class="decision"><h3>A — تطوير مباشر</h3><p>تطوير Current واستعادة ميزات Legacy.</p><p class="good">أقل فقد وظيفي وتغيير صلاحيات.</p><p class="warn">قد يتحول إلى ترقيع إن لم تسبق الميزات معالجة P0.</p></article>
+        <article class="decision"><h3>B — تبني HSP4</h3><p>استخدام Legacy B كأساس.</p><p class="good">تنظيم واجهة جيد.</p><p class="bad">غير موصى به: placeholders وصلاحيات أكبر وجسر غير آمن وترحيل واسع.</p></article>
+        <article class="decision recommended"><h3>C — إعادة هيكلة مدروسة</h3><p>Current أساس، وLegacy مراجع انتقائية.</p><p class="good">أفضل توازن بين الأمن والصيانة والاشتراك المستقبلي.</p><p class="warn">تكلفة أولية أعلى من الإصلاح السريع.</p></article>
+      </div></section>
+
+      <section id="features" class="section"><h2>10. قائمة الميزات الموحدة</h2>
+        <div class="cards"><div class="card"><h3 class="good">نحافظ عليها</h3><ul><li>الموظفون والحركات ضمن الصلاحيات</li><li>raw/index/summary</li><li>المتابعة اليومية</li><li>الغياب والتأخر</li><li>PDF/Excel والطباعة</li><li>RTL والخطوط المحلية</li></ul></div>
+        <div class="card"><h3 class="warn">نحسنها</h3><ul><li>حالات الجلسة والأخطاء</li><li>البحث والتصفية ومركز الحركات</li><li>الواجهة والوصولية وإدارة التركيز</li><li>التخزين والاحتفاظ</li></ul></div>
+        <div class="card"><h3>نعيد تنفيذها</h3><ul><li>جسر الصفحة والـbroker</li><li>الإجازات والإشعارات إن اعتمدت</li><li>الدفع والاشتراك</li><li>الاختبارات</li></ul></div>
+        <div class="card"><h3 class="bad">نستبعدها</h3><ul><li>البحث عن tokens في تخزين الموقع</li><li>نسخ قبول/رفض الإجازات مباشرة</li><li>unlimitedStorage</li><li>Google Fonts البعيدة</li><li>node_modules والأرشيفات من ZIP</li><li>اشتراك مفروض محليًا فقط</li></ul></div></div>
+      </section>
+
+      <section id="decisions" class="section"><h2>11. القرارات المطلوبة من المالك</h2><ol><li>هل الإجازات وقبولها/رفضها ضمن المنتج مستقبلًا؟</li><li>هل توجد موافقة صريحة على عمليات كتابة داخل حضوري، أم يبقى المنتج قراءة وتحليلًا وتقارير فقط؟</li><li>هل مكونات <code>official notice</code> في Legacy C متطلب يجب التحقق منه أولًا؟</li><li>هل نعتمد الخيار C: إعادة هيكلة مدروسة فوق Current؟</li></ol><div class="callout"><b>توصية التقرير:</b> اعتماد Current والخيار C، ثم تحقق غير تنفيذي من تقارير Legacy C وحدود API قبل أي معمارية أو دمج.</div></section>
+
+      <section id="notes" class="section notes"><h2>ملاحظات المراجع</h2>
+        <div class="callout success"><h3>تقييمي العام</h3><p>التقرير قوي ومنضبط، وتوصيته الأساسية سليمة: لا فائدة من تبديل القاعدة إلى Legacy؛ القيمة الحقيقية هي استخراج الأفكار والمتطلبات مع إعادة تنفيذ الأجزاء الحساسة.</p></div>
+        <h3>1. أتفق مع اختيار Current، لكن بشرط</h3><p>اعتماد Current يجب أن يعني اعتماد <b>وظائفه وبياناته</b> كنقطة انطلاق، لا تثبيت معماريته الحالية. الجلسة والـbroker وحدود الرسائل تحتاج معالجة قبل إضافة الاشتراك أو توسيع الميزات.</p>
+        <h3>2. خيار C هو الصحيح، مع تجنب إعادة البناء المفتوحة</h3><p>أفضل صياغة له: «إعادة هيكلة موجّهة بالمخاطر فوق Current». نحافظ على الوظائف المثبتة، ونستبدل الحدود الأمنية والتراكمات تدريجيًا باختبارات. هذا يمنع تحول المشروع إلى إعادة بناء جديدة طويلة وغير قابلة للقياس.</p>
+        <h3>3. الإجازات يجب فصلها إلى مستويين</h3><ul><li><b>قراءة وعرض طلبات الإجازات:</b> يمكن دراستها لاحقًا كميزة منفصلة.</li><li><b>قبول/رفض الطلبات:</b> عملية كتابة عالية الحساسية، وأوصي بإخراجها من الإصدار الأول حتى يتوفر تفويض صريح واختبار أمان وسجل تدقيق وتأكيد مستخدم واضح.</li></ul>
+        <h3>4. تقارير Legacy C تستحق تحققًا محدودًا</h3><p>لأن C قريب جدًا من Current، يمكن مقارنة مكونات <code>official_notice</code> وتحديد هل هي مستخدمة فعليًا وما القيمة التي تضيفها. لا ينبغي أن تصبح هذه المقارنة مرحلة كبيرة أو تؤخر إصلاح P0.</p>
+        <h3>5. Legacy B مرجع تصميم، وليس مصدر كود</h3><p>فصل الشاشات والـstores مفيد، لكن اختيار iframe أو Shadow DOM ينبغي أن ينتج من احتياجات العزل والتكامل والوصولية، لا من كون B يبدو أكثر ترتيبًا.</p>
+        <h3>6. تقرير المقارنة لا يثبت الجاهزية التشغيلية</h3><p>الحكم <b>NEEDS TARGETED VERIFICATION</b> صحيح. الفحص ساكن فقط؛ لا يثبت صحة APIs أو الحسابات أو الطباعة أو دورة حياة MV3. يجب لاحقًا بناء اختبارات ببيانات اصطناعية ثم تجربة محدودة بحساب مفوض.</p>
+        <h3>7. ملاحظة مهمة عن Git</h3><p>مجلد <code>legacy/</code> غير متتبع ويحتوي <code>node_modules</code> وأصولًا تاريخية وربما مواد حساسة. أوصي بعدم إدخاله في Git الحالي كاملًا. بعد استخراج ما نحتاجه، يُحفظ كأرشيف خارجي أو تُضاف قواعد استبعاد واضحة، ولا يدخل ZIP الإنتاجي إطلاقًا.</p>
+        <div class="callout warning"><h3>قراري المقترح الآن</h3><p>وافق على الخيار C، واجعل المنتج في الإصدار الأول قراءة/تحليل/تقارير فقط. أجّل عمليات اعتماد ورفض الإجازات. نفّذ تحققًا صغيرًا من تقارير Legacy C، ثم انتقل مباشرة إلى معمارية الأمان والاشتراك بدل مزيد من تحليل النسخ.</p></div>
+      </section>
+      <p class="footer">أُعدت هذه الصفحة من تقرير المقارنة الساكن. لا تمثل نتائج اختبار تشغيلي أو موافقة نشر.</p>
+    </main>
+  </div>
+  <script>let expanded=true;function toggleAll(){expanded=!expanded;document.querySelectorAll('details').forEach(d=>d.open=expanded)}</script>
+</body>
+</html>

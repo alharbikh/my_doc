@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <meta name="color-scheme" content="light dark">
+  <title>دليل استخدام مهارات إضافات كروم</title>
+  <style>
+    :root {
+      --bg:#f3f6fb; --surface:#fff; --surface-2:#f8fafc; --text:#172033;
+      --muted:#667085; --line:#dde4ee; --brand:#2357d9; --brand-2:#163d9f;
+      --accent:#e9efff; --success:#087a55; --warning:#9a5800; --code:#101828;
+      --shadow:0 16px 42px rgba(20,32,58,.09); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo","Tajawal","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.9}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .topbar{position:sticky;top:0;z-index:50;height:68px;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 24px}
+    .brand{font-weight:800;color:var(--brand-2);white-space:nowrap}.topbar input{width:min(480px,50vw);margin-inline-start:auto;border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:12px;padding:10px 14px;font:inherit;line-height:1.2}
+    button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:11px;padding:9px 13px;font:inherit;cursor:pointer}button:hover{border-color:var(--brand);color:var(--brand)}
+    .layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:290px minmax(0,900px);justify-content:center;gap:26px;padding:28px}
+    .toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 118px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .toc strong{display:block;margin-bottom:10px}.toc a{display:block;color:var(--muted);padding:6px 9px;border-radius:8px;font-size:.91rem}.toc a:hover,.toc a.active{background:var(--accent);color:var(--brand);text-decoration:none}
+    main{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,5vw,64px);box-shadow:var(--shadow)}
+    h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.3;color:var(--brand-2);margin-top:0}h2{font-size:1.65rem;margin-top:3.2rem;padding-top:.25rem;border-bottom:1px solid var(--line);padding-bottom:.55rem;color:#193b8f}h3{font-size:1.18rem;margin-top:2rem;color:#294165}h1,h2,h3{line-height:1.5}
+    p{margin:1rem 0}blockquote{margin:1.5rem 0;padding:14px 18px;border-right:5px solid var(--brand);background:var(--accent);border-radius:12px;color:#263c71}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin:20px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:.94rem}th,td{padding:12px 14px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}th{background:#edf2ff;color:#24448d}tr:last-child td{border-bottom:0}tr:nth-child(even) td{background:var(--surface-2)}
+    pre{position:relative;direction:ltr;text-align:left;background:var(--code);color:#e7edf7;border-radius:14px;padding:19px;overflow:auto;line-height:1.65;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}code{font-family:"Cascadia Code","Consolas",monospace;font-size:.9em}p code,li code,td code{direction:ltr;display:inline-block;background:#eef2f8;color:#17376f;padding:1px 6px;border-radius:6px}
+    .copy{position:absolute;top:9px;right:9px;font-size:.78rem;padding:5px 9px;background:#26344d;color:#fff;border-color:#42506a}.copy:hover{color:#fff;border-color:#8ca8ff}
+    ul,ol{padding-right:1.45rem}li{margin:.35rem 0}hr{border:0;border-top:1px solid var(--line);margin:3rem 0}
+    input[type=checkbox]{accent-color:var(--brand);width:17px;height:17px;vertical-align:middle;margin-left:7px}.task-list-item{list-style:none;margin-right:-1.4rem}
+    mark{background:#fff09a;color:#172033;border-radius:3px;padding:0 2px}.meta{color:var(--muted);font-size:.9rem;margin-top:-1rem;margin-bottom:2rem}
+    .backtop{position:fixed;left:22px;bottom:22px;display:none;border-color:var(--brand);color:var(--brand);box-shadow:var(--shadow)}
+    @media(max-width:900px){.layout{display:block;padding:14px}.toc{position:static;max-height:320px;margin-bottom:16px}.topbar{padding:0 12px}.brand{display:none}.topbar input{width:100%;margin:0}main{padding:24px 18px;border-radius:18px}table{display:block;overflow:auto}.hide-mobile{display:none}}
+    @media(prefers-color-scheme:dark){:root{--bg:#0e1420;--surface:#151d2b;--surface-2:#1b2535;--text:#e8edf6;--muted:#a9b4c7;--line:#2b384b;--brand:#8daaff;--brand-2:#b4c5ff;--accent:#202e50;--code:#080d15}.topbar{background:rgba(21,29,43,.92)}h2{color:#a9bfff}h3{color:#c3d0e7}th{background:#202e50;color:#c7d4ff}p code,li code,td code{background:#243147;color:#dbe6ff}blockquote{color:#cad7f8}}
+    @media print{body{background:#fff;color:#000}.topbar,.toc,.copy,.backtop{display:none!important}.layout{display:block;max-width:none;padding:0}main{border:0;box-shadow:none;padding:0}h2{break-before:page;color:#163d9f}pre,table,blockquote{break-inside:avoid}a{color:#000;text-decoration:none}}
+  </style>
+</head>
+<body>
+  <style>.home-nav{position:sticky;top:0;z-index:1100;padding:.65rem 1rem;background:rgba(255,255,255,.94);border-bottom:1px solid #dde4ee;backdrop-filter:blur(10px);font-family:Cairo,system-ui,sans-serif}.home-nav a{display:inline-block;padding:.38rem .9rem;border-radius:.55rem;background:#e9efff;color:#163d9f;text-decoration:none;font-weight:700}.home-nav a:hover{background:#dbe5ff}@media(max-width:575.98px){body{overflow-x:hidden}table{display:block;max-width:100%;overflow-x:auto}}</style>
+  <nav class="home-nav" aria-label="التنقل الرئيسي"><a href="./index.html">الرئيسية</a></nav>
+  <header class="topbar">
+    <div class="brand">دليل مهارات إضافات كروم</div>
+    <input id="search" type="search" placeholder="ابحث داخل الدليل…" aria-label="البحث داخل الدليل">
+    <button id="print" class="hide-mobile">طباعة / PDF</button>
+  </header>
+  <div class="layout">
+    <aside class="toc" aria-label="فهرس المحتويات"><strong>المحتويات</strong><nav id="toc"></nav></aside>
+    <main id="content">
+      <h1 id="دليل-استخدام-مهارات-إضافات-كروم">دليل استخدام مهارات
+      إضافات كروم</h1>
+      <h2
+      id="من-فكرة-المشروع-إلى-حزمة-جاهزة-للرفع-على-chrome-web-store">من
+      فكرة المشروع إلى حزمة جاهزة للرفع على Chrome Web Store</h2>
+      <p>هذا الدليل صالح للاستخدام مع Codex أو Claude Code لبناء إضافة
+      جديدة، تطوير إضافة قائمة، إصلاح تكامل مع موقع، إضافة اشتراك أو
+      فترة تجريبية، أو تجهيز إصدار للنشر.</p>
+      <blockquote>
+      <p>النتيجة النهائية المقصودة: مجلد إصدار نظيف وحزمة ZIP مطابقة له،
+      تم اختبارهما ومراجعتهما، وجاهزان للرفع يدويًا إلى Chrome Web Store
+      بعد موافقة صاحب المشروع.</p>
+      </blockquote>
+      <hr />
+      <h2 id="1-المهارات-وأدوارها">1. المهارات وأدوارها</h2>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>المهارة</th>
+      <th>وقت استخدامها</th>
+      <th>الناتج الأساسي</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td><code>chrome-extension-orchestrator</code></td>
+      <td>طوال المشروع</td>
+      <td>تنسيق المراحل، اختيار المهارات، وضبط بوابات الموافقة</td>
+      </tr>
+      <tr class="even">
+      <td><code>target-site-analyzer</code></td>
+      <td>إذا كانت الإضافة تعمل على موقع محدد</td>
+      <td>تقرير موثق عن الصفحات والتقنيات والجلسات واستراتيجية التكامل
+      المسموح بها</td>
+      </tr>
+      <tr class="odd">
+      <td><code>chrome-extension-architect</code></td>
+      <td>قبل كتابة الكود أو عند تغيير حدود رئيسية</td>
+      <td>معمارية Manifest V3، الصلاحيات، الرسائل، التخزين، الأمن
+      والخصوصية</td>
+      </tr>
+      <tr class="even">
+      <td><code>chrome-extension-ui-designer</code></td>
+      <td>عند وجود popup أو side panel أو options أو onboarding</td>
+      <td>مخططات الواجهات، الحالات، RTL، الوصول، ونظام التصميم</td>
+      </tr>
+      <tr class="odd">
+      <td><code>chrome-extension-builder</code></td>
+      <td>بعد اعتماد المعمارية والتصميم</td>
+      <td>ملفات الإضافة والكود والاختبارات وأداة البناء</td>
+      </tr>
+      <tr class="even">
+      <td><code>chrome-extension-tester</code></td>
+      <td>أثناء البناء وقبل الإصدار</td>
+      <td>نتائج اختبارات ووثائق أدلة وتصنيف الأعطال</td>
+      </tr>
+      <tr class="odd">
+      <td><code>extension-commercial-control</code></td>
+      <td>عند وجود تجربة أو اشتراك أو ترخيص</td>
+      <td>نموذج الصلاحيات التجارية، حالات الاشتراك، وضوابط الخادم</td>
+      </tr>
+      <tr class="even">
+      <td><code>extension-code-protection</code></td>
+      <td>قبل الإصدار وعند وجود منطق مميز</td>
+      <td>تقليل انكشاف الكود والأسرار وحماية الحزمة ضمن سياسة
+      المتجر</td>
+      </tr>
+      <tr class="odd">
+      <td><code>chrome-web-store-reviewer</code></td>
+      <td>على حزمة الإصدار النهائية تحديدًا</td>
+      <td>تقرير جاهزية المتجر وقرار النشر أو قائمة العوائق</td>
+      </tr>
+      <tr class="even">
+      <td><code>agent-handoff</code></td>
+      <td>عند تغيير الجلسة أو العميل أو النموذج</td>
+      <td>تقرير تسليم موثق يمكّن الجلسة التالية من الاستمرار بأمان</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>لا يلزم استدعاء جميع المهارات في كل مشروع. المنسق يختار أقل
+      مجموعة تكفي لتحقيق النتيجة.</p>
+      <hr />
+      <h2 id="2-إنشاء-مجلد-المشروع-وبدء-الجلسة">2. إنشاء مجلد المشروع
+      وبدء الجلسة</h2>
+      <h3 id="مشروع-جديد">مشروع جديد</h3>
+      <p>في PowerShell:</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">$Project</span> <span class="op">=</span> <span class="st">&quot;$HOME\Desktop\MyChromeExtension&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">New-Item</span> <span class="op">-</span>ItemType Directory <span class="op">-</span>Force <span class="op">-</span>Path <span class="va">$Project</span> <span class="op">|</span> <span class="fu">Out-Null</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="va">$Project</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>git init</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>codex</span></code></pre></div>
+      <p>لاستعمال Claude Code بدل Codex:</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;$HOME\Desktop\MyChromeExtension&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>claude</span></code></pre></div>
+      <h3 id="مشروع-قائم">مشروع قائم</h3>
+      <p>افتح العميل من جذر المشروع الذي يحتوي على
+      <code>manifest.json</code> أو إعدادات البناء:</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;C:\path\to\extension-project&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>codex</span></code></pre></div>
+      <p>لا تشغّل جلستين تعدّلان المجلد نفسه في الوقت نفسه. يمكن تشغيل
+      جلسات متزامنة إذا كان لكل جلسة مشروع أو worktree مستقل.</p>
+      <hr />
+      <h2 id="3-أمر-البداية-الموحد">3. أمر البداية الموحد</h2>
+      <p>أرسل هذا الأمر في أول جلسة:</p>
+      <pre class="text"><code>استخدم مهارة chrome-extension-orchestrator لإدارة هذا المشروع من البداية حتى إنتاج حزمة إصدار جاهزة للمراجعة والرفع على Chrome Web Store.
+
+ابدأ بوضع الاستقبال التفاعلي. اسألني فقط عن المعلومات التي لا تستطيع استنتاجها من ملفات المشروع. اجمع الأسئلة في دفعة قصيرة ومنظمة، ثم:
+1. لخّص المتطلبات ومعايير القبول.
+2. حدّد المهارات اللازمة ومسار التنفيذ في مراحل كبيرة مترابطة.
+3. اذكر القرارات والمخاطر والبوابات التي تحتاج موافقتي.
+4. لا تكتب الكود قبل موافقتي على نطاق المنتج والمعمارية.
+5. لا تنفّذ رفعًا أو نشرًا أو دفعًا ماليًا أو تسجيل دخول نيابة عني.
+6. حافظ على وثائق مشروع مختصرة، وتجنب تقسيم العمل إلى مراحل صغيرة لكل ملف.</code></pre>
+      <hr />
+      <h2 id="4-أسئلة-الاستقبال-المطلوبة">4. أسئلة الاستقبال
+      المطلوبة</h2>
+      <p>يجب أن تغطي جلسة الاستقبال، بحسب الحاجة:</p>
+      <ol type="1">
+      <li>اسم الإضافة ووصفها المختصر.</li>
+      <li>المشكلة التي تحلها والمستخدمون المستهدفون.</li>
+      <li>هل المشروع جديد أم توجد إضافة حالية؟</li>
+      <li>روابط المواقع والصفحات والمسارات التي ستعمل عليها.</li>
+      <li>الوظائف الأساسية والوظائف المؤجلة.</li>
+      <li>البيانات التي ستقرأها أو تحفظها أو ترسلها.</li>
+      <li>هل توجد مصادقة، جلسة، MFA، CAPTCHA أو حسابات حساسة؟</li>
+      <li>الواجهات المطلوبة: popup، side panel، options، onboarding،
+      صفحة كاملة أو عناصر داخل الموقع.</li>
+      <li>اللغات المطلوبة، ومنها العربية وRTL.</li>
+      <li>هل توجد فترة تجريبية، اشتراك، ترخيص، خطط أو إيقاف ميزات؟</li>
+      <li>هل يوجد backend أو مزود دفع أو حساب مطور Chrome Web
+      Store؟</li>
+      <li>المتصفحات والإصدارات المدعومة.</li>
+      <li>مستوى الاختبارات المطلوب ومعايير القبول العملية.</li>
+      <li>متطلبات الخصوصية والاحتفاظ بالبيانات والدعم.</li>
+      </ol>
+      <p>يحوّل العميل الإجابات إلى ملخص متطلبات واضح. لا يبدأ التنفيذ إلا
+      بعد أن تقول مثلًا:</p>
+      <pre class="text"><code>أوافق على ملخص المتطلبات والنطاق. انتقل إلى التحليل والمعمارية، ولا تبدأ البناء قبل عرض قرارات المعمارية والصلاحيات عليّ.</code></pre>
+      <hr />
+      <h2 id="5-المرحلة-الأولى-تحليل-الموقع-المستهدف">5. المرحلة الأولى:
+      تحليل الموقع المستهدف</h2>
+      <p>تُستخدم <code>target-site-analyzer</code> عندما تعتمد الإضافة
+      على موقع محدد.</p>
+      <h3 id="الأمر">الأمر</h3>
+      <pre class="text"><code>استخدم target-site-analyzer لتحليل الموقع والصفحات المعتمدة فقط. نفّذ تحليلًا موثقًا دون بناء الإضافة ودون محاولة تجاوز تسجيل الدخول أو CAPTCHA أو الحماية.
+
+حدّد:
+- الصفحات والمسارات وحالات SPA.
+- التقنيات الأمامية المؤثرة في التكامل.
+- أسلوب المصادقة والجلسة دون تسجيل الأسرار.
+- أسطح البيانات المسموح بها: DOM أو واجهة رسمية أو رسائل الصفحة.
+- مقارنة استراتيجيات التكامل من حيث الثبات والأمان والصلاحيات.
+- أقل host permissions وpermissions متوقعة.
+- مخاطر تغيّر الموقع والخصوصية والأمان.
+- الأدلة الناقصة والخطوات اليدوية التي يجب أن أقوم بها.
+
+اختم بقرار: DISCOVERY COMPLETE — READY FOR ARCHITECTURE، أو اذكر العائق بدقة.</code></pre>
+      <h3 id="بوابة-القبول">بوابة القبول</h3>
+      <p>لا تنتقل للمعمارية حتى يتضح:</p>
+      <ul>
+      <li>أن الاستخدام مصرح به ومتوافق مع شروط الموقع.</li>
+      <li>أن البيانات المطلوبة محددة ومبررة.</li>
+      <li>أن طريقة التكامل لا تتجاوز الحماية أو تجمع أسرارًا.</li>
+      <li>أن الصلاحيات المتوقعة هي الحد الأدنى.</li>
+      <li>أن استراتيجية DOM أو API أو page bridge مدعومة بأدلة.</li>
+      </ul>
+      <hr />
+      <h2 id="6-المرحلة-الثانية-المعمارية-وتصميم-الواجهات">6. المرحلة
+      الثانية: المعمارية وتصميم الواجهات</h2>
+      <p>يمكن تنفيذ المعمارية والتصميم في مرحلة كبيرة واحدة، مع موافقة
+      واحدة قبل البناء.</p>
+      <h3 id="أمر-المعمارية">أمر المعمارية</h3>
+      <pre class="text"><code>استخدم chrome-extension-architect وحوّل المتطلبات وتقرير الموقع المعتمد إلى معمارية Manifest V3 قابلة للتنفيذ.
+
+حدّد:
+- بنية manifest.json وأقل permissions وhost_permissions.
+- مسؤوليات content scripts وservice worker وصفحات الإضافة.
+- تدفقات الرسائل وعقود البيانات والتحقق منها.
+- التخزين ودورة حياة البيانات والترحيلات.
+- حدود الثقة والمصادقة والجلسات والأسرار.
+- سياسة الأمن والخصوصية والتسجيل التشخيصي الآمن.
+- الاختبارات ونقاط العزل وقابلية الصيانة.
+- ADR فقط للقرارات الدائمة عالية الأثر.
+
+لا تكتب كود الإنتاج. اعرض الحزمة المعمارية واطلب موافقتي.</code></pre>
+      <h3 id="أمر-تصميم-الواجهات">أمر تصميم الواجهات</h3>
+      <pre class="text"><code>استخدم chrome-extension-ui-designer لتصميم الواجهات المعتمدة في المتطلبات.
+
+قدّم:
+- اختيار السطح المناسب: popup أو side panel أو options أو onboarding.
+- مخططات واضحة لكل شاشة.
+- حالات التحميل والنجاح والفراغ والخطأ وانتهاء الجلسة وعدم الصلاحية.
+- نظام ألوان وخطوط ومسافات ومكونات.
+- دعم العربية وRTL والوصول ولوحة المفاتيح.
+- شاشات التجربة والاشتراك إذا كانت ضمن النطاق.
+- مواصفات تنفيذية يستطيع builder تحويلها مباشرة إلى كود.
+
+لا تنفّذ الواجهات بعد. اعرض التصميم واطلب موافقتي.</code></pre>
+      <h3 id="بوابة-التصميم">بوابة التصميم</h3>
+      <p>يجب اعتماد:</p>
+      <ul>
+      <li>هدف واحد واضح للإضافة.</li>
+      <li>الصلاحيات وأسباب كل صلاحية.</li>
+      <li>تدفقات الرسائل والتخزين والجلسة.</li>
+      <li>الواجهات وحالاتها الأساسية.</li>
+      <li>معايير القبول والاختبارات.</li>
+      <li>الحدود التجارية والخادم إن وجدت.</li>
+      </ul>
+      <p>أمر الموافقة:</p>
+      <pre class="text"><code>أوافق على المعمارية والتصميم والصلاحيات الموضحة. ابدأ البناء ضمن هذا النطاق فقط، وتوقف إذا احتجت صلاحية أو خدمة أو حد ثقة جديدًا.</code></pre>
+      <hr />
+      <h2 id="7-المرحلة-الثالثة-بناء-الإضافة-وكتابة-ملفاتها">7. المرحلة
+      الثالثة: بناء الإضافة وكتابة ملفاتها</h2>
+      <p>نعم، <code>chrome-extension-builder</code> يكتب الملفات
+      والأوامر البرمجية، ومنها:</p>
+      <ul>
+      <li><code>manifest.json</code> وفق Manifest V3.</li>
+      <li>content scripts وservice worker.</li>
+      <li>popup وside panel وoptions وonboarding.</li>
+      <li>HTML وCSS وJavaScript أو TypeScript وإطار الواجهة
+      المعتمد.</li>
+      <li>الرسائل والتخزين والترحيلات.</li>
+      <li>adapters خاصة بالموقع.</li>
+      <li>الاختبارات وأداة البناء.</li>
+      <li>ملفات التوثيق والإصدار الضرورية.</li>
+      </ul>
+      <h3 id="أمر-البناء">أمر البناء</h3>
+      <pre class="text"><code>استخدم chrome-extension-builder لتنفيذ المعمارية والتصميم المعتمدين كشرائح رأسية متماسكة، وليس كمرحلة منفصلة لكل ملف.
+
+متطلبات التنفيذ:
+1. أنشئ ملفات المشروع وكود Manifest V3 الفعلي.
+2. التزم بأقل الصلاحيات، ولا تضف remote hosted code.
+3. لا تخزن كلمات مرور أو cookies أو tokens أو بيانات حساسة في السجلات.
+4. طبّق عقود رسائل محققة وحدودًا واضحة بين المكونات.
+5. أضف اختبارات مركزة مع كل قدرة رئيسية.
+6. شغّل التنسيق والفحص والاختبارات بعد كل شريحة كبيرة.
+7. لا تغيّر المعمارية أو توسع النطاق دون موافقتي.
+8. لا تنفذ git commit أو push إلا إذا أذنت بذلك صراحة.
+9. عند إكمال القدرة، اعرض الملفات المتغيرة والاختبارات والقيود المتبقية.</code></pre>
+      <h3 id="بنية-نموذجية-للمشروع">بنية نموذجية للمشروع</h3>
+      <pre class="text"><code>project/
+├── src/
+│   ├── background/
+│   ├── content/
+│   ├── popup/
+│   ├── sidepanel/
+│   ├── options/
+│   ├── shared/
+│   └── site-adapters/
+├── public/
+│   ├── manifest.json
+│   └── icons/
+├── tests/
+├── docs/
+├── package.json
+└── build configuration</code></pre>
+      <p>البنية الفعلية تتبع المعمارية والأداة المختارة، ولا يجب إنشاء
+      مجلدات غير مستخدمة.</p>
+      <hr />
+      <h2 id="8-المرحلة-التجارية-التجربة-والاشتراك-والترخيص">8. المرحلة
+      التجارية: التجربة والاشتراك والترخيص</h2>
+      <p>تُستخدم <code>extension-commercial-control</code> فقط إذا كان
+      المشروع تجاريًا.</p>
+      <h3 id="المبدأ-الحاسم">المبدأ الحاسم</h3>
+      <p>لا يمكن الاعتماد على واجهة الإضافة وحدها لحماية الميزات
+      المدفوعة. يستطيع المستخدم تعديل الكود المحلي. يجب أن تكون
+      الصلاحيات والميزات الحساسة قابلة للتحقق من خادم موثوق عند
+      الحاجة.</p>
+      <h3 id="الأمر-1">الأمر</h3>
+      <pre class="text"><code>استخدم extension-commercial-control لتصميم وتنفيذ نظام التجربة والاشتراك ضمن المعمارية المعتمدة.
+
+غطِّ:
+- الحساب والهوية والربط الآمن.
+- بداية التجربة ونهايتها ومنع إعادة التجربة غير المصرح بها.
+- الخطط والميزات entitlements بدل الاعتماد على زر مخفي محليًا.
+- التجديد والإلغاء والتعليق وفشل الدفع وفترة السماح.
+- حدود الأجهزة والجلسات والوضع غير المتصل.
+- webhooks وتوقيعها ومنع إعادة الإرسال.
+- الإيقاف الجزئي أو الكامل بطريقة واضحة وآمنة للمستخدم.
+- اختبارات العبث والانقطاع وانتهاء الاشتراك.
+- الإفصاحات والخصوصية وإدارة الحساب.
+
+أوقف التنفيذ عند أي قرار قانوني أو مزود دفع أو تغيير في البيانات يحتاج موافقتي.</code></pre>
+      <hr />
+      <h2 id="9-الاختبار-والتحقق-العملي">9. الاختبار والتحقق العملي</h2>
+      <p>استخدم <code>chrome-extension-tester</code> بعد كل قدرة كبيرة،
+      ثم مرة أخيرة على حزمة الإصدار.</p>
+      <h3 id="الاختبارات-المطلوبة-بحسب-المشروع">الاختبارات المطلوبة بحسب
+      المشروع</h3>
+      <ul>
+      <li>فحص صحة <code>manifest.json</code>.</li>
+      <li>unit tests للمنطق والعقود.</li>
+      <li>اختبارات رسائل بين المكونات.</li>
+      <li>اختبارات التخزين والترحيل.</li>
+      <li>تحميل الإضافة Unpacked في Chrome.</li>
+      <li>اختبار الصفحات والمسارات المستهدفة.</li>
+      <li>اختبار تسجيل الدخول وانتهاء الجلسة دون كشف بيانات حساسة.</li>
+      <li>اختبار بدء وتوقف service worker.</li>
+      <li>اختبار الصلاحيات الاختيارية والمرفوضة.</li>
+      <li>اختبار popup أو side panel أو options وحالات الخطأ.</li>
+      <li>اختبار العربية وRTL والوصول.</li>
+      <li>اختبار إعادة تشغيل المتصفح وتحديث الإضافة.</li>
+      <li>اختبار انقطاع الشبكة والموقع وتغير الاستجابة.</li>
+      <li>اختبار التجربة والاشتراك والعبث إذا كان المشروع تجاريًا.</li>
+      </ul>
+      <h3 id="أمر-الاختبار">أمر الاختبار</h3>
+      <pre class="text"><code>استخدم chrome-extension-tester للتحقق من الإضافة دون إصلاح الأعطال أثناء مرحلة التشخيص.
+
+1. ثبّت هوية النسخة وcommit وحزمة الاختبار والمتصفح والموقع.
+2. شغّل الاختبارات الآلية والمتصفح والسيناريوهات الواقعية المناسبة.
+3. اجمع أدلة منقحة لا تحتوي على أسرار أو بيانات شخصية.
+4. صنّف كل فشل إلى كود الإضافة أو الموقع أو الجلسة أو الصلاحيات أو البيئة.
+5. اذكر أقل تجربة تالية تفصل بين الأسباب عند عدم اليقين.
+6. قدّم تقرير PASS/FAIL ولا تدّع نجاح اختبار لم يُنفذ.</code></pre>
+      <p>إذا ظهرت أعطال، يُعاد الإصلاح إلى
+      <code>chrome-extension-builder</code> ضمن نطاق معتمد، ثم يعاد
+      الاختبار المميز واختبارات الانحدار.</p>
+      <hr />
+      <h2 id="10-حماية-الكود-والأسرار">10. حماية الكود والأسرار</h2>
+      <p>استخدم <code>extension-code-protection</code> قبل إنشاء حزمة
+      الإصدار.</p>
+      <h3 id="حقائق-يجب-اعتمادها">حقائق يجب اعتمادها</h3>
+      <ul>
+      <li>لا يمكن منع المستخدم تمامًا من قراءة كود الإضافة المثبتة.</li>
+      <li>لا تضع مفاتيح API سرية أو أسرار خادم داخل الإضافة.</li>
+      <li>انقل المنطق السري والقيم التجارية الحساسة إلى backend.</li>
+      <li>استخدم minification متوافقًا مع سياسة المتجر، ولا تستخدم
+      obfuscation يخفي وظيفة الكود عن المراجعين.</li>
+      <li>احذف source maps وملفات التطوير والاختبارات والأسرار من حزمة
+      الإصدار.</li>
+      </ul>
+      <h3 id="الأمر-2">الأمر</h3>
+      <pre class="text"><code>استخدم extension-code-protection لمراجعة مشروع الإضافة وحزمة الإصدار.
+
+أنشئ جردًا لما يمكن للمستخدم رؤيته، وابحث عن الأسرار والمنطق المميز وsource maps وملفات التطوير والتبعيات والتراخيص. اقترح أو نفّذ الحماية المسموح بها فقط: نقل المنطق الحساس للخادم، minification متوافق، تنظيف الحزمة، منع تسرب الأسرار، وضبط provenance للبناء.
+
+لا تستخدم obfuscation محظورًا، واذكر بوضوح المخاطر المتبقية التي لا يمكن إزالتها من كود العميل.</code></pre>
+      <hr />
+      <h2 id="11-إنشاء-حزمة-الإصدار">11. إنشاء حزمة الإصدار</h2>
+      <p>استخدم أوامر المشروع الفعلية. في مشروع Node نموذجي قد تكون:</p>
+      <div class="sourceCode" id="cb15"><pre
+      class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>npm ci</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>npm run lint</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>npm test</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>npm run build</span></code></pre></div>
+      <p>يجب أن ينتج البناء مجلدًا مثل:</p>
+      <pre class="text"><code>dist\</code></pre>
+      <p>تحقق أن <code>manifest.json</code> موجود مباشرة في جذر
+      <code>dist</code>:</p>
+      <div class="sourceCode" id="cb17"><pre
+      class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Test-Path</span> <span class="st">&quot;.\dist\manifest.json&quot;</span></span></code></pre></div>
+      <p>اعرض الملفات قبل الضغط:</p>
+      <div class="sourceCode" id="cb18"><pre
+      class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-ChildItem</span> <span class="st">&quot;.\dist&quot;</span> <span class="op">-</span>Recurse <span class="op">|</span> <span class="fu">Select-Object</span> FullName<span class="op">,</span> Length</span></code></pre></div>
+      <p>أنشئ ZIP بحيث يكون <code>manifest.json</code> في جذر الملف
+      المضغوط، لا داخل مجلد <code>dist</code> إضافي:</p>
+      <div class="sourceCode" id="cb19"><pre
+      class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="va">$Version</span> <span class="op">=</span> <span class="st">&quot;1.0.0&quot;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="va">$Release</span> <span class="op">=</span> <span class="st">&quot;.\release\my-extension-$Version.zip&quot;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">New-Item</span> <span class="op">-</span>ItemType Directory <span class="op">-</span>Force <span class="st">&quot;.\release&quot;</span> <span class="op">|</span> <span class="fu">Out-Null</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>Compress<span class="op">-</span>Archive <span class="op">-</span>Path <span class="st">&quot;.\dist\*&quot;</span> <span class="op">-</span>DestinationPath <span class="va">$Release</span> <span class="op">-</span>Force</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>Get<span class="op">-</span>FileHash <span class="va">$Release</span> <span class="op">-</span>Algorithm SHA256</span></code></pre></div>
+      <p>لا تنشئ الحزمة من مجلد المصدر. استخدم مخرجات الإنتاج النظيفة
+      فقط.</p>
+      <hr />
+      <h2 id="12-مراجعة-chrome-web-store-النهائية">12. مراجعة Chrome Web
+      Store النهائية</h2>
+      <p>يجب تشغيل <code>chrome-web-store-reviewer</code> على ملف ZIP
+      النهائي نفسه، لأن مراجعة المصدر وحده لا تكفي.</p>
+      <h3 id="الأمر-3">الأمر</h3>
+      <pre class="text"><code>استخدم chrome-web-store-reviewer لمراجعة ملف ZIP النهائي المحدد، وليس المصدر فقط، وفق السياسات الحالية وقت المراجعة.
+
+تحقق من:
+- Manifest V3 والغرض الواحد الواضح.
+- أقل permissions وhost_permissions وتبريرها.
+- عدم وجود remote hosted code أو obfuscation محظور.
+- قابلية قراءة الكود بعد minification المقبول.
+- التعامل مع بيانات المستخدم وسياسة الخصوصية والإفصاحات.
+- تسجيل الدخول والمدفوعات والاشتراكات والتجربة.
+- جودة الوظائف والواجهات والوصول.
+- نصوص وصور صفحة المتجر واتساقها مع السلوك.
+- بيانات وصول المراجع إن كانت مطلوبة دون كشف أسرار في المستودع.
+- نظافة ZIP وعدم وجود source maps أو اختبارات أو أسرار أو ملفات غير مستخدمة.
+- مخاطر التحديث من الإصدار السابق إن وجدت.
+
+أصدر أحد الحكمين:
+1. READY FOR SUBMISSION — EXTERNAL AUTHORIZATION REQUIRED
+2. NOT READY، مع عوائق مرتبة حسب الشدة وطريقة التحقق بعد الإصلاح.
+
+لا ترفع الحزمة ولا تنشرها.</code></pre>
+      <h3 id="حزمة-التسليم-المطلوبة">حزمة التسليم المطلوبة</h3>
+      <p>يجب أن تحتوي نتيجة المشروع النهائية على:</p>
+      <ul>
+      <li>ملف ZIP النهائي.</li>
+      <li>SHA-256 للحزمة.</li>
+      <li>رقم الإصدار وcommit أو tag المرجعي.</li>
+      <li>تقرير الاختبارات.</li>
+      <li>تقرير مراجعة المتجر.</li>
+      <li>سياسة الخصوصية عند الحاجة.</li>
+      <li>وصف المتجر ولقطات الشاشة والأيقونات المطلوبة.</li>
+      <li>تعليمات المختبر أو المراجع عند الحاجة.</li>
+      <li>قائمة بالمخاطر أو الأعمال المؤجلة.</li>
+      </ul>
+      <hr />
+      <h2 id="13-الرفع-والنشر">13. الرفع والنشر</h2>
+      <p>الرفع إلى Chrome Web Store إجراء خارجي منفصل، ولا ينفذه العميل
+      تلقائيًا دون إذن صريح.</p>
+      <p>بعد الحكم:</p>
+      <pre class="text"><code>READY FOR SUBMISSION — EXTERNAL AUTHORIZATION REQUIRED</code></pre>
+      <p>يقوم صاحب المشروع يدويًا بما يلي:</p>
+      <ol type="1">
+      <li>تسجيل الدخول إلى حساب مطور Chrome Web Store.</li>
+      <li>رفع ملف ZIP الذي تمت مراجعته بالضبط.</li>
+      <li>إدخال بيانات صفحة المتجر والخصوصية واستخدام البيانات.</li>
+      <li>إضافة صور وأيقونات الإصدار.</li>
+      <li>توفير تعليمات المراجع أو حساب اختبار محدود عند الحاجة.</li>
+      <li>مراجعة الإفصاحات والأسعار والاشتراك.</li>
+      <li>إرسال النسخة للمراجعة أو جدولة النشر.</li>
+      </ol>
+      <p>لا تُعد الإضافة منشورة لمجرد أن ZIP جاهز؛ الجاهزية والرفع
+      والموافقة والنشر حالات منفصلة.</p>
+      <hr />
+      <h2 id="14-نقاط-التحقق-وإدارة-git">14. نقاط التحقق وإدارة Git</h2>
+      <p>عند نهاية كل مرحلة كبيرة، اطلب تقريرًا يتضمن:</p>
+      <ul>
+      <li>الهدف والنتيجة والحكم.</li>
+      <li>branch وHEAD قبل وبعد العمل.</li>
+      <li>الملفات التي تغيرت.</li>
+      <li>الاختبارات التي نُفذت فعلًا ونتائجها.</li>
+      <li>الصلاحيات والبيانات والحدود التي تغيرت أو بقيت.</li>
+      <li>ما لم يُنفذ.</li>
+      <li>العوائق والمخاطر.</li>
+      <li>المرحلة التالية المسموح بها فقط.</li>
+      </ul>
+      <p>قبل commit:</p>
+      <pre class="text"><code>راجع diff والملفات المرشحة للـcommit. تأكد من عدم وجود أسرار أو بيانات شخصية أو ملفات بناء أو تغييرات خارج النطاق. لا تنفذ commit حتى تعرض النتيجة وتحصل على موافقتي.</code></pre>
+      <p>بعد الموافقة فقط:</p>
+      <pre class="text"><code>أنشئ commit واحدًا مركزًا لهذه المرحلة بالملفات المعتمدة فقط، ثم اعرض hash والحالة النهائية. لا تنفذ push.</code></pre>
+      <p>يحتاج <code>push</code> أو إنشاء PR أو رفع المتجر إلى موافقة
+      مستقلة.</p>
+      <hr />
+      <h2 id="15-نقل-العمل-بين-codex-وclaude">15. نقل العمل بين Codex
+      وClaude</h2>
+      <p>قبل إغلاق جلسة أو الانتقال إلى عميل آخر:</p>
+      <pre class="text"><code>استخدم agent-handoff وأنشئ تقرير تسليم موثقًا للمشروع الحالي إلى Codex/Claude. تحقق من branch وHEAD وgit status والملفات المعدلة والاختبارات والقرارات والعوائق والخطوة التالية. لا تعدّل الكود ولا تنفذ commit أو push.</code></pre>
+      <p>في الجلسة الجديدة:</p>
+      <pre class="text"><code>اقرأ تقرير التسليم والوثائق الأساسية، ثم تحقّق بنفسك من branch وHEAD وgit status قبل أي تعديل. اذكر ما تأكدت منه وأي اختلاف. لا تستأنف التنفيذ حتى يصبح checkpoint موثوقًا.</code></pre>
+      <hr />
+      <h2 id="16-الأمر-الشامل-لمشروع-جديد">16. الأمر الشامل لمشروع
+      جديد</h2>
+      <p>يمكن استعمال هذا النص كبداية سريعة:</p>
+      <pre class="text"><code>استخدم chrome-extension-orchestrator لإدارة إنشاء إضافة كروم Manifest V3 كاملة في هذا المجلد حتى إنتاج ZIP جاهز لمراجعة Chrome Web Store.
+
+اعمل بالمراحل الكبيرة التالية:
+1. استقبال تفاعلي وملخص متطلبات ومعايير قبول.
+2. تحليل الموقع باستخدام target-site-analyzer إذا كانت الإضافة مرتبطة بموقع.
+3. معمارية وصلاحيات باستخدام chrome-extension-architect، وتصميم واجهات باستخدام chrome-extension-ui-designer.
+4. بناء الملفات والكود والاختبارات باستخدام chrome-extension-builder.
+5. ضوابط تجارية باستخدام extension-commercial-control إذا كان الاشتراك أو التجربة ضمن النطاق.
+6. اختبار آلي وتشغيلي باستخدام chrome-extension-tester.
+7. حماية أسرار وكود وتنظيف حزمة باستخدام extension-code-protection.
+8. بناء ZIP إنتاجي نهائي ومراجعته باستخدام chrome-web-store-reviewer.
+
+قواعد العمل:
+- اسألني أولًا ولا تفترض قرارات المنتج غير الموجودة.
+- لا تبدأ البناء قبل موافقتي على المعمارية والصلاحيات.
+- لا تتجاوز مصادقة الموقع أو شروطه ولا تطلب كلمات مرور أو tokens.
+- استخدم أقل صلاحيات وأقل بيانات لازمة.
+- لا تستخدم remote hosted code أو obfuscation مخالفًا.
+- لا تقسّم المشروع إلى مرحلة لكل ملف؛ اجمع العمل في نتائج كبيرة قابلة للاختبار.
+- لا تدّع نجاح اختبار لم تنفذه.
+- لا تنفذ commit أو push أو رفعًا أو نشرًا أو دفعًا ماليًا دون موافقة منفصلة.
+- توقف عند أي تغيير جديد في الثقة أو الصلاحيات أو التخزين أو backend أو الاشتراك للحصول على موافقتي.
+
+ابدأ الآن بأسئلة الاستقبال فقط.</code></pre>
+      <hr />
+      <h2 id="17-قائمة-الإغلاق-النهائية">17. قائمة الإغلاق النهائية</h2>
+      <p>لا تعتبر المشروع منتهيًا حتى تتحقق العناصر المناسبة:</p>
+      <ul class="task-list">
+      <li><label><input type="checkbox" />الغرض والمتطلبات ومعايير
+      القبول معتمدة.</label></li>
+      <li><label><input type="checkbox" />تحليل الموقع واستراتيجية
+      التكامل موثقان.</label></li>
+      <li><label><input type="checkbox" />Manifest V3 والصلاحيات
+      والمعمارية معتمدة.</label></li>
+      <li><label><input type="checkbox" />جميع الواجهات والحالات
+      الأساسية منفذة.</label></li>
+      <li><label><input type="checkbox" />لا توجد أسرار أو بيانات حساسة
+      في الكود أو السجلات أو الحزمة.</label></li>
+      <li><label><input type="checkbox" />الاختبارات الآلية
+      ناجحة.</label></li>
+      <li><label><input type="checkbox" />الاختبارات التشغيلية على
+      Chrome والموقع ناجحة.</label></li>
+      <li><label><input type="checkbox" />حالات انتهاء الجلسة ورفض
+      الصلاحية وانقطاع الشبكة مختبرة.</label></li>
+      <li><label><input type="checkbox" />التجربة والاشتراك والعبث
+      مختبرة إن وجدت.</label></li>
+      <li><label><input type="checkbox" />حزمة الإنتاج لا تحتوي source
+      maps أو اختبارات أو ملفات تطوير.</label></li>
+      <li><label><input type="checkbox" />ملف ZIP يحتوي
+      <code>manifest.json</code> في الجذر.</label></li>
+      <li><label><input type="checkbox" />SHA-256 ورقم الإصدار ومرجع Git
+      مسجلة.</label></li>
+      <li><label><input type="checkbox" />مراجعة Chrome Web Store تمت
+      على ZIP النهائي.</label></li>
+      <li><label><input type="checkbox" />نصوص المتجر والصور وسياسة
+      الخصوصية جاهزة.</label></li>
+      <li><label><input type="checkbox" />الحكم النهائي
+      <code>READY FOR SUBMISSION — EXTERNAL AUTHORIZATION REQUIRED</code>.</label></li>
+      <li><label><input type="checkbox" />صاحب المشروع أعطى إذنًا منفصلًا
+      قبل الرفع أو النشر.</label></li>
+      </ul>
+      <p>بهذه الآلية تكون نهاية العمل التقنية هي إنتاج حزمة إصدار موثقة
+      وقابلة لإعادة البناء ومختبرة وجاهزة للرفع، مع بقاء قرار الرفع
+      والنشر إجراءً بشريًا منفصلًا.</p>
+    </main>
+  </div>
+  <button class="backtop" id="backtop" aria-label="العودة إلى الأعلى">↑ أعلى</button>
+  <script>
+    const content=document.getElementById('content');
+    const headings=[...content.querySelectorAll('h2')];
+    const toc=document.getElementById('toc');
+    headings.forEach((h,i)=>{if(!h.id)h.id='section-'+(i+1);const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;toc.appendChild(a)});
+    document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.className='copy';b.textContent='نسخ';pre.appendChild(b)});
+    content.addEventListener('click',async e=>{if(!e.target.classList.contains('copy'))return;const b=e.target;const code=b.parentElement.querySelector('code');await navigator.clipboard.writeText(code?code.innerText:b.parentElement.innerText.replace(/^نسخ\s*/,''));b.textContent='تم النسخ';setTimeout(()=>b.textContent='نسخ',1200)});
+    document.getElementById('print').onclick=()=>window.print();
+    const back=document.getElementById('backtop');window.addEventListener('scroll',()=>back.style.display=scrollY>700?'block':'none');back.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+    const original=content.innerHTML;
+    document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.trim();content.innerHTML=original;if(!q){location.hash='';return}const walker=document.createTreeWalker(content,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())if(!['SCRIPT','STYLE','CODE','PRE'].includes(walker.currentNode.parentElement.tagName)&&walker.currentNode.data.includes(q))nodes.push(walker.currentNode);nodes.forEach(n=>{const parts=n.data.split(q),f=document.createDocumentFragment();parts.forEach((p,i)=>{f.append(p);if(i<parts.length-1){const m=document.createElement('mark');m.textContent=q;f.append(m)}});n.replaceWith(f)});const first=content.querySelector('mark');if(first)first.scrollIntoView({behavior:'smooth',block:'center'})});
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70%'});headings.forEach(h=>observer.observe(h));
+  </script>
+</body>
+</html>
