@@ -1,0 +1,1822 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الدليل الشامل لاستخدام Puppeteer للطباعة العربية - SchoolOS</title>
+  <!-- Bootstrap 5 RTL -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <!-- Google Fonts - Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --secondary: #1d4ed8;
+      --accent: #f59e0b;
+      --bg-light: #f8fafc;
+      --text-dark: #111827;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+    }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 40px rgba(15, 118, 110, 0.2);
+    }
+    .section-card {
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      background: #ffffff;
+      margin-bottom: 2rem;
+    }
+    .section-title {
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-right: 1rem;
+    }
+    .section-title::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 5px;
+      bottom: 5px;
+      width: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .badge-soft-primary {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #bae6fd;
+    }
+    .badge-soft-success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    .badge-soft-danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    .badge-soft-warning {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+    .info-box {
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      height: 100%;
+      transition: transform 0.2s ease;
+    }
+    .info-box:hover {
+      transform: translateY(-3px);
+    }
+    .table-custom thead th {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      border: none;
+    }
+    .table-custom tbody td {
+      vertical-align: middle;
+    }
+    .muted-text {
+      color: var(--text-muted);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .step-item {
+      border-right: 3px solid var(--primary);
+      padding-right: 1.5rem;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .step-item::before {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 0;
+      width: 13px;
+      height: 13px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+    .step-item:last-child {
+      border-right-color: transparent;
+      padding-bottom: 0;
+    }
+    .code-preview {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      direction: ltr;
+      text-align: left;
+      border: 2px solid var(--border-light);
+    }
+    .code-preview .comment {
+      color: #94a3b8;
+    }
+    .code-preview .keyword {
+      color: #f472b6;
+    }
+    .code-preview .string {
+      color: #86efac;
+    }
+    .code-preview .function {
+      color: #60a5fa;
+    }
+    .comparison-table tr:hover {
+      background: var(--bg-light);
+    }
+    .winner-cell {
+      background: #dcfce7 !important;
+      font-weight: 700;
+      color: #166534;
+    }
+    .tip-box {
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      border: 2px solid #93c5fd;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .warning-box {
+      background: linear-gradient(135deg, #fef3c7, #fef9c3);
+      border: 2px solid #fde68a;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    footer {
+      background: var(--text-dark);
+      color: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    @media print {
+      .hero-section { background: #ffffff !important; color: #000000 !important; }
+      body { background: #ffffff; }
+    }
+  </style>
+</head>
+<body>
+  <style>.home-nav{position:sticky;top:0;z-index:1100;background:rgba(255,255,255,.94);border-bottom:1px solid #e2e8f0;backdrop-filter:blur(10px)}.home-nav-inner{max-width:1140px;margin:auto;padding:.6rem 1rem}.home-nav a{display:inline-block;padding:.38rem .9rem;border-radius:.55rem;background:#e0f2fe;color:#0f766e;text-decoration:none;font-family:Cairo,system-ui,sans-serif;font-weight:700}.home-nav a:hover{background:#ccfbf1}@media(max-width:575.98px){body{overflow-x:hidden}.table-responsive{max-width:100%;overflow-x:auto}table{max-width:100%}}</style>
+  <nav class="home-nav" aria-label="التنقل الرئيسي"><div class="home-nav-inner"><a href="./index.html">الرئيسية</a></div></nav>
+
+  <div class="container py-4 py-md-5">
+    
+    <!-- Hero Section -->
+    <div class="hero-section p-4 p-md-5 mb-5">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-9">
+          <span class="badge bg-light text-dark mb-3 px-3 py-2">الدليل النهائي الشامل</span>
+          <h1 class="fw-bold mb-3 display-6">الدليل الشامل لاستخدام Puppeteer<br><span class="fw-light opacity-75">للطباعة العربية على Windows و VS Code</span></h1>
+          <p class="lead mb-0 opacity-75">دليل عملي شامل من التثبيت حتى النشر، مع أمثلة عملية وحلول لمشاكل الطباعة العربية ودعم RTL.</p>
+        </div>
+        <div class="col-lg-3 text-lg-center">
+          <div class="bg-white text-dark rounded-4 p-3 shadow-sm">
+            <div class="h6 fw-bold mb-2">المحتوى</div>
+            <div class="text-muted small">تثبيت + إعداد<br>أمثلة عملية<br>حلول مشاكل</div>
+            <hr class="my-2">
+            <div class="h6 fw-bold mb-2">المنصة</div>
+            <div class="text-muted small">Windows 10/11<br>VS Code<br>Node.js 20+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="card section-card">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="section-title h4">1) محتويات الدليل</h2>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="info-box bg-primary-subtle border border-primary-subtle h-100">
+              <h6 class="fw-bold mb-2">📦 الجزء 1: التثبيت والإعداد</h6>
+              <ul class="custom-list mb-0 small text-muted">
+                <li>تثبيت Node.js</li>
+                <li>تثبيت VS Code</li>
+                <li>تثبيت Puppeteer</li>
+                <li>إعداد البيئة</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="info-box bg-success-subtle border border-success-subtle h-100">
+              <h6 class="fw-bold mb-2">🔧 الجزء 2: الاستخدام الأساسي</h6>
+              <ul class="custom-list mb-0 small text-muted">
+                <li>أول PDF عربي</li>
+                <li>إضافة الخطوط</li>
+                <li>تنسيق RTL</li>
+                <li>الطباعة الاحترافية</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="info-box bg-warning-subtle border border-warning-subtle h-100">
+              <h6 class="fw-bold mb-2">🎯 الجزء 3: أمثلة عملية</h6>
+              <ul class="custom-list mb-0 small text-muted">
+                <li>نموذج لجنة مدرسية</li>
+                <li>تقرير أداء وظيفي</li>
+                <li>كشف درجات</li>
+                <li>رسالة إدارية</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="info-box bg-info-subtle border border-info-subtle h-100">
+              <h6 class="fw-bold mb-2">🐛 الجزء 4: حل المشاكل</h6>
+              <ul class="custom-list mb-0 small text-muted">
+                <li>مشاكل الخطوط</li>
+                <li>مشاكل RTL</li>
+                <li>مشاكل الأداء</li>
+                <li>نصائح النشر</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 1: Installation -->
+    <div class="card section-card">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="section-title h4">📦 الجزء 1: التثبيت والإعداد على Windows</h2>
+        <p class="text-muted mb-4">خطوات مفصلة لتثبيت كل ما تحتاجه على Windows 10/11:</p>
+
+        <div class="step-item">
+          <h6 class="fw-bold mb-2">الخطوة 1: تثبيت Node.js</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-2">Puppeteer يحتاج Node.js 20 أو أحدث:</p>
+            <ul class="small text-muted mb-3">
+              <li>انتقل إلى <a href="https://nodejs.org" target="_blank" class="text-primary">nodejs.org</a></li>
+              <li>حمل نسخة <strong>LTS</strong> (20.x أو 22.x)</li>
+              <li>شغّل الملف وشبّت Next حتى الانتهاء</li>
+              <li>أعد تشغيل الكمبيوتر (مهم!)</li>
+              <li>افتح Command Prompt واكتب: <code>node --version</code></li>
+            </ul>
+            <div class="code-preview">
+<span class="comment"># يجب أن ترى إصدار مثل v20.11.0</span>
+<span class="keyword">node</span> --version
+<span class="keyword">npm</span> --version
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <h6 class="fw-bold mb-2">الخطوة 2: تثبيت VS Code</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <ul class="small text-muted mb-3">
+              <li>انتقل إلى <a href="https://code.visualstudio.com" target="_blank" class="text-primary">code.visualstudio.com</a></li>
+              <li>حمّل VS Code لـ Windows</li>
+              <li>ثبّته بالخطوات الافتراضية</li>
+              <li>أضف الإضافات التالية:</li>
+            </ul>
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered mb-3">
+                <thead class="table-light">
+                  <tr>
+                    <th>الإضافة</th>
+                    <th>الوصف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Arabic Language Pack</strong></td>
+                    <td>دعم اللغة العربية في VS Code</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ESLint</strong></td>
+                    <td>فحص الأخطاء البرمجية</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Prettier</strong></td>
+                    <td>تنسيق الكود تلقائيًا</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Code Runner</strong></td>
+                    <td>تشغيل الكود بسرعة</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small text-muted mb-2">لتثبيت إضافة: Ctrl+Shift+X → ابحث عن اسم الإضافة → Install</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <h6 class="fw-bold mb-2">الخطوة 3: تثبيت Puppeteer</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-2">أنشئ مجلد جديد وافتحه في VS Code:</p>
+            <div class="code-preview">
+<span class="comment"># في Terminal (Ctrl+`)</span>
+<span class="comment"># 1. إنشاء مجلد جديد</span>
+<span class="keyword">mkdir</span> schoolos-pdf
+<span class="keyword">cd</span> schoolos-pdf
+
+<span class="comment"># 2. إنشاء مشروع Node.js</span>
+<span class="keyword">npm</span> init -y
+
+<span class="comment"># 3. تثبيت Puppeteer</span>
+<span class="keyword">npm</span> install puppeteer
+
+<span class="comment"># ملاحظة: سيقوم بتحميل Chrome (~170MB)</span>
+            </div>
+            <div class="tip-box mb-0">
+              <strong>💡 نصيحة:</strong> إذا كان الإنترنت بطيئًا، يمكنك استخدام:
+              <div class="code-preview mt-2">
+<span class="keyword">npm</span> install puppeteer --save-exact
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <h6 class="fw-bold mb-2">الخطوة 4: إنشاء ملف الاختبار</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-2">أنشئ ملف <code>test.js</code> في المجلد:</p>
+            <div class="code-preview">
+<span class="keyword">const</span> puppeteer = <span class="function">require</span>('puppeteer');
+
+(<span class="keyword">async</span> () => {
+  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.<span class="function">launch</span>();
+  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.<span class="function">newPage</span>();
+  
+  <span class="keyword">await</span> page.<span class="function">setContent</span>(<span class="string">`
+    &lt;html dir="rtl" lang="ar"&gt;
+      &lt;body&gt;
+        &lt;h1&gt;مرحبًا بالعالم!&lt;/h1&gt;
+        &lt;p&gt;هذا اختبار للطباعة العربية&lt;/p&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  `</span>);
+  
+  <span class="keyword">await</span> page.<span class="function">pdf</span>({
+    path: <span class="string">'test.pdf'</span>,
+    format: <span class="string">'A4'</span>
+  });
+  
+  <span class="keyword">await</span> browser.<span class="function">close</span>();
+  
+  console.<span class="function">log</span>('✅ تم إنشاء PDF بنجاح!');
+})();
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item mb-0">
+          <h6 class="fw-bold mb-2">الخطوة 5: تشغيل الاختبار</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-2">شغّل الكود من Terminal:</p>
+            <div class="code-preview">
+<span class="keyword">node</span> test.js
+
+<span class="comment"># يجب أن ترى: ✅ تم إنشاء PDF بنجاح!</span>
+            </div>
+            <div class="warning-box mb-0">
+              <strong>⚠️ إذا واجهت مشكلة:</strong>
+              <ul class="mb-0 mt-2 small">
+                <li><strong>خطأ "Cannot find module":</strong> <code>npm install</code> مرة أخرى</li>
+                <li><strong>خطأ في Chrome:</strong> <code>npm install puppeteer --force</code></li>
+                <li><strong>بطء التحميل:</strong> طبيعي - Chrome يُحمّل أول مرة (~170MB)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 2: Basic Usage -->
+    <div class="card section-card">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="section-title h4">🔧 الجزء 2: الاستخدام الأساسي للغة العربية</h2>
+        <p class="text-muted mb-4">كل ما تحتاجه لدعم كامل للعربية وRTL:</p>
+
+        <div class="step-item">
+          <h6 class="fw-bold mb-2">أولاً: إضافة الخطوط العربية</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-2">استخدم خطوط Google Fonts مثل Noto Sans Arabic أو Cairo أو Amiri:</p>
+            <div class="code-preview">
+<span class="keyword">const</span> html = <span class="string">`
+&lt;html dir="rtl" lang="ar"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;style&gt;
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;700&display=swap');
+      
+      body {
+        font-family: 'Noto Sans Arabic', sans-serif;
+        direction: rtl;
+        text-align: right;
+        line-height: 1.6;
+      }
+      
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 20px;
+      }
+      
+      p {
+        font-size: 16px;
+        color: #334155;
+        margin-bottom: 12px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;عنوان المستند&lt;/h1&gt;
+    &lt;p&gt;هذا نص عربي باستخدام خط Noto Sans Arabic من Google Fonts.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+`</span>;
+            </div>
+            <div class="tip-box mb-0">
+              <strong>💡 خطوط عربية موصى بها:</strong>
+              <ul class="mb-0 mt-2 small">
+                <li><strong>Noto Sans Arabic:</strong> خط حديث وواضح، مناسب للمستندات</li>
+                <li><strong>Cairo:</strong> خط عصري، مناسب للعناوين</li>
+                <li><strong>Amiri:</strong> خط كلاسيكي، مناسب للمستندات الرسمية</li>
+                <li><strong>Tajawal:</strong> خط متوازن، مناسب للنصوص الطويلة</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <h6 class="fw-bold mb-2">ثانياً: تنسيق RTL الكامل</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-3">استخدم <code>dir="rtl"</code> و <code>text-align: right</code> في كل مكان:</p>
+            <ul class="small text-muted mb-3">
+              <li><code>dir="rtl"</code> على <code>&lt;html&gt;</code> أو <code>&lt;body&gt;</code></li>
+              <li><code>text-align: right</code> في CSS</li>
+              <li><code>direction: rtl</code> في CSS</li>
+              <li>اختبر مع أرقام وإنجليزية للتأكد من Bidi</li>
+            </ul>
+            <div class="code-preview">
+&lt;html dir="rtl" lang="ar"&gt;
+  &lt;style&gt;
+    body {
+      direction: rtl;
+      text-align: right;
+    }
+    
+    .container {
+      direction: rtl;
+    }
+    
+    .bidi-test {
+      /* هذا نص عربي مع أرقام 123 و English */
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+    &lt;div class="container"&gt;
+      &lt;p&gt;هذا نص عربي مع رقم 123 وكلمة English&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <h6 class="fw-bold mb-2">ثالثاً: إعدادات الطباعة الاحترافية</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-3">استخدم <code>@media print</code> للتحكم في الطباعة:</p>
+            <div class="code-preview">
+&lt;style&gt;
+  /* CSS الأساسي */
+  body {
+    font-family: 'Noto Sans Arabic';
+    padding: 20px;
+  }
+  
+  .header {
+    background: #0f766e;
+    color: white;
+    padding: 20px;
+  }
+  
+  /* CSS للطباعة فقط */
+  @media print {
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    
+    .no-print {
+      display: none !important;
+    }
+    
+    .header {
+      background: #0f766e !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+    
+    @page {
+      margin: 2cm;
+      size: A4;
+    }
+  }
+&lt;/style&gt;
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item mb-0">
+          <h6 class="fw-bold mb-2">رابعاً: خيارات PDF المتقدمة</h6>
+          <div class="bg-light-subtle rounded-3 p-3">
+            <p class="small text-muted mb-3">كل خيارات <code>page.pdf()</code> المهمة:</p>
+            <div class="code-preview">
+<span class="keyword">await</span> page.<span class="function">pdf</span>({
+  path: <span class="string">'output.pdf'</span>,
+  format: <span class="string">'A4'</span>,           <span class="comment">// A4, A3, Letter, etc.</span>
+  width: <span class="string">'210mm'</span>,          <span class="comment">// أو حجم مخصص</span>
+  height: <span class="string">'297mm'</span>,         <span class="comment">// أو حجم مخصص</span>
+  printBackground: <span class="keyword">true</span>,    <span class="comment">// طباعة الخلفيات والألوان</span>
+  displayHeaderFooter: <span class="keyword">true</span>, <span class="comment">// إظهار الرأس والتذييل</span>
+  headerTemplate: <span class="string">`&lt;div style="font-size:10px;text-align:center;width:100%"&gt;رأس الصفحة&lt;/div&gt;`</span>,
+  footerTemplate: <span class="string">`&lt;div style="font-size:10px;text-align:center;width:100%"&gt;صفحة &lt;span class="pageNumber"&gt;&lt;/span&gt; من &lt;span class="totalPages"&gt;&lt;/span&gt;&lt;/div&gt;`</span>,
+  margin: {
+    top: <span class="string">'20mm'</span>,
+    bottom: <span class="string">'20mm'</span>,
+    left: <span class="string">'20mm'</span>,
+    right: <span class="string">'20mm'</span>
+  },
+  landscape: <span class="keyword">false</span>,       <span class="comment">// true للطباعة الأفقية</span>
+  preferCSSPageSize: <span class="keyword">true</span>,  <span class="comment">// احترام CSS @page</span>
+  omitBackground: <span class="keyword">false</span>,    <span class="comment">// false للحفاظ على الخلفيات</span>
+  scale: <span class="keyword">1</span>,                <span class="comment">// 0.5-2.0 للتكبير/التصغير</span>
+});
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 3: Practical Examples -->
+    <div class="card section-card">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="section-title h4">🎯 الجزء 3: أمثلة عملية كاملة</h2>
+        <p class="text-muted mb-4">4 نماذج جاهزة للاستخدام الفوري في SchoolOS:</p>
+
+        <!-- Example 1 -->
+        <div class="card border mb-4">
+          <div class="card-header bg-primary text-white">
+            <h6 class="fw-bold mb-0">📋 مثال 1: نموذج لجنة مدرسية</h6>
+          </div>
+          <div class="card-body">
+            <p class="small text-muted mb-3">نموذج متكامل لقرار تشكيل لجنة مدرسية مع جدول الأعضاء:</p>
+            <div class="code-preview">
+<span class="keyword">const</span> puppeteer = <span class="function">require</span>('puppeteer');
+
+<span class="keyword">const</span> committeeData = {
+  title: <span class="string">"قرار تشكيل لجنة الاختبارات"</span>,
+  number: <span class="string">"2026/45"</span>,
+  date: <span class="string">"1447/01/15"</span>,
+  members: [
+    { name: <span class="string">"أحمد محمد علي"</span>, role: <span class="string">"رئيس اللجنة"</span>, id: <span class="string">"12345"</span> },
+    { name: <span class="string">"محمد سعيد العمري"</span>, role: <span class="string">"عضو"</span>, id: <span class="string">"12346"</span> },
+    { name: <span class="string">"خالد إبراهيم حسن"</span>, role: <span class="string">"عضو"</span>, id: <span class="string">"12347"</span> },
+  ]
+};
+
+<span class="keyword">const</span> html = <span class="string">`
+&lt;html dir="rtl" lang="ar"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;style&gt;
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap');
+      
+      body {
+        font-family: 'Noto Sans Arabic', sans-serif;
+        padding: 40px;
+        line-height: 1.8;
+      }
+      
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        border-bottom: 3px solid #0f766e;
+        padding-bottom: 20px;
+      }
+      
+      .school-name {
+        font-size: 24px;
+        font-weight: 700;
+        color: #0f766e;
+        margin-bottom: 10px;
+      }
+      
+      .document-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-top: 20px;
+      }
+      
+      .content {
+        margin-bottom: 30px;
+      }
+      
+      .text {
+        font-size: 16px;
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+      
+      .committe-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+      }
+      
+      .committe-table th,
+      .committe-table td {
+        border: 1px solid #0f766e;
+        padding: 12px 15px;
+        text-align: right;
+      }
+      
+      .committe-table th {
+        background: #0f766e;
+        color: white;
+        font-weight: 700;
+      }
+      
+      .committe-table tr:nth-child(even) {
+        background: #f0fdfa;
+      }
+      
+      .footer {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .signature {
+        text-align: center;
+      }
+      
+      .signature-line {
+        border-top: 1px solid #0f766e;
+        width: 200px;
+        margin: 40px auto 10px;
+      }
+      
+      @media print {
+        body { padding: 20px; }
+        .no-print { display: none; }
+      }
+      
+      @page {
+        margin: 2cm;
+        size: A4;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="header"&gt;
+      &lt;div class="school-name"&gt;المملكة العربية السعودية&lt;/div&gt;
+      &lt;div class="school-name"&gt;وزارة التعليم&lt;/div&gt;
+      &lt;div class="school-name"&gt;إدارة التعليم بمنطقة الرياض&lt;/div&gt;
+      &lt;div class="document-title"&gt;${committeeData.title}&lt;/div&gt;
+      &lt;div&gt;العدد: ${committeeData.number} &lt;/div&gt;
+      &lt;div&gt;التاريخ: ${committeeData.date} &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="content"&gt;
+      &lt;p class="text"&gt;بناءً على احتياجات العمل المدرسي، وتمشيا مع اللوائح والأنظمة،&&lt;/p&gt;
+      &lt;p class="text"&gt;تم تشكيل اللجنة التالية:&lt;/p&gt;
+      
+      &lt;table class="committe-table"&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;م&lt;/th&gt;
+            &lt;th&gt;اسم العضو&lt;/th&gt;
+            &lt;th&gt;المهمة&lt;/th&gt;
+            &lt;th&gt;الرقم الوظيفي&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          ${committeeData.members.map((member, index) => `
+            &lt;tr&gt;
+              &lt;td&gt;${index + 1}&lt;/td&gt;
+              &lt;td&gt;${member.name}&lt;/td&gt;
+              &lt;td&gt;${member.role}&lt;/td&gt;
+              &lt;td&gt;${member.id}&lt;/td&gt;
+            &lt;/tr&gt;
+          `).join('')}
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+      
+      &lt;p class="text"&gt;وتتولى هذه اللجنة المهام التالية:&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;الإشراف على إعداد الاختبارات ومراجعتها&lt;/li&gt;
+        &lt;li&gt;متابعة سير الاختبارات وتذليل الصعوبات&lt;/li&gt;
+        &lt;li&gt;رصد الدرجات وإدخالها في النظام&lt;/li&gt;
+        &lt;li&gt;إعداد التقارير الدورية عن سير العمل&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="footer"&gt;
+      &lt;div class="signature"&gt;
+        &lt;div&gt;مدير المدرسة&lt;/div&gt;
+        &lt;div class="signature-line"&gt;&lt;/div&gt;
+        &lt;div&gt;التوقيع: __________________&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="signature"&gt;
+        &lt;div&gt;الختم&lt;/div&gt;
+        &lt;div class="signature-line"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+`</span>;
+
+(<span class="keyword">async</span> () => {
+  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.<span class="function">launch</span>({
+    headless: <span class="keyword">true</span>,
+    args: [<span class="string">'--no-sandbox'</span>, <span class="string">'--disable-setuid-sandbox'</span>]
+  });
+  
+  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.<span class="function">newPage</span>();
+  <span class="keyword">await</span> page.<span class="function">setContent</span>(html, { 
+    waitUntil: <span class="string">'networkidle'</span>,
+    encoding: <span class="string">'utf-8'</span>
+  });
+  
+  <span class="keyword">await</span> page.<span class="function">pdf</span>({
+    path: <span class="string">'committee.pdf'</span>,
+    format: <span class="string">'A4'</span>,
+    printBackground: <span class="keyword">true</span>,
+    displayHeaderFooter: <span class="keyword">true</span>,
+    headerTemplate: <span class="string">`&lt;div style="font-size:10px;text-align:center;width:100%;font-family:'Noto Sans Arabic'"&gt;نموذج رقم: ${committeeData.number}&lt;/div&gt;`</span>,
+    footerTemplate: <span class="string">`&lt;div style="font-size:10px;text-align:center;width:100%;font-family:'Noto Sans Arabic'"&gt;صفحة &lt;span class="pageNumber"&gt;&lt;/span&gt; من &lt;span class="totalPages"&gt;&lt;/span&gt;&lt;/div&gt;`</span>,
+    margin: {
+      top: <span class="string">'20mm'</span>,
+      bottom: <span class="string">'25mm'</span>,
+      left: <span class="string">'20mm'</span>,
+      right: <span class="string">'20mm'</span>
+    }
+  });
+  
+  <span class="keyword">await</span> browser.<span class="function">close</span>();
+  console.<span class="function">log</span>(<span class="string">'✅ تم إنشاء نموذج اللجنة بنجاح!'</span>);
+})();
+            </div>
+            <div class="tip-box mb-0">
+              <strong>💡 المميزات:</strong> جدول منسق، رأس وتذييل، تذييل رسمي، دعم كامل للعربية، جاهز للطباعة.
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="card border mb-4">
+          <div class="card-header bg-success text-white">
+            <h6 class="fw-bold mb-0">📊 مثال 2: تقرير أداء وظيفي</h6>
+          </div>
+          <div class="card-body">
+            <p class="small text-muted mb-3">نموذج تقييم أداء وظيفي مع جدول المعاير والدرجات:</p>
+            <div class="code-preview">
+<span class="keyword">const</span> performanceData = {
+  employeeName: <span class="string">"أحمد محمد علي"</span>,
+  jobTitle: <span class="string">"معلم مادة الرياضيات"</span>,
+  evaluationPeriod: <span class="string">"الفصل الدراسي الأول 1447"</span>,
+  criteria: [
+    { category: <span class="string">"التخطيط"</span>, name: <span class="string">"إعداد الخطط الدراسية"</span>, score: 95, max: 100 },
+    { category: <span class="string">"التنفيذ"</span>, name: <span class="string">"تنفيذ الدروس"</span>, score: 90, max: 100 },
+    { category: <span class="string">"التقويم"</span>, name: <span class="string">"تقييم الطلاب"</span>, score: 88, max: 100 },
+    { category: <span class="string">"التطور"</span>, name: <span class="string">"التطوير المهني"</span>, score: 92, max: 100 },
+  ],
+  totalScore: 365,
+  maxTotal: 400,
+  percentage: 91.25,
+  rating: <span class="string">"ممتاز"</span>
+};
+
+<span class="keyword">const</span> html = <span class="string">`
+&lt;html dir="rtl" lang="ar"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;style&gt;
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap');
+      
+      body {
+        font-family: 'Noto Sans Arabic', sans-serif;
+        padding: 30px;
+      }
+      
+      .header {
+        text-align: center;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+      }
+      
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+        background: #f0fdf4;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      
+      .info-item {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .info-label {
+        font-size: 14px;
+        color: #64748b;
+        margin-bottom: 5px;
+      }
+      
+      .info-value {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1e293b;
+      }
+      
+      .criteria-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+      }
+      
+      .criteria-table th,
+      .criteria-table td {
+        border: 1px solid #10b981;
+        padding: 12px;
+        text-align: right;
+      }
+      
+      .criteria-table th {
+        background: #10b981;
+        color: white;
+        font-weight: 700;
+      }
+      
+      .score-cell {
+        text-align: center !important;
+        font-weight: 700;
+      }
+      
+      .score-good {
+        color: #10b981;
+      }
+      
+      .score-excellent {
+        color: #059669;
+      }
+      
+      .summary-box {
+        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        border: 2px solid #10b981;
+        border-radius: 10px;
+        padding: 25px;
+        margin-top: 30px;
+      }
+      
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        text-align: center;
+      }
+      
+      .summary-item {
+        padding: 15px;
+      }
+      
+      .summary-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: #10b981;
+        margin-bottom: 5px;
+      }
+      
+      .summary-label {
+        font-size: 14px;
+        color: #64748b;
+      }
+      
+      .rating-badge {
+        display: inline-block;
+        background: #10b981;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 700;
+        margin-top: 10px;
+      }
+      
+      @media print {
+        body { padding: 15px; }
+        .header, .summary-box {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="header"&gt;
+      &lt;div class="title"&gt;تقرير الأداء الوظيفي&lt;/div&gt;
+      &lt;div&gt;${performanceData.evaluationPeriod}&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="info-grid"&gt;
+      &lt;div class="info-item"&gt;
+        &lt;span class="info-label"&gt;اسم الموظف&lt;/span&gt;
+        &lt;span class="info-value"&gt;${performanceData.employeeName}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="info-item"&gt;
+        &lt;span class="info-label"&gt;المسمى الوظيفي&lt;/span&gt;
+        &lt;span class="info-value"&gt;${performanceData.jobTitle}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;table class="criteria-table"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;المجال&lt;/th&gt;
+          &lt;th&gt;معيار التقييم&lt;/th&gt;
+          &lt;th&gt;الدرجة&lt;/th&gt;
+          &lt;th&gt;النسبة&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        ${performanceData.criteria.map((item, index) => {
+          <span class="keyword">const</span> percentage = (item.score / item.max * 100).toFixed(1);
+          <span class="keyword">const</span> scoreClass = percentage >= 90 ? <span class="string">'score-excellent'</span> : <span class="string">'score-good'</span>;
+          <span class="keyword">return</span> `
+            &lt;tr&gt;
+              &lt;td&gt;${item.category}&lt;/td&gt;
+              &lt;td&gt;${item.name}&lt;/td&gt;
+              &lt;td class="score-cell ${scoreClass}"&gt;${item.score}&lt;/td&gt;
+              &lt;td class="score-cell ${scoreClass}"&gt;${percentage}%&lt;/td&gt;
+            &lt;/tr&gt;
+          `;
+        }).join('')}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+    
+    &lt;div class="summary-box"&gt;
+      &lt;h3 style="margin-bottom: 20px; text-align: center;"&gt;ملخص التقييم&lt;/h3&gt;
+      &lt;div class="summary-grid"&gt;
+        &lt;div class="summary-item"&gt;
+          &lt;div class="summary-value"&gt;${performanceData.totalScore}&lt;/div&gt;
+          &lt;div class="summary-label"&gt;الدرجة الكلية&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="summary-item"&gt;
+          &lt;div class="summary-value"&gt;${performanceData.percentage}%&lt;/div&gt;
+          &lt;div class="summary-label"&gt;النسبة المئوية&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="summary-item"&gt;
+          &lt;div class="summary-value"&gt;${performanceData.rating}&lt;/div&gt;
+          &lt;div class="summary-label"&gt;التقدير العام&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+`</span>;
+
+(<span class="keyword">async</span> () => {
+  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.<span class="function">launch</span>({ headless: <span class="keyword">true</span> });
+  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.<span class="function">newPage</span>();
+  <span class="keyword">await</span> page.<span class="function">setContent</span>(html, { waitUntil: <span class="string">'networkidle'</span> });
+  <span class="keyword">await</span> page.<span class="function">pdf</span>({
+    path: <span class="string">'performance-report.pdf'</span>,
+    format: <span class="string">'A4'</span>,
+    printBackground: <span class="keyword">true</span>,
+    margin: { top: <span class="string">'20mm'</span>, bottom: <span class="string">'20mm'</span>, left: <span class="string">'20mm'</span>, right: <span class="string">'20mm'</span> }
+  });
+  <span class="keyword">await</span> browser.<span class="function">close</span>();
+  console.<span class="function">log</span>(<span class="string">'✅ تم إنشاء تقرير الأداء بنجاح!'</span>);
+})();
+            </div>
+            <div class="tip-box mb-0">
+              <strong>💡 المميزات:</strong> Grid Layout، ألوان متدرجة، حسابات ديناميكية، تصميم عصري.
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="card border mb-4">
+          <div class="card-header bg-warning text-dark">
+            <h6 class="fw-bold mb-0">📝 مثال 3: كشف درجات الطلاب</h6>
+          </div>
+          <div class="card-body">
+            <p class="small text-muted mb-3">كشف درجات الطلاب مع جدول مفصل وإحصائيات:</p>
+            <div class="code-preview">
+<span class="keyword">const</span> studentsData = {
+  schoolName: <span class="string">"مدرسة الأمل الثانوية"</span>,
+  className: <span class="string">"الثالث الثانوي - أ"</span>,
+  subject: <span class="string">"الرياضيات"</span>,
+  teacher: <span class="string">"أ. أحمد محمد"</span>,
+  semester: <span class="string">"الفصل الدراسي الأول 1447"</span>,
+  students: [
+    { name: <span class="string">"أحمد محمد علي"</span>, id: <span class="string">"12345"</span>, midterm: 45, final: 48, total: 93 },
+    { name: <span class="string">"محمد سعيد العمري"</span>, id: <span class="string">"12346"</span>, midterm: 42, final: 46, total: 88 },
+    { name: <span class="string">"خالد إبراهيم حسن"</span>, id: <span class="string">"12347"</span>, midterm: 40, final: 44, total: 84 },
+    { name: <span class="string">"عبدالله عمر الزهراني"</span>, id: <span class="string">"12348"</span>, midterm: 38, final: 42, total: 80 },
+    { name: <span class="string">"فهد سالم القحطاني"</span>, id: <span class="string">"12349"</span>, midterm: 35, final: 40, total: 75 },
+  ],
+  classAverage: 84,
+  passRate: 100,
+  excellenceRate: 60
+};
+
+<span class="keyword">const</span> html = <span class="string">`
+&lt;html dir="rtl" lang="ar"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;style&gt;
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap');
+      
+      body {
+        font-family: 'Noto Sans Arabic', sans-serif;
+        padding: 25px;
+        font-size: 14px;
+      }
+      
+      .header {
+        text-align: center;
+        border-bottom: 3px solid #f59e0b;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .school-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: #f59e0b;
+        margin-bottom: 8px;
+      }
+      
+      .info-table {
+        width: 100%;
+        margin: 15px 0;
+        border-collapse: collapse;
+      }
+      
+      .info-table td {
+        padding: 8px;
+        border: none;
+      }
+      
+      .info-label {
+        font-weight: 700;
+        color: #64748b;
+        width: 120px;
+      }
+      
+      .students-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 13px;
+      }
+      
+      .students-table th,
+      .students-table td {
+        border: 1px solid #f59e0b;
+        padding: 10px;
+        text-align: center;
+      }
+      
+      .students-table th {
+        background: #f59e0b;
+        color: white;
+        font-weight: 700;
+      }
+      
+      .students-table td:nth-child(2) {
+        text-align: right;
+      }
+      
+      .students-table tr:nth-child(even) {
+        background: #fef3c7;
+      }
+      
+      .grade-excellent {
+        color: #10b981;
+        font-weight: 700;
+      }
+      
+      .grade-good {
+        color: #3b82f6;
+        font-weight: 700;
+      }
+      
+      .grade-pass {
+        color: #f59e0b;
+        font-weight: 700;
+      }
+      
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+        background: #fef3c7;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      
+      .stat-item {
+        padding: 10px;
+      }
+      
+      .stat-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: #f59e0b;
+      }
+      
+      .stat-label {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 5px;
+      }
+      
+      .footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .signature {
+        text-align: center;
+      }
+      
+      .signature-line {
+        border-top: 1px solid #f59e0b;
+        width: 180px;
+        margin: 30px auto 10px;
+      }
+      
+      @media print {
+        body { padding: 15px; }
+        .header, .students-table th, .stats-grid {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="header"&gt;
+      &lt;div class="school-name"&gt;${studentsData.schoolName}&lt;/div&gt;
+      &lt;div&gt;كشف درجات الطلاب - ${studentsData.semester}&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;table class="info-table"&gt;
+      &lt;tr&gt;
+        &lt;td class="info-label"&gt;الفصل:&lt;/td&gt;
+        &lt;td&gt;${studentsData.className}&lt;/td&gt;
+        &lt;td class="info-label"&gt;المادة:&lt;/td&gt;
+        &lt;td&gt;${studentsData.subject}&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="info-label"&gt;المعلم:&lt;/td&gt;
+        &lt;td&gt;${studentsData.teacher}&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    
+    &lt;table class="students-table"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;م&lt;/th&gt;
+          &lt;th&gt;اسم الطالب&lt;/th&gt;
+          &lt;th&gt;الرقم&lt;/th&gt;
+          &lt;th&gt;منتصف الفصل&lt;/th&gt;
+          &lt;th&gt;نهاية الفصل&lt;/th&gt;
+          &lt;th&gt;الدرجة الكلية&lt;/th&gt;
+          &lt;th&gt;التقدير&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        ${studentsData.students.map((student, index) => {
+          <span class="keyword">let</span> grade = <span class="string">''</span>, gradeClass = <span class="string">''</span>;
+          <span class="keyword">if</span> (student.total >= 90) { grade = <span class="string">'ممتاز'</span>; gradeClass = <span class="string">'grade-excellent'</span>; }
+          <span class="keyword">else if</span> (student.total >= 80) { grade = <span class="string">'جيد جداً'</span>; gradeClass = <span class="string">'grade-good'</span>; }
+          <span class="keyword">else</span> { grade = <span class="string">'جيد'</span>; gradeClass = <span class="string">'grade-pass'</span>; }
+          
+          <span class="keyword">return</span> `
+            &lt;tr&gt;
+              &lt;td&gt;${index + 1}&lt;/td&gt;
+              &lt;td&gt;${student.name}&lt;/td&gt;
+              &lt;td&gt;${student.id}&lt;/td&gt;
+              &lt;td&gt;${student.midterm}&lt;/td&gt;
+              &lt;td&gt;${student.final}&lt;/td&gt;
+              &lt;td class="${gradeClass}"&gt;${student.total}&lt;/td&gt;
+              &lt;td class="${gradeClass}"&gt;${grade}&lt;/td&gt;
+            &lt;/tr&gt;
+          `;
+        }).join('')}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+    
+    &lt;div class="stats-grid"&gt;
+      &lt;div class="stat-item"&gt;
+        &lt;div class="stat-value"&gt;${studentsData.classAverage}&lt;/div&gt;
+        &lt;div class="stat-label"&gt;متوسط الفصل&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="stat-item"&gt;
+        &lt;div class="stat-value"&gt;${studentsData.passRate}%&lt;/div&gt;
+        &lt;div class="stat-label"&gt;نسبة النجاح&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="stat-item"&gt;
+        &lt;div class="stat-value"&gt;${studentsData.excellenceRate}%&lt;/div&gt;
+        &lt;div class="stat-label"&gt;نسبة الامتياز&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="footer"&gt;
+      &lt;div class="signature"&gt;
+        &lt;div&gt;معلم المادة&lt;/div&gt;
+        &lt;div class="signature-line"&gt;&lt;/div&gt;
+        &lt;div&gt;التوقيع: _______________&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="signature"&gt;
+        &lt;div&gt;مدير المدرسة&lt;/div&gt;
+        &lt;div class="signature-line"&gt;&lt;/div&gt;
+        &lt;div&gt;التوقيع: _______________&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+`</span>;
+
+(<span class="keyword">async</span> () => {
+  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.<span class="function">launch</span>({ headless: <span class="keyword">true</span> });
+  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.<span class="function">newPage</span>();
+  <span class="keyword">await</span> page.<span class="function">setContent</span>(html, { waitUntil: <span class="string">'networkidle'</span> });
+  <span class="keyword">await</span> page.<span class="function">pdf</span>({
+    path: <span class="string">'grades-report.pdf'</span>,
+    format: <span class="string">'A4'</span>,
+    printBackground: <span class="keyword">true</span>,
+    margin: { top: <span class="string">'15mm'</span>, bottom: <span class="string">'20mm'</span>, left: <span class="string">'15mm'</span>, right: <span class="string">'15mm'</span> }
+  });
+  <span class="keyword">await</span> browser.<span class="function">close</span>();
+  console.<span class="function">log</span>(<span class="string">'✅ تم إنشاء كشف الدرجات بنجاح!'</span>);
+})();
+            </div>
+            <div class="tip-box mb-0">
+              <strong>💡 المميزات:</strong> جدول كبير، حسابات تلقائية، ألوان للدرجات، إحصائيات الفصل.
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="card border mb-4">
+          <div class="card-header bg-info text-white">
+            <h6 class="fw-bold mb-0">✉️ مثال 4: رسالة إدارية رسمية</h6>
+          </div>
+          <div class="card-body">
+            <p class="small text-muted mb-3">خطاب إداري رسمي مع ترويسة المؤسسة والتذييل:</p>
+            <div class="code-preview">
+<span class="keyword">const</span> letterData = {
+  letterNumber: <span class="string">"45/م"</span>,
+  date: <span class="string">"1447/01/15"</span>,
+  to: <span class="string">"إدارة التعليم بمنطقة الرياض"</span>,
+  from: <span class="string">"مدرسة الأمل الثانوية"</span>,
+  subject: <span class="string">"طلب الموافقة على تشكيل لجنة الاختبارات"</span>,
+  content: <span class="string">`
+    تحية طيبة وبعد،
+    
+    createActionً على احتياجات العمل المدرسي، وتمشيا مع اللوائح والأنظمة، نرجو من سيادتكم الموافقة على تشكيل لجنة الاختبارات للمدرسة للفصل الدراسي الأول من العام الدراسي 1447هـ.
+    
+    وقد تم اختيار أعضاء اللجنة بناءً على الكفاءة والخبرة، وذلك على النحو التالي:
+    
+    1. الأستاذ/ أحمد محمد علي - رئيسًا
+    2. الأستاذ/ محمد سعيد العمري - عضوًا
+    3. الأستاذ/ خالد إبراهيم حسن - عضوًا
+    
+    وتتولى هذه اللجنة الإشراف الكامل على جميع مراحل الاختبارات من إعداد ومراجعة ورصد، وذلك لضمان سير العملية الاختبارية بشكل منظم وفعّال.
+    
+    نرجو من سيادتكم التكرم بالموافقة على ما ورد أعلاه.
+    
+    وتقبلوا تحياتنا وتقديرنا،
+  `</span>,
+  attachments: [<span class="string">"تشكيلة اللجنة"</span>, <span class="string">"المهام المكلفة"</span>]
+};
+
+<span class="keyword">const</span> html = <span class="string">`
+&lt;html dir="rtl" lang="ar"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;style&gt;
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+      
+      body {
+        font-family: 'Amiri', 'Noto Sans Arabic', serif;
+        padding: 30px;
+        font-size: 16px;
+        line-height: 2;
+      }
+      
+      .header {
+        text-align: center;
+        border-bottom: 2px solid #1e293b;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+      }
+      
+      .government-text {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      
+      .ministry-text {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      
+      .school-text {
+        font-size: 14px;
+        color: #64748b;
+      }
+      
+      .letter-info {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+        font-size: 14px;
+      }
+      
+      .letter-number {
+        font-weight: 700;
+      }
+      
+      .letter-date {
+        font-weight: 700;
+      }
+      
+      .recipient {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 20px 0;
+      }
+      
+      .subject {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 20px 0;
+        text-decoration: underline;
+      }
+      
+      .content {
+        text-align: justify;
+        margin: 25px 0;
+        white-space: pre-line;
+      }
+      
+      .attachments {
+        margin-top: 25px;
+        font-size: 14px;
+      }
+      
+      .attachments-title {
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      
+      .attachments-list {
+        list-style-type: disc;
+        padding-right: 20px;
+      }
+      
+      .footer {
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      
+      .sender {
+        text-align: center;
+      }
+      
+      .sender-name {
+        font-weight: 700;
+        margin-top: 30px;
+      }
+      
+      .sender-title {
+        font-size: 14px;
+        color: #64748b;
+      }
+      
+      .stamp-box {
+        border: 2px dashed #1e293b;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        font-size: 12px;
+      }
+      
+      @media print {
+        body { padding: 20px; }
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="header"&gt;
+      &lt;div class="government-text"&gt;المملكة العربية السعودية&lt;/div&gt;
+      &lt;div class="ministry-text"&gt;وزارة التعليم&lt;/div&gt;
+      &lt;div class="school-text"&gt;إدارة التعليم بمنطقة الرياض - مدرسة الأمل الثانوية&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="letter-info"&gt;
+      &lt;div class="letter-number"&gt;العدد: ${letterData.letterNumber}&lt;/div&gt;
+      &lt;div class="letter-date"&gt;التاريخ: ${letterData.date}&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="recipient"&gt;
+      إلى سعادة مدير إدارة التعليم بمنطقة الرياض
+    &lt;/div&gt;
+    
+    &lt;div class="subject"&gt;
+      الموضوع: ${letterData.subject}
+    &lt;/div&gt;
+    
+    &lt;div class="content"&gt;
+      ${letterData.content}
+    &lt;/div&gt;
+    
+    &lt;div class="attachments"&gt;
+      &lt;div class="attachments-title"&gt;المرفقات:&lt;/div&gt;
+      &lt;ul class="attachments-list"&gt;
+        ${letterData.attachments.map(attachment => `&lt;li&gt;${attachment}&lt;/li&gt;`).join('')}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="footer"&gt;
+      &lt;div class="sender"&gt;
+        &lt;div class="sender-name"&gt;أحمد محمد علي&lt;/div&gt;
+        &lt;div class="sender-title"&gt;مدير المدرسة&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="stamp-box"&gt;
+        الختم الرسمي
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+`</span>;
+
+(<span class="keyword">async</span> () => {
+  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.<span class="function">launch</span>({ headless: <span class="keyword">true</span> });
+  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.<span class="function">newPage</span>();
+  <span class="keyword">await</span> page.<span class="function">setContent</span>(html, { waitUntil: <span class="string">'networkidle'</span> });
+  <span class="keyword">await</span> page.<span class="function">pdf</span>({
+    path: <span class="string">'official-letter.pdf'</span>,
+    format: <span class="string">'A4'</span>,
+    printBackground: <span class="keyword">true</span>,
+    margin: { top: <span class="string">'25mm'</span>, bottom: <span class="string">'25mm'</span>, left: <span class="string">'25mm'</span>, right: <span class="string">'25mm'</span> }
+  });
+  <span class="keyword">await</span> browser.<span class="function">close</span>();
+  console.<span class="function">log</span>(<span class="string">'✅ تم إنشاء الرسالة الإدارية بنجاح!'</span>);
+})();
+            </div>
+            <div class="tip-box mb-0">
+              <strong>💡 المميزات:</strong> خط Amيري رسمي، ترويسة حكومية، تنسيق احترافي، مرفقات.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 4: Troubleshooting -->
+    <div class="card section-card">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="section-title h4">🐛 الجزء 4: حل المشاكل الشائعة</h2>
+        <p class="text-muted mb-4">أهم المشاكل التي تواجه المستخدمين مع العربية وحلولها:</p>
+
+        <div class="accordion" id="troubleshootingAccordion">
+          <!-- Problem 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#problem1">
+                <strong>مشكلة 1:</strong> الحروف العربية تظهر مقطعة أو منفصلة
+              </button>
+            </h2>
+            <div id="problem1" class="accordion-collapse collapse show" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <div class="warning-box">
+                  <strong>⚠️ السبب:</strong>
+                  <ul class="mb-0 mt-2 small">
+                    <li>عدم استخدام خط عربي يدعم الربط [web:122]</li>
+                    <li>مشكلة في encoding (UTF-8)</li>
+                    <li>استخدام خطوط لا تدعم Arabic Shaping</li>
+                  </ul>
+                </div>
+                <div class="tip-box">
+                  <strong>✅ الحل:</strong>
+                  <div class="code-preview">
+&lt;html dir="rtl" lang="ar"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt; <span class="comment">&lt;!-- مهم جداً! --&gt;</span>
+    &lt;style&gt;
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap');
+      
+      body {
+        font-family: 'Noto Sans Arabic', sans-serif; <span class="comment">&lt;!-- خط يدعم الربط --&gt;</span>
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  ...
+&lt;/html&gt;
+                  </div>
+                  <strong>خطوط موصى بها:</strong> Noto Sans Arabic, Cairo, Amiri, Tajawal
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#problem2">
+                <strong>مشكلة 2:</strong> النص يظهر من اليسار لليمين بدلاً من اليمين لليسار
+              </button>
+            </h2>
+            <div id="problem2" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <div class="warning-box">
+                  <strong>⚠️ السبب:</strong>
+                  <ul class="mb-0 mt-2 small">
+                    <li>عدم استخدام <code>dir="rtl"</code> [web:132]</li>
+                    <li>عدم استخدام <code>text-align: right</code></li>
+                  </ul>
+                </div>
+                <div class="tip-box">
+                  <strong>✅ الحل:</strong>
+                  <div class="code-preview">
+&lt;html dir="rtl" lang="ar"&gt; <span class="comment">&lt;!-- على مستوى html --&gt;</span>
+  &lt;style&gt;
+    body {
+      direction: rtl;           <span class="comment">&lt;!-- مهم --&gt;</span>
+      text-align: right;        <span class="comment">&lt;!-- مهم --&gt;</span>
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+    &lt;div dir="rtl"&gt;...&lt;/div&gt; <span class="comment">&lt;!-- أو على مستوى العنصر --&gt;</span>
+  &lt;/body&gt;
+&lt;/html&gt;
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#problem3">
+                <strong>مشكلة 3:</strong> الخطوط لا تظهر أو تظهر كمربعات
+              </button>
+            </h2>
+            <div id="problem3" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <div class="warning-box">
+                  <strong>⚠️ السبب:</strong>
+                  <ul class="mb-0 mt-2 small">
+                    <li>الخط غير محمّل بشكل صحيح [web:134]</li>
+                    <li>مشكلة في подключения الإنترنت</li>
+                    <li>استخدام local fonts بدون embed</li>
+                  </ul>
+                </div>
+                <div class="tip-box">
+                  <strong>✅ الحل:</strong>
+                  <div class="code-preview">
+<span class="keyword">await</span> page.<span class="function">setContent</span>(html, {
+  waitUntil: <span class="string">'networkidle'</span>,  <span class="comment">&lt;!-- انتظار تحميل كل الموارد --&gt;</span>
+  encoding: <span class="string">'utf-8'</span>      <span class="comment">&lt;!-- UTF-8 encoding --&gt;</span>
+});
+
+<span class="comment">// أو تحميل الخطوط يدويًا</span>
+<span class="keyword">await</span> page.<span class="function">addStyleTag</span>({
+  content: <span class="string">`
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap');
+  `</span>
+});
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#problem4">
+                <strong>مشكلة 4:</strong> Puppeteer بطيء في التحميل والتنفيذ
+              </button>
+            </h2>
+            <div id="problem4" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <div class="warning-box">
+                  <strong>⚠️ السبب:</strong>
+                  <ul class="mb-0 mt-2 small">
+                    <li>Chrome يحتاج وقت للإقلاع أول مرة (~170MB)</li>
+                    <li>تحميل الخطوط من الإنترنت</li>
+                    <li>مشكلة في internet connection</li>
+                  </ul>
+                </div>
+                <div class="tip-box">
+                  <strong>✅ الحلول:</strong>
+                  <div class="code-preview">
+<span class="comment">// 1. استخدام headless فقط (أسرع)</span>
+<span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.<span class="function">launch</span>({
+  headless: <span class="keyword">true</span>,
+  args: [
+    <span class="string">'--no-sandbox'</span>,
+    <span class="string">'--disable-setuid-sandbox'</span>,
+    <span class="string">'--disable-dev-shm-usage'</span>,
+    <span class="string">'--disable-accelerated-2d-canvas'</span>,
+    <span class="string">'--disable-gpu'</span>
+  ]
+});
+
+<span class="comment">// 2. استخدام Browser Cache (أول مرة فقط بطيئة)</span>
+<span class="comment">// 3. تحميل الخطوط محليًا إذا كان الإنترنت بطيئًا</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 5 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#problem5">
+                <strong>مشكلة 5:</strong> الأرقام والإنجليزية تظهر بشكل خاطئ مع العربية
+              </button>
+            </h2>
+            <div id="problem5" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <div class="warning-box">
+                  <strong>⚠️ السبب:</strong>
+                  <ul class="mb-0 mt-2 small">
+                    <li>مشكلة في Bidirectional Text [web:122]</li>
+                    <li>عدم استخدام Unicode بشكل صحيح</li>
+                  </ul>
+                </div>
+                <div class="tip-box">
+                  <strong>✅ الحل:</strong>
+                  <div class="code-preview">
+<span class="comment">// هذا طبيعي - Bidi يعمل بشكل صحيح</span>
+&lt;p&gt;هذا نص عربي مع رقم 123 وكلمة English&lt;/p&gt;
+
+<span class="comment">// سيظهر بشكل صحيح: "هذا نص عربي مع رقم 123 وكلمة English"</span>
+<span class="comment">// الاتجاه من اليمين لليسار، لكن الأرقام والإنجليزية من اليسار لليمين</span>
+                  </div>
+                  <strong>ملاحظة:</strong> هذا سلوك صحيح لـ Bidi (Bidirectional Text).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-info border mt-4 mb-0">
+          <strong>💡 نصائح إضافية:</strong>
+          <ul class="mb-0 mt-2 small">
+            <li>استخدم <code>waitUntil: 'networkidle'</code> دائماً [web:134]</li>
+            <li>تأكد من <code>encoding: 'utf-8'</code> في setContent</li>
+            <li>اختبر في Chrome أولاً قبل استخدام Puppeteer</li>
+            <li>استخدم DevTools في Chrome لفحص المشاكل</li>
+            <li>جرب الخطوط المختلفة (Noto, Cairo, Amiri, Tajawal)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 5: Best Practices -->
+    <div class="card section-card">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="section-title h4">✨ الجزء 5: أفضل الممارسات والنصائح</h2>
+        
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="info-box bg-success-subtle border border-success-subtle h-100">
+              <h6 class="fw-bold mb-3">✅ يجب فعله (Do's)</h6>
+              <ul class="custom-list mb-0 small">
+                <li>استخدم دائمًا <code>dir="rtl"</code> و <code>lang="ar"</code> [web:122]</li>
+                <li>استخدم خطوط Google Fonts (Noto, Cairo, Amiri) [web:119][web:122]</li>
+                <li>استخدم <code>waitUntil: 'networkidle'</code> [web:134]</li>
+                <li>استخدم <code>printBackground: true</code> للألوان</li>
+                <li>استخدم <code>@media print</code> للتحكم في الطباعة</li>
+                <li>اختبر في Chrome أولاً قبل Puppeteer</li>
+                <li>وضع الهوامش razonables (20mm تقريبًا)</li>
+                <li>استخدم headless للإنتاج (أسرع)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="info-box bg-danger-subtle border border-danger-subtle h-100">
+              <h6 class="fw-bold mb-3">❌ يجب تجنبه (Don'ts)</h6>
+              <ul class="custom-list mb-0 small">
+                <li>لا تستخدم خطوط محلية بدون embed</li>
+                <li>لا تنسى <code>meta charset="UTF-8"</code></li>
+                <li>لا تستخدم <code>waitUntil: 'load'</code> فقط</li>
+                <li>لا تنسى <code>await</code> قبل العمليات</li>
+                <li>لا تستخدم headless: false للإنتاج (بطيء)</li>
+                <li>لا تعتمد على wkhtmltopdf (متوقف) [web:139]</li>
+                <li>لا تنسى إغلاق المتصفح (<code>browser.close()</code>)</li>
+                <li>لا تستخدم CSS معقد جدًا (Flexbox جيد, Grid بحذر)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box mt-4">
+          <strong>النصائح الأخيرة:</strong>
+          <ul class="mb-0 mt-2 small">
+            <li><strong>للأداء:</strong> استخدم headless, disable sandbox, cache fonts</li>
+            <li><strong>للجودة:</strong> استخدم printBackground, CSS print media, linesreasonables</li>
+            <li><strong>للصيانة:</strong> استخدم components, functions, data-driven templates</li>
+            <li><strong>للنشر:</strong> استخدم Lambda مع chromium, أو Docker images</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <h6 class="fw-bold mb-3">الدليل الشامل لاستخدام Puppeteer للطباعة العربية - SchoolOS</h6>
+          <p class="small text-white-50 mb-0">دليل عملي شامل من التثبيت حتى النشر، مع 4 أمثلة عملية كاملة وحلول لجميع مشاكل الطباعة العربية ودعم RTL.</p>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">المحتوى</h6>
+          <ul class="list-unstyled small text-white-50 mb-0">
+            <li>الجزء 1: التثبيت والإعداد</li>
+            <li>الجزء 2: الاستخدام الأساسي</li>
+            <li>الجزء 3: 4 أمثلة عملية</li>
+            <li>الجزء 4: حل المشاكل</li>
+            <li>الجزء 5: أفضل الممارسات</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">معلومات</h6>
+          <ul class="list-unstyled small text-white-50 mb-0">
+            <li>الإصدار: يوليو 2026</li>
+            <li>النوع: دليل عملي شامل</li>
+            <li>المنصة: Windows 10/11, VS Code</li>
+            <li>Node.js: 20+ , Puppeteer 23+</li>
+            <li>المصادر: 20+ مصدر [web:119]-
