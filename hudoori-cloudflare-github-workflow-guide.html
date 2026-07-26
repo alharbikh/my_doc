@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="دليل العلاقة بين مجلد مشروع حضوري سمارت برو على الجهاز، ومستودع GitHub، ونشر Cloudflare Workers." />
+  <title>دليل النشر والتحديث — حضوري سمارت برو</title>
+  <style>
+    :root{
+      --bg:#f6f8f7;
+      --surface:#ffffff;
+      --surface-2:#eef5f1;
+      --text:#183027;
+      --muted:#60746b;
+      --primary:#2e7d5b;
+      --primary-dark:#215f45;
+      --navy:#12304a;
+      --border:#dbe7e0;
+      --warning:#fff7df;
+      --warning-border:#e6b94a;
+      --danger:#fff0f0;
+      --danger-border:#dc6b6b;
+      --success:#edf9f2;
+      --success-border:#53a978;
+      --shadow:0 14px 40px rgba(20,50,37,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Cairo","Segoe UI",Tahoma,Arial,sans-serif;
+      background:linear-gradient(180deg,#f8fbf9 0%,var(--bg) 100%);
+      color:var(--text);
+      line-height:1.9;
+    }
+    a{color:var(--primary-dark)}
+    .container{width:min(1140px,calc(100% - 32px));margin:auto}
+    .hero{
+      padding:72px 0 48px;
+      background:
+        radial-gradient(circle at 85% 15%,rgba(46,125,91,.18),transparent 28%),
+        radial-gradient(circle at 10% 5%,rgba(18,48,74,.12),transparent 25%);
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 13px;border:1px solid var(--border);
+      background:rgba(255,255,255,.78);border-radius:999px;
+      color:var(--primary-dark);font-size:.9rem;font-weight:700;
+    }
+    h1{font-size:clamp(2rem,5vw,3.7rem);line-height:1.25;margin:18px 0 12px}
+    .lead{font-size:1.12rem;color:var(--muted);max-width:850px;margin:0}
+    .summary{
+      margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px
+    }
+    .summary-card,.card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .summary-card{padding:20px}
+    .summary-card strong{display:block;font-size:1.05rem;margin-bottom:5px}
+    .summary-card span{color:var(--muted);font-size:.94rem}
+    nav{
+      position:sticky;top:0;z-index:20;
+      background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex;align-items:center;gap:10px;overflow-x:auto;
+      padding:12px 0;scrollbar-width:thin
+    }
+    .nav-inner a{
+      white-space:nowrap;text-decoration:none;
+      padding:8px 12px;border-radius:10px;font-size:.92rem;
+      color:var(--text);font-weight:700
+    }
+    .nav-inner a:hover{background:var(--surface-2);color:var(--primary-dark)}
+    main{padding:34px 0 70px}
+    section{scroll-margin-top:82px;margin:0 0 32px}
+    .card{padding:28px}
+    h2{font-size:1.65rem;margin:0 0 14px}
+    h3{font-size:1.18rem;margin:26px 0 8px}
+    p{margin:8px 0}
+    .muted{color:var(--muted)}
+    .flow{
+      display:grid;grid-template-columns:1fr auto 1fr auto 1fr;
+      align-items:center;gap:12px;margin:24px 0
+    }
+    .flow-box{
+      text-align:center;padding:20px 12px;border:1px solid var(--border);
+      background:var(--surface-2);border-radius:16px;font-weight:800
+    }
+    .arrow{font-size:1.8rem;color:var(--primary);font-weight:900}
+    .callout{
+      padding:17px 18px;border-radius:14px;margin:18px 0;
+      border-right:5px solid
+    }
+    .success{background:var(--success);border-color:var(--success-border)}
+    .warning{background:var(--warning);border-color:var(--warning-border)}
+    .danger{background:var(--danger);border-color:var(--danger-border)}
+    .steps{counter-reset:step;display:grid;gap:14px;margin-top:18px}
+    .step{
+      position:relative;padding:18px 66px 18px 18px;
+      border:1px solid var(--border);border-radius:15px;background:#fff
+    }
+    .step:before{
+      counter-increment:step;content:counter(step);
+      position:absolute;right:18px;top:18px;width:34px;height:34px;
+      display:grid;place-items:center;border-radius:50%;
+      background:var(--primary);color:#fff;font-weight:900
+    }
+    code{
+      direction:ltr;unicode-bidi:embed;
+      font-family:Consolas,"Courier New",monospace;
+      background:#edf2ef;padding:2px 6px;border-radius:6px;font-size:.92em
+    }
+    pre{
+      direction:ltr;text-align:left;overflow:auto;
+      background:#10231c;color:#e9fff3;padding:18px;border-radius:14px;
+      border:1px solid #25483a;line-height:1.65
+    }
+    pre code{background:transparent;padding:0;color:inherit}
+    table{width:100%;border-collapse:collapse;margin-top:14px}
+    th,td{padding:13px;border:1px solid var(--border);text-align:right;vertical-align:top}
+    th{background:var(--surface-2)}
+    .checklist{list-style:none;padding:0;margin:12px 0}
+    .checklist li{margin:8px 0;padding-right:28px;position:relative}
+    .checklist li:before{content:"✓";position:absolute;right:0;color:var(--primary);font-weight:900}
+    .scenario{
+      border:1px dashed #aac7b8;border-radius:14px;padding:18px;margin:14px 0;background:#fbfdfc
+    }
+    .scenario strong{color:var(--navy)}
+    footer{padding:28px 0 44px;color:var(--muted);text-align:center}
+    .small{font-size:.9rem}
+    @media(max-width:800px){
+      .summary{grid-template-columns:1fr}
+      .flow{grid-template-columns:1fr}
+      .arrow{transform:rotate(90deg)}
+      .card{padding:20px}
+      .step{padding-right:60px}
+      h1{font-size:2.15rem}
+      table{display:block;overflow-x:auto;white-space:nowrap}
+    }
+    @media print{
+      nav{display:none}
+      body{background:#fff}
+      .card,.summary-card{box-shadow:none}
+      .hero{padding-top:30px}
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    pre, code { max-width: 100%; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; align-items: center; gap: .45rem; min-height: 42px; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-family: "Cairo", sans-serif; font-weight: 700; text-decoration: none !important; }
+    .site-home-nav__link:hover, .site-home-nav__link:focus { background: #0f5138; color: #fff !important; }
+    @media (max-width: 767.98px) {
+      body { max-width: 100vw; overflow-x: hidden; }
+      table { display: block; width: 100% !important; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { overflow-wrap: normal; }
+      .container, .container-fluid, main, section, article { max-width: 100%; }
+      button, .btn, a { max-width: 100%; }
+    }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+<body>
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي">
+    <div class="site-home-nav__inner">
+      <a class="site-home-nav__link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">⌂ الرئيسية</a>
+    </div>
+  </nav>
+  <header class="hero">
+    <div class="container">
+      <span class="badge">حضوري سمارت برو · دليل تشغيل فعلي</span>
+      <h1>العلاقة بين مجلد المشروع وGitHub وCloudflare</h1>
+      <p class="lead">
+        هذا الدليل يوضح أين توجد النسخة الأصلية من ملفات الموقع، وكيف تنتقل التعديلات من جهازك إلى GitHub،
+        ثم كيف يقوم Cloudflare ببناء الموقع ونشره تلقائيًا، وماذا تفعل عند تعديل أي جزء من هذه المنظومة.
+      </p>
+
+      <div class="summary">
+        <div class="summary-card">
+          <strong>مجلد المشروع على الجهاز</strong>
+          <span>مكان العمل والتحرير والتجربة المحلية.</span>
+        </div>
+        <div class="summary-card">
+          <strong>GitHub</strong>
+          <span>المستودع المركزي وسجل الإصدارات والنسخة الاحتياطية.</span>
+        </div>
+        <div class="summary-card">
+          <strong>Cloudflare</strong>
+          <span>يبني الموقع من GitHub وينشره على الرابط العام.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#overview">الصورة العامة</a>
+      <a href="#source">مصدر الحقيقة</a>
+      <a href="#normal-update">التحديث المعتاد</a>
+      <a href="#github-change">تعديل GitHub</a>
+      <a href="#cloudflare-change">تعديل Cloudflare</a>
+      <a href="#new-device">جهاز جديد</a>
+      <a href="#errors">حل الأخطاء</a>
+      <a href="#commands">الأوامر</a>
+      <a href="#rules">قواعد مهمة</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="overview" class="card">
+      <h2>1. الصورة العامة</h2>
+      <div class="flow">
+        <div class="flow-box">مجلد المشروع على جهازك</div>
+        <div class="arrow">←</div>
+        <div class="flow-box">مستودع GitHub</div>
+        <div class="arrow">←</div>
+        <div class="flow-box">Cloudflare Workers</div>
+      </div>
+      <p>
+        التسلسل الطبيعي يبدأ من جهازك: تعدّل الملفات، تختبر الموقع محليًا، ثم ترسل التغييرات إلى GitHub.
+        بعد وصول التغييرات إلى الفرع الرئيسي <code>main</code> يقوم Cloudflare تلقائيًا بتشغيل أمر البناء
+        <code>npm run build</code> ثم ينشر محتويات مجلد <code>dist</code>.
+      </p>
+      <div class="callout success">
+        <strong>الرابط المنشور الحالي:</strong><br>
+        <code>https://hudoori-smart-pro-website.khmobgm.workers.dev</code>
+      </div>
+    </section>
+
+    <section id="source" class="card">
+      <h2>2. ما هو مصدر الحقيقة؟</h2>
+      <p>
+        مصدر الحقيقة العملي هو <strong>مستودع GitHub على فرع main</strong>، لأنه النسخة التي يعتمد عليها Cloudflare في النشر.
+        أما مجلد الجهاز فهو نسخة العمل المحلية التي تُجرى فيها التعديلات قبل رفعها.
+      </p>
+
+      <table>
+        <thead>
+          <tr><th>المكان</th><th>وظيفته</th><th>هل يعدّل مباشرة؟</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>مجلد المشروع على الجهاز</td>
+            <td>التحرير، التجربة، البناء، مراجعة الملفات.</td>
+            <td>نعم، وهو المكان الموصى به.</td>
+          </tr>
+          <tr>
+            <td>GitHub</td>
+            <td>حفظ السجل، مشاركة الكود، تشغيل النشر التلقائي.</td>
+            <td>يمكن، لكن التعديل المحلي أفضل.</td>
+          </tr>
+          <tr>
+            <td>Cloudflare</td>
+            <td>البناء والنشر والاستضافة وإظهار الموقع للعامة.</td>
+            <td>لا تعدّل ملفات الموقع من داخله.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warning">
+        لا تعدّل ملفات موقع الإنتاج مباشرة داخل Cloudflare. التعديل الصحيح يكون في مجلد المشروع، ثم GitHub، ثم النشر التلقائي.
+      </div>
+    </section>
+
+    <section id="normal-update" class="card">
+      <h2>3. ماذا أفعل عند تعديل الموقع من جهازي؟</h2>
+      <div class="steps">
+        <div class="step">
+          افتح مجلد المشروع في VS Code أو محرر النصوص.
+        </div>
+        <div class="step">
+          شغّل الموقع محليًا:
+          <pre><code>npm run dev</code></pre>
+          ثم افتح الرابط المحلي الذي يظهر، وغالبًا:
+          <pre><code>http://localhost:5173</code></pre>
+        </div>
+        <div class="step">
+          نفّذ التعديلات واختبر الصفحات على الكمبيوتر والجوال.
+        </div>
+        <div class="step">
+          اختبر نسخة الإنتاج:
+          <pre><code>npm run build</code></pre>
+          يجب أن ينتهي الأمر دون أخطاء وأن يتكوّن مجلد <code>dist</code>.
+        </div>
+        <div class="step">
+          راجع الملفات المعدلة:
+          <pre><code>git status
+git diff</code></pre>
+        </div>
+        <div class="step">
+          احفظ التغييرات في Git:
+          <pre><code>git add .
+git commit -m "Update website content and design"
+git push</code></pre>
+        </div>
+        <div class="step">
+          انتظر حتى يكمل Cloudflare عملية البناء والنشر، ثم افتح الرابط العام وتحقق من التحديث.
+        </div>
+      </div>
+
+      <div class="scenario">
+        <strong>مثال:</strong> عدّلت عنوان الصفحة الرئيسية.<br>
+        بعد الحفظ والتجربة محليًا، تنفذ <code>git add</code> ثم <code>git commit</code> ثم <code>git push</code>.
+        بعد دقائق قليلة سيظهر العنوان الجديد على رابط Cloudflare.
+      </div>
+    </section>
+
+    <section id="github-change" class="card">
+      <h2>4. ماذا أفعل إذا عدّلت ملفًا مباشرة في GitHub؟</h2>
+      <p>
+        يمكن التعديل من واجهة GitHub، لكن يجب بعد ذلك مزامنة مجلد جهازك حتى لا يصبح قديمًا.
+      </p>
+      <div class="steps">
+        <div class="step">احفظ التعديل في GitHub باستخدام Commit إلى الفرع <code>main</code>.</div>
+        <div class="step">Cloudflare سيبدأ النشر تلقائيًا.</div>
+        <div class="step">على جهازك افتح PowerShell داخل المشروع ونفّذ:
+          <pre><code>git pull</code></pre>
+        </div>
+        <div class="step">شغّل الموقع محليًا وتأكد أن النسخة أصبحت مطابقة.</div>
+      </div>
+
+      <div class="callout danger">
+        لا تنفذ <code>git pull</code> إذا كانت لديك تعديلات محلية غير محفوظة. نفّذ أولًا <code>git status</code>،
+        ثم احفظ تعديلاتك في Commit أو استخدم Stash عند الحاجة.
+      </div>
+    </section>
+
+    <section id="cloudflare-change" class="card">
+      <h2>5. ماذا أفعل إذا غيّرت إعدادًا في Cloudflare؟</h2>
+      <p>التغييرات في Cloudflare نوعان:</p>
+
+      <h3>أ. تغييرات لا تتطلب تعديل ملفات المشروع</h3>
+      <ul class="checklist">
+        <li>ربط نطاق مخصص.</li>
+        <li>تغيير إعدادات Analytics أو Logs.</li>
+        <li>إضافة متغير بيئة غير سري للبناء.</li>
+        <li>إعادة تشغيل آخر عملية نشر.</li>
+      </ul>
+
+      <h3>ب. تغييرات يجب توثيقها داخل المشروع</h3>
+      <ul class="checklist">
+        <li>تغيير أمر البناء.</li>
+        <li>تغيير أمر النشر.</li>
+        <li>تغيير اسم Worker.</li>
+        <li>تغيير مسار مجلد الملفات الثابتة.</li>
+        <li>إضافة متغيرات يعتمد عليها الكود.</li>
+      </ul>
+
+      <p>
+        عند تغيير أي عنصر من النوع الثاني، حدّث ملف <code>wrangler.jsonc</code> أو <code>package.json</code>
+        داخل المشروع، ثم ارفع التغيير إلى GitHub حتى تبقى الإعدادات موثقة وقابلة للاستعادة.
+      </p>
+
+      <div class="scenario">
+        <strong>مثال:</strong> إذا تغيّر مجلد الإخراج من <code>dist</code> إلى اسم آخر،
+        يجب تعديل <code>assets.directory</code> داخل <code>wrangler.jsonc</code>، وليس تعديل Cloudflare فقط.
+      </div>
+    </section>
+
+    <section id="new-device" class="card">
+      <h2>6. ماذا أفعل عند الانتقال إلى جهاز جديد؟</h2>
+      <div class="steps">
+        <div class="step">
+          ثبّت Git وNode.js وVS Code.
+        </div>
+        <div class="step">
+          انسخ المستودع:
+          <pre><code>git clone https://github.com/alharbikh/HudooriSmartPro-Website.git</code></pre>
+        </div>
+        <div class="step">
+          ادخل إلى المجلد:
+          <pre><code>cd HudooriSmartPro-Website</code></pre>
+        </div>
+        <div class="step">
+          ثبّت الحزم:
+          <pre><code>npm install</code></pre>
+        </div>
+        <div class="step">
+          شغّل الموقع:
+          <pre><code>npm run dev</code></pre>
+        </div>
+      </div>
+      <p class="muted">
+        لا تحتاج إلى نسخ مجلد <code>node_modules</code> من الجهاز القديم، لأنه يُعاد إنشاؤه عبر <code>npm install</code>.
+      </p>
+    </section>
+
+    <section id="errors" class="card">
+      <h2>7. ماذا أفعل عند حدوث خطأ؟</h2>
+
+      <h3>Cloudflare لم ينشر آخر تعديل</h3>
+      <ul class="checklist">
+        <li>تحقق أن <code>git push</code> نجح.</li>
+        <li>تحقق أن التغيير وصل إلى فرع <code>main</code> في GitHub.</li>
+        <li>افتح Cloudflare ثم سجل البناء وافحص رسالة الخطأ.</li>
+        <li>شغّل محليًا <code>npm run build</code> لمعرفة إن كان الخطأ قابلًا للتكرار.</li>
+      </ul>
+
+      <h3>الموقع يعمل محليًا لكنه لا يعمل بعد النشر</h3>
+      <ul class="checklist">
+        <li>تحقق من المسارات النسبية للصور وCSS وJavaScript.</li>
+        <li>تأكد أن الملفات المطلوبة تدخل إلى مجلد <code>dist</code>.</li>
+        <li>تأكد أن اسم الملف وحالة الأحرف متطابقان؛ خوادم Linux حساسة للأحرف.</li>
+      </ul>
+
+      <h3>حدث تعارض بعد git pull</h3>
+      <p>
+        لا تحذف الملفات عشوائيًا. افتح الملفات المتعارضة، اختر النسخة الصحيحة، ثم:
+      </p>
+      <pre><code>git add .
+git commit -m "Resolve merge conflicts"
+git push</code></pre>
+
+      <h3>أريد الرجوع إلى إصدار سابق</h3>
+      <p>
+        استخدم سجل GitHub لتحديد الـ Commit الصحيح. الأفضل إنشاء Commit جديد يعكس التغيير بدل حذف التاريخ.
+        عند الضرورة يمكن استخدام:
+      </p>
+      <pre><code>git revert &lt;commit-hash&gt;
+git push</code></pre>
+    </section>
+
+    <section id="commands" class="card">
+      <h2>8. أهم الأوامر اليومية</h2>
+      <table>
+        <thead><tr><th>المهمة</th><th>الأمر</th></tr></thead>
+        <tbody>
+          <tr><td>تشغيل محلي</td><td><code>npm run dev</code></td></tr>
+          <tr><td>بناء نسخة الإنتاج</td><td><code>npm run build</code></td></tr>
+          <tr><td>معرفة حالة الملفات</td><td><code>git status</code></td></tr>
+          <tr><td>مشاهدة التعديلات</td><td><code>git diff</code></td></tr>
+          <tr><td>سحب آخر نسخة</td><td><code>git pull</code></td></tr>
+          <tr><td>إضافة الملفات</td><td><code>git add .</code></td></tr>
+          <tr><td>إنشاء Commit</td><td><code>git commit -m "وصف التعديل"</code></td></tr>
+          <tr><td>رفع التحديث</td><td><code>git push</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="rules" class="card">
+      <h2>9. قواعد تشغيل يجب الالتزام بها</h2>
+      <ul class="checklist">
+        <li>عدّل الموقع من مجلد المشروع المحلي كلما أمكن.</li>
+        <li>اختبر محليًا قبل كل Push.</li>
+        <li>نفّذ <code>npm run build</code> قبل رفع تعديل مهم.</li>
+        <li>اكتب رسالة Commit واضحة تصف النتيجة.</li>
+        <li>لا ترفع كلمات مرور أو مفاتيح سرية إلى GitHub.</li>
+        <li>لا تعدّل Cloudflare بطريقة تخالف ملفات الإعداد الموجودة في المشروع.</li>
+        <li>بعد كل نشر، اختبر الصفحة الرئيسية والروابط الأساسية من الرابط العام.</li>
+        <li>احتفظ بفرع <code>main</code> دائمًا في حالة قابلة للنشر.</li>
+      </ul>
+
+      <div class="callout success">
+        <strong>قاعدة مختصرة:</strong><br>
+        عدّل محليًا → اختبر → ابنِ → Commit → Push → راقب Cloudflare → اختبر الموقع العام.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>10. مثال كامل من البداية إلى النهاية</h2>
+      <p>بعد تعديل صفحة المميزات:</p>
+      <pre><code>cd C:\Users\khmob\Desktop\HudooriSmartPro-Website
+npm run dev
+
+# بعد مراجعة التعديل
+npm run build
+git status
+git add .
+git commit -m "Improve features page content"
+git push</code></pre>
+      <p>
+        بعد نجاح <code>git push</code> انتقل إلى Cloudflare، راقب عملية البناء، ثم افتح:
+      </p>
+      <pre><code>https://hudoori-smart-pro-website.khmobgm.workers.dev</code></pre>
+      <p>واختبر الصفحة المعدلة من جهاز كمبيوتر ومن هاتف.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      دليل تشغيل موقع حضوري سمارت برو · نسخة جاهزة للاستخدام والطباعة
+      <div class="small">آخر تحديث: يوليو 2026</div>
+    </div>
+  </footer>
+</body>
+</html>

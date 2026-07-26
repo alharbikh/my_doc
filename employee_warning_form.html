@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>نموذج تنبيه موظف</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm 12mm 15mm;
+            @bottom-right {
+                content: "";
+            }
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Traditional Arabic', 'Arial', sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #000;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Header Tables */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+        }
+
+        .header-table td, .header-table th {
+            border: 1px solid #000;
+            padding: 5px 8px;
+            text-align: center;
+            font-size: 10.5pt;
+        }
+
+        .header-table .bg-light {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Form Metadata Header */
+        .top-meta {
+            width: 100%;
+            margin-bottom: 15px;
+            border-collapse: collapse;
+        }
+
+        .top-meta td {
+            border: 1px solid #000;
+            padding: 4px 8px;
+            font-size: 10pt;
+            text-align: center;
+        }
+
+        /* Info Grid / Table */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .info-table td {
+            border: 1px solid #000;
+            padding: 6px 10px;
+            vertical-align: middle;
+        }
+
+        .label-cell {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            width: 15%;
+            white-space: nowrap;
+        }
+
+        .fill-cell {
+            width: 35%;
+        }
+
+        /* Notice Content Section */
+        .salutation {
+            font-weight: bold;
+            font-size: 11.5pt;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        .greeting {
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .intro-text {
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        /* Items List / Table */
+        .item-box {
+            border: 1px solid #000;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+
+        .item-row {
+            display: table;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+
+        .item-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .dots-line {
+            border-bottom: 1px dotted #000;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .input-inline-box {
+            display: inline-block;
+            border: 1px solid #000;
+            min-width: 50px;
+            height: 22px;
+            vertical-align: middle;
+            margin: 0 4px;
+            text-align: center;
+        }
+
+        .full-dots {
+            border-bottom: 1px dotted #888;
+            height: 20px;
+            margin-top: 6px;
+            width: 100%;
+        }
+
+        /* Paragraph Box */
+        .legal-notice {
+            text-align: justify;
+            font-size: 10.5pt;
+            line-height: 1.7;
+            margin: 15px 0;
+            padding: 8px 10px;
+            border: 1px solid #666;
+            background-color: #fafafa;
+        }
+
+        /* Signatures Section */
+        .signatures-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .signatures-table td {
+            width: 50%;
+            vertical-align: top;
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        .sig-header {
+            font-weight: bold;
+            text-align: center;
+            font-size: 11pt;
+            margin-bottom: 12px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .sig-row {
+            margin-bottom: 8px;
+            font-size: 10.5pt;
+        }
+
+        /* Footer Distribution */
+        .footer-notes {
+            margin-top: 15px;
+            padding-top: 8px;
+            border-top: 1px solid #000;
+            font-size: 9.5pt;
+            line-height: 1.6;
+        }
+
+        .footer-notes div {
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .footer-notes div::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+        }
+
+        /* Print Button for Browser View */
+        .no-print {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .btn-print {
+            background-color: #1b4332;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: #fff;
+            }
+        }
+    </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    pre, code { max-width: 100%; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; align-items: center; gap: .45rem; min-height: 42px; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-family: "Cairo", sans-serif; font-weight: 700; text-decoration: none !important; }
+    .site-home-nav__link:hover, .site-home-nav__link:focus { background: #0f5138; color: #fff !important; }
+    @media (max-width: 767.98px) {
+      body { max-width: 100vw; overflow-x: hidden; }
+      table { display: block; width: 100% !important; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { overflow-wrap: normal; }
+      .container, .container-fluid, main, section, article { max-width: 100%; }
+      button, .btn, a { max-width: 100%; }
+    }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+<body>
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي">
+    <div class="site-home-nav__inner">
+      <a class="site-home-nav__link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">⌂ الرئيسية</a>
+    </div>
+  </nav>
+
+<div class="no-print">
+    <button class="btn-print" onclick="window.print()">طباعة النموذج / حفظ كـ PDF</button>
+</div>
+
+<div class="container">
+
+    <!-- Top Metadata Header Table -->
+    <table class="top-meta">
+        <tr>
+            <td class="bg-light" style="width: 12%;">رمز النموذج</td>
+            <td style="width: 10%;">و.ت.ع.ن</td>
+            <td style="width: 8%;">100</td>
+            <td style="width: 8%;">1</td>
+            <td class="bg-light" style="width: 12%;">اسم النموذج</td>
+            <td style="width: 25%; font-weight: bold; font-size: 11pt;">تنبيه موظف</td>
+            <td class="bg-light" style="width: 12%;">رقم النموذج</td>
+            <td style="width: 13%; font-weight: bold;">101</td>
+        </tr>
+    </table>
+
+    <!-- Academic Year & Term + Employee Info Table -->
+    <table class="info-table">
+        <tr>
+            <td class="label-cell">العام الدراسي</td>
+            <td class="fill-cell">1444 هـ</td>
+            <td class="label-cell">الفصل الدراسي</td>
+            <td class="fill-cell">
+                <span style="margin-left: 15px;">&#9633; الأول</span>
+                <span>&#9633; الثاني</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="label-cell">السجل المدني</td>
+            <td class="fill-cell"></td>
+            <td class="label-cell">الاسم</td>
+            <td class="fill-cell"></td>
+        </tr>
+    </table>
+
+    <!-- Salutation & Greeting -->
+    <div class="salutation">
+        المكرم الأستاذ / <span class="dots-line" style="width: 60%;"></span> وفقه الله
+    </div>
+    <div class="greeting">
+        السلام عليكم ورحمة الله وبركاته.. وبعــد
+    </div>
+    <div class="intro-text">
+        من خلال متابعة سجل الدوام الرسمي وسير العملية التعليمية تبين لنا ما يلي :
+    </div>
+
+    <!-- Items Section -->
+    <div class="item-box">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td style="padding-bottom: 6px;">
+                    <strong>1.</strong> بلغ تأخركم الصباحي منذ بداية العام الدراسي إلى يوم 
+                    <span class="dots-line" style="width: 120px;"></span> 
+                    الموافق : &nbsp; / &nbsp;&nbsp;&nbsp;&nbsp; / 1444 هـ
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-bottom: 6px;">
+                    عدد التأخر: 
+                    [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] ساعة 
+                    &nbsp;&nbsp;
+                    [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] دقيقة
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top: 1px dotted #aaa; padding-top: 4px; color: #555;">
+                    ملاحظات: ....................................................................................................................................................................................................
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="item-box">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td style="padding-bottom: 6px;">
+                    <strong>2.</strong> بلغ غيابكم منذ بداية العام الدراسي إلى يوم 
+                    <span class="dots-line" style="width: 120px;"></span> 
+                    الموافق : &nbsp; / &nbsp;&nbsp;&nbsp;&nbsp; / 1444 هـ
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-bottom: 6px;">
+                    عدد الغياب: 
+                    [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] يوم
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top: 1px dotted #aaa; padding-top: 4px; color: #555;">
+                    ملاحظات: ....................................................................................................................................................................................................
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="item-box">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td>
+                    <strong>3.</strong> بلغ تأخركم عن دخول الحصص والخروج قبل نهايتها :
+                    &nbsp;&nbsp;
+                    [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] ساعة 
+                    &nbsp;&nbsp;
+                    [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] دقيقة
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Legal Notice Paragraph -->
+    <div class="legal-notice">
+        وكما تعلمون أن الغياب والتأخر يؤثران سلباً على سير العمل، وتعلمون أن التعميم المنظم للغياب والتأخر والانصراف الصادر من معالي نائب وزير التعليم للبنين رقم (116/31) بتاريخ (5 / 4 / 1428هـ) قد نظم ذلك، وإننا أولاً نخاطب فيكم الأمانة التي كلفنا بحملها بإراداتنا. ونأمل منك أخي الزميل المحافظة على أوقات الدوام وعدم تجاوز الحد الذي يفضي بالحسم، والله يحفظكم ويرعاكم.
+    </div>
+
+    <!-- Signatures Table -->
+    <table class="signatures-table">
+        <tr>
+            <!-- Right Column: Employee -->
+            <td>
+                <div class="sig-header">توقيع المعلم بالعلم</div>
+                <div class="sig-row"><strong>الاسم:</strong> .....................................................</div>
+                <div class="sig-row"><strong>التوقيع:</strong> .................................................</div>
+                <div class="sig-row"><strong>التاريخ:</strong> &nbsp;&nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp;&nbsp; / 1444 هـ</div>
+            </td>
+            <!-- Left Column: Principal -->
+            <td>
+                <div class="sig-header">مدير ثانوية ابن سيرين</div>
+                <div class="sig-row"><strong>الاسم:</strong> خالد بن علي المحوري</div>
+                <div class="sig-row"><strong>التوقيع:</strong> .................................................</div>
+                <div class="sig-row"><strong>التاريخ:</strong> &nbsp;&nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp;&nbsp; / 1444 هـ</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Footer Notes -->
+    <div class="footer-notes">
+        <div>صورة للزميل بعد التوقيع على الأصل.</div>
+        <div>الأصل في ملف الزميل.</div>
+        <div>صورة في ملف متابعة الدوام الرسمي.</div>
+    </div>
+
+</div>
+
+</body>
+</html>

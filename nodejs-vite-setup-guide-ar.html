@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="دليل تثبيت Node.js وتشغيل موقع حضوري سمارت برو باستخدام Vite على Windows.">
+  <title>دليل تثبيت Node.js وتشغيل موقع حضوري سمارت برو</title>
+  <style>
+    :root{
+      --primary:#17a68b;
+      --primary-dark:#0f7f6c;
+      --ink:#17322d;
+      --muted:#61736f;
+      --bg:#f5f8f7;
+      --surface:#ffffff;
+      --border:#dfe9e6;
+      --code:#122522;
+      --success:#18794e;
+      --warning:#9a6700;
+      --shadow:0 12px 36px rgba(20,65,57,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Cairo","Segoe UI",Tahoma,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.9;
+    }
+    a{color:var(--primary-dark);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:min(980px,calc(100% - 32px));margin:auto}
+    header{
+      background:linear-gradient(135deg,#0e705f,#17a68b);
+      color:white;
+      padding:64px 0 48px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 12px;
+      border:1px solid rgba(255,255,255,.28);
+      border-radius:999px;
+      background:rgba(255,255,255,.1);
+      font-size:.9rem;
+    }
+    h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.25;margin:18px 0 12px}
+    header p{max-width:760px;margin:0;color:#eafff9;font-size:1.05rem}
+    .toc{
+      margin-top:-24px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .toc strong{display:block;margin-bottom:10px}
+    .toc nav{display:flex;gap:10px;flex-wrap:wrap}
+    .toc a{
+      background:#eef8f5;
+      border:1px solid #d5ece6;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:.92rem;
+    }
+    main{padding:36px 0 72px}
+    .step{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px;
+      margin:22px 0;
+      position:relative;
+      overflow:hidden;
+    }
+    .step::before{
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:5px;
+      background:var(--primary);
+    }
+    .step-head{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:12px;
+    }
+    .num{
+      width:42px;height:42px;
+      border-radius:12px;
+      display:grid;place-items:center;
+      background:var(--primary);
+      color:white;
+      font-weight:800;
+      flex:none;
+    }
+    h2{margin:0;font-size:1.35rem}
+    h3{margin:20px 0 8px;font-size:1.05rem}
+    p{margin:8px 0 14px}
+    ul{padding-right:22px}
+    .note,.success,.warning{
+      padding:14px 16px;
+      border-radius:14px;
+      margin:16px 0;
+      border:1px solid;
+    }
+    .note{background:#eef8ff;border-color:#cbe4f4}
+    .success{background:#edf9f2;border-color:#c6ead5;color:var(--success)}
+    .warning{background:#fff8e8;border-color:#f1d99a;color:var(--warning)}
+    pre{
+      margin:14px 0;
+      background:var(--code);
+      color:#e8fff8;
+      border-radius:14px;
+      padding:16px;
+      overflow:auto;
+      direction:ltr;
+      text-align:left;
+      line-height:1.7;
+      border:1px solid #203d38;
+    }
+    code{font-family:Consolas,"Courier New",monospace}
+    .path{
+      direction:ltr;
+      text-align:left;
+      background:#f1f5f4;
+      border:1px dashed #c6d8d4;
+      border-radius:12px;
+      padding:12px 14px;
+      font-family:Consolas,"Courier New",monospace;
+      overflow:auto;
+    }
+    .checklist{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:#f8fbfa;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+    }
+    .check input{margin-top:7px}
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:700;
+      border:1px solid transparent;
+    }
+    .btn-primary{background:var(--primary);color:white}
+    .btn-secondary{background:white;border-color:var(--border);color:var(--ink)}
+    footer{
+      border-top:1px solid var(--border);
+      background:white;
+      padding:24px 0;
+      color:var(--muted);
+      text-align:center;
+    }
+    @media (max-width:640px){
+      header{padding:46px 0 40px}
+      .step{padding:20px}
+      .step-head{align-items:flex-start}
+      .num{width:38px;height:38px}
+    }
+    @media print{
+      .toc,.actions{display:none}
+      body{background:white}
+      .step{box-shadow:none;break-inside:avoid}
+      header{padding:24px;background:white;color:black;border-bottom:2px solid #ddd}
+      header p{color:#444}
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    pre, code { max-width: 100%; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; align-items: center; gap: .45rem; min-height: 42px; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-family: "Cairo", sans-serif; font-weight: 700; text-decoration: none !important; }
+    .site-home-nav__link:hover, .site-home-nav__link:focus { background: #0f5138; color: #fff !important; }
+    @media (max-width: 767.98px) {
+      body { max-width: 100vw; overflow-x: hidden; }
+      table { display: block; width: 100% !important; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { overflow-wrap: normal; }
+      .container, .container-fluid, main, section, article { max-width: 100%; }
+      button, .btn, a { max-width: 100%; }
+    }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+<body>
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي">
+    <div class="site-home-nav__inner">
+      <a class="site-home-nav__link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">⌂ الرئيسية</a>
+    </div>
+  </nav>
+  <header>
+    <div class="container">
+      <span class="eyebrow">حضوري سمارت برو — دليل التشغيل المحلي</span>
+      <h1>تثبيت Node.js وتشغيل الموقع باستخدام Vite</h1>
+      <p>
+        دليل عملي لنظام Windows يبدأ من تنزيل Node.js، ثم تجهيز مجلد الموقع،
+        وتثبيت Vite، وتشغيل خادم التطوير، واختبار نسخة الإنتاج.
+      </p>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="toc" aria-label="فهرس الخطوات">
+      <strong>الخطوات</strong>
+      <nav>
+        <a href="#step-1">1. تثبيت Node.js</a>
+        <a href="#step-2">2. التحقق من التثبيت</a>
+        <a href="#step-3">3. تجهيز مجلد الموقع</a>
+        <a href="#step-4">4. فتح المشروع</a>
+        <a href="#step-5">5. تثبيت Vite</a>
+        <a href="#step-6">6. إعداد package.json</a>
+        <a href="#step-7">7. تشغيل الموقع</a>
+        <a href="#step-8">8. التجربة من الجوال</a>
+        <a href="#step-9">9. بناء نسخة الإنتاج</a>
+      </nav>
+    </section>
+  </div>
+
+  <main class="container">
+    <section class="step" id="step-1">
+      <div class="step-head">
+        <div class="num">1</div>
+        <h2>تثبيت Node.js</h2>
+      </div>
+      <p>افتح صفحة التنزيل الرسمية وثبّت إصدار LTS المخصص لنظام Windows.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://nodejs.org/en/download" target="_blank" rel="noopener">فتح موقع Node.js الرسمي</a>
+      </div>
+      <h3>أثناء التثبيت</h3>
+      <ul>
+        <li>اترك الخيارات الافتراضية كما هي.</li>
+        <li>تأكد من تثبيت npm مع Node.js.</li>
+        <li>تأكد من تفعيل إضافة Node.js إلى PATH.</li>
+        <li>أغلق PowerShell أو VS Code ثم افتحه من جديد بعد انتهاء التثبيت.</li>
+      </ul>
+      <div class="note">
+        يفضّل تثبيت أحدث إصدار LTS. يجب أن يكون الإصدار متوافقًا مع متطلبات Vite الحديثة.
+      </div>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-head">
+        <div class="num">2</div>
+        <h2>التحقق من نجاح التثبيت</h2>
+      </div>
+      <p>افتح PowerShell أو Terminal داخل VS Code ثم نفّذ:</p>
+      <pre><code>node --version
+npm --version</code></pre>
+      <p>إذا ظهرت أرقام للإصدارين، فقد تم التثبيت بنجاح.</p>
+      <div class="success">مثال: ظهور قيمة تبدأ بـ <code>v24</code> لـ Node.js وقيمة رقمية لـ npm.</div>
+      <div class="warning">
+        إذا ظهرت رسالة أن الأمر غير معروف، أعد تشغيل الجهاز ثم جرّب مرة أخرى.
+      </div>
+    </section>
+
+    <section class="step" id="step-3">
+      <div class="step-head">
+        <div class="num">3</div>
+        <h2>تجهيز مجلد الموقع</h2>
+      </div>
+      <p>أنشئ مجلدًا مستقلًا للموقع، مثل:</p>
+      <div class="path">C:\Users\khmob\Desktop\hudoori-smart-pro-website</div>
+      <p>فك ضغط ملفات الموقع داخله. يجب أن يكون ملف <code>index.html</code> داخل المجلد مباشرة.</p>
+      <pre><code>hudoori-smart-pro-website/
+├── index.html
+├── features.html
+├── assets/
+├── en/
+└── ...</code></pre>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-head">
+        <div class="num">4</div>
+        <h2>فتح المشروع في VS Code</h2>
+      </div>
+      <p>افتح PowerShell ثم نفّذ:</p>
+      <pre><code>cd C:\Users\khmob\Desktop\hudoori-smart-pro-website
+code .</code></pre>
+      <p>أو افتح VS Code واختر <strong>File → Open Folder</strong> ثم اختر مجلد الموقع.</p>
+    </section>
+
+    <section class="step" id="step-5">
+      <div class="step-head">
+        <div class="num">5</div>
+        <h2>تهيئة المشروع وتثبيت Vite</h2>
+      </div>
+      <p>من Terminal داخل VS Code نفّذ:</p>
+      <pre><code>npm init -y
+npm install --save-dev vite</code></pre>
+      <p>سيتم إنشاء ملف <code>package.json</code> ومجلد <code>node_modules</code>.</p>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-head">
+        <div class="num">6</div>
+        <h2>إعداد ملف package.json</h2>
+      </div>
+      <p>افتح ملف <code>package.json</code> واجعل قسم الأوامر بهذا الشكل:</p>
+      <pre><code>{
+  "name": "hudoori-smart-pro-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "devDependencies": {
+    "vite": "^8.0.0"
+  }
+}</code></pre>
+      <div class="note">
+        إذا كتب npm رقمًا أحدث لإصدار Vite داخل الملف، اترك الرقم الذي أضافه npm.
+      </div>
+    </section>
+
+    <section class="step" id="step-7">
+      <div class="step-head">
+        <div class="num">7</div>
+        <h2>تشغيل خادم التطوير</h2>
+      </div>
+      <p>نفّذ:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>سيظهر عنوان محلي قريب من:</p>
+      <pre><code>Local:   http://localhost:5173/
+Network: http://192.168.1.25:5173/</code></pre>
+      <p>افتح العنوان المحلي في المتصفح:</p>
+      <div class="path">http://localhost:5173</div>
+      <p>لإيقاف الخادم اضغط <code>Ctrl + C</code>.</p>
+    </section>
+
+    <section class="step" id="step-8">
+      <div class="step-head">
+        <div class="num">8</div>
+        <h2>تجربة الموقع من الجوال</h2>
+      </div>
+      <ul>
+        <li>اجعل الكمبيوتر والجوال على شبكة Wi‑Fi نفسها.</li>
+        <li>افتح في الجوال عنوان <code>Network</code> الذي ظهر في Terminal.</li>
+        <li>اسمح لـ Node.js بالعمل على الشبكات الخاصة عند ظهور Windows Firewall.</li>
+      </ul>
+      <div class="warning">
+        لا تستخدم الرقم الموجود في المثال؛ استخدم عنوان Network الظاهر على جهازك.
+      </div>
+    </section>
+
+    <section class="step" id="step-9">
+      <div class="step-head">
+        <div class="num">9</div>
+        <h2>بناء واختبار نسخة الإنتاج</h2>
+      </div>
+      <p>أنشئ نسخة النشر:</p>
+      <pre><code>npm run build</code></pre>
+      <p>سينشئ Vite مجلدًا باسم:</p>
+      <div class="path">dist</div>
+      <p>ثم اختبر النسخة المبنية:</p>
+      <pre><code>npm run preview</code></pre>
+      <p>غالبًا ستفتح على:</p>
+      <div class="path">http://localhost:4173</div>
+    </section>
+
+    <section class="step">
+      <div class="step-head">
+        <div class="num">✓</div>
+        <h2>قائمة تحقق نهائية</h2>
+      </div>
+      <div class="checklist">
+        <label class="check"><input type="checkbox"> تم تثبيت Node.js وnpm.</label>
+        <label class="check"><input type="checkbox"> يظهر إصدار Node.js عبر <code>node --version</code>.</label>
+        <label class="check"><input type="checkbox"> تم فك ملفات الموقع في مجلد مستقل.</label>
+        <label class="check"><input type="checkbox"> تم تثبيت Vite داخل المشروع.</label>
+        <label class="check"><input type="checkbox"> يعمل الموقع عبر <code>npm run dev</code>.</label>
+        <label class="check"><input type="checkbox"> تم اختبار الموقع من الجوال.</label>
+        <label class="check"><input type="checkbox"> نجح أمر <code>npm run build</code>.</label>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">حضوري سمارت برو — دليل إعداد بيئة الموقع المحلية</div>
+  </footer>
+</body>
+</html>

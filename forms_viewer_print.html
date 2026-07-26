@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معاينة وطباعة النماذج الرسمية - الدليل الإجرائي</title>
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Tajawal', 'sans-serif'],
+          },
+          colors: {
+            gov: {
+              50: '#f0f7f6',
+              100: '#e0efe0',
+              800: '#1e3a8a',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f1f5f9;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Standard Official Table Styling for Print Replica */
+    .official-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+
+    .official-table th, 
+    .official-table td {
+      border: 1px solid #000;
+      padding: 4px 6px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .official-table th {
+      background-color: #f8fafc;
+      font-weight: 700;
+    }
+
+    /* Editable Field Mode Styling */
+    [contenteditable="true"] {
+      outline: none;
+      transition: background-color 0.2s;
+    }
+
+    .interactive-mode [contenteditable="true"]:hover {
+      background-color: #e0f2fe;
+    }
+
+    .interactive-mode [contenteditable="true"]:focus {
+      background-color: #fef08a;
+      box-shadow: 0 0 0 1px #ca8a04;
+    }
+
+    /* Screen Preview Container (A4 Page Representation) */
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 12mm 15mm 15mm 15mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* Print Specific Rules */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .a4-page {
+        width: 100% !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        margin: 0 !important;
+        padding: 10mm 12mm 12mm 12mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      .a4-page.hidden {
+        display: none !important;
+      }
+
+      /* Adjust content fits strictly inside single page */
+      .form-content {
+        flex-grow: 1;
+      }
+    }
+
+    /* Line Input Utilities for Replica Forms */
+    .dots-line {
+      border-bottom: 1px dotted #000;
+      display: inline-block;
+      min-width: 80px;
+      padding: 0 4px;
+    }
+    
+    .bracket-input {
+      display: inline-block;
+      min-width: 40px;
+      text-align: center;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    pre, code { max-width: 100%; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; align-items: center; gap: .45rem; min-height: 42px; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-family: "Cairo", sans-serif; font-weight: 700; text-decoration: none !important; }
+    .site-home-nav__link:hover, .site-home-nav__link:focus { background: #0f5138; color: #fff !important; }
+    @media (max-width: 767.98px) {
+      body { max-width: 100vw; overflow-x: hidden; }
+      table { display: block; width: 100% !important; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { overflow-wrap: normal; }
+      .container, .container-fluid, main, section, article { max-width: 100%; }
+      button, .btn, a { max-width: 100%; }
+    }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex flex-col">
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي">
+    <div class="site-home-nav__inner">
+      <a class="site-home-nav__link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">⌂ الرئيسية</a>
+    </div>
+  </nav>
+
+  <!-- Top Navigation & Control Bar (Hidden on Print) -->
+  <header class="no-print bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- App Title & Icon -->
+        <div class="flex items-center gap-3">
+          <div class="bg-emerald-600 text-white p-2.5 rounded-lg shadow-sm">
+            <i class="fa-solid fa-print text-xl"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold tracking-tight text-white">منصة معاينة وطباعة النماذج الرسمية</h1>
+            <p class="text-xs text-slate-400">الدليل الإجرائي لمدارس التعليم العام (الإصدار الثالث)</p>
+          </div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          
+          <!-- Mode Selector Toggle -->
+          <button id="toggle-mode-btn" onclick="toggleInteractivity()" class="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition">
+            <i class="fa-solid fa-pen-to-square text-amber-400"></i>
+            <span id="mode-status-text">تفعيل الكتابة والتعبئة</span>
+          </button>
+
+          <!-- Print Options -->
+          <button onclick="printCurrentForm()" class="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shadow transition">
+            <i class="fa-solid fa-print"></i>
+            <span>طباعة النموذج الحالي</span>
+          </button>
+
+          <button onclick="printAllForms()" class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg shadow transition">
+            <i class="fa-sharp fa-solid fa-files"></i>
+            <span>طباعة الكل (٥ نماذج)</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Form Selector Tabs -->
+      <nav class="flex items-center gap-2 mt-4 pt-3 border-t border-slate-800 overflow-x-auto text-xs font-medium">
+        <button onclick="switchTab('all')" id="tab-all" class="tab-btn px-3 py-2 rounded-md bg-emerald-600 text-white whitespace-nowrap transition">
+          <i class="fa-solid fa-layer-group ml-1"></i> عرض جميع النماذج
+        </button>
+        <button onclick="switchTab('form-17')" id="tab-form-17" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (17) - سجل العمل الرسمي
+        </button>
+        <button onclick="switchTab('form-19')" id="tab-form-19" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (19) - قرار حسم تأخر وخروج
+        </button>
+        <button onclick="switchTab('form-21')" id="tab-form-21" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (21) - قرار حسم غياب
+        </button>
+        <button onclick="switchTab('form-22')" id="tab-form-22" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (22) - سجل استئذان الموظفين
+        </button>
+        <button onclick="switchTab('form-49')" id="tab-form-49" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (49) - خطة الزيارات الصفية
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Forms Viewport Container -->
+  <main id="forms-container" class="flex-1 py-6 px-2 md:px-0">
+
+    <!-- ================= FORM 17 ================= -->
+    <section id="form-17" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Header Metadata Top -->
+          <div class="flex justify-between items-start text-xs font-bold border-b border-black pb-2 mb-3">
+            <div>
+              <div>نموذج رقم ( ۱۷ )</div>
+              <div class="mt-1">اسم النموذج : سجل العمل الرسمي</div>
+            </div>
+            <div class="text-left">
+              <div>رمز النموذج: (و.م.ع. ن. - ۰۲-۰۱)</div>
+            </div>
+          </div>
+
+          <!-- Main Title -->
+          <div class="text-center my-3">
+            <h2 class="text-lg font-black tracking-wide border-b-2 border-black inline-block px-4 pb-1">سجل دوام الموظفين</h2>
+          </div>
+
+          <!-- Sub Header Information Bar -->
+          <div class="flex justify-between items-center text-xs font-bold mb-3 px-1">
+            <div>سجل دوام الموظفين للعام الدراسي <span class="dots-line" contenteditable="true"></span></div>
+            <div>الفصل <span class="dots-line" contenteditable="true"></span></div>
+            <div>يوم <span class="dots-line" contenteditable="true"></span></div>
+            <div>الموافق / <span class="dots-line" contenteditable="true"></span> / ٤ اهـ</div>
+          </div>
+
+          <!-- Section 1 Title -->
+          <div class="bg-gray-100 border border-black text-center text-xs font-bold py-1 mb-1">
+            الحاضرون قبل بداية الاصطفاف الصباحي
+          </div>
+
+          <!-- Main Table: Two Collated Columns (Right Half 1..15 / Left Half 1..15) -->
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[3%]">م</th>
+                <th class="w-[20%]">اسم الموظف الرباعي</th>
+                <th class="w-[11%]">الوظيفة</th>
+                <th class="w-[8%]">وقت الحضور</th>
+                <th class="w-[8%]">التوقيع</th>
+                <th class="w-[8%]">وقت الخروج</th>
+                <th class="w-[8%]">التوقيع</th>
+                <th class="w-[3%] border-r-2 border-r-black">م</th>
+                <th class="w-[20%]">اسم الموظف الرباعي</th>
+                <th class="w-[11%]">الوظيفة</th>
+                <th class="w-[8%]">وقت الحضور</th>
+                <th class="w-[8%]">التوقيع</th>
+                <th class="w-[8%]">وقت الخروج</th>
+                <th class="w-[8%]">التوقيع</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Generating 15 Paired Rows -->
+              <!-- Row 1 -->
+              <tr>
+                <td>1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 2 -->
+              <tr>
+                <td>2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 3 -->
+              <tr>
+                <td>3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 4 -->
+              <tr>
+                <td>4</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">4</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 5 -->
+              <tr>
+                <td>5</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">5</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 6 -->
+              <tr>
+                <td>6</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">6</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 7 -->
+              <tr>
+                <td>7</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">7</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 8 -->
+              <tr>
+                <td>8</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">8</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 9 -->
+              <tr>
+                <td>9</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">9</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 10 -->
+              <tr>
+                <td>10</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">10</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 11 -->
+              <tr>
+                <td>11</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">11</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 12 -->
+              <tr>
+                <td>12</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">12</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 13 -->
+              <tr>
+                <td>13</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">13</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 14 -->
+              <tr>
+                <td>14</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">14</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+              <!-- Row 15 -->
+              <tr>
+                <td>15</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td class="border-r-2 border-r-black">15</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Section 2: Absent Employees -->
+          <div class="bg-gray-100 border border-black text-center text-xs font-bold py-1 mt-2 mb-1">
+            الموظفون الغائبون
+          </div>
+
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[5%]">م</th>
+                <th class="w-[35%]">اسم الموظف الرباعي</th>
+                <th class="w-[20%]">الوظيفة</th>
+                <th class="w-[40%]">سبب الغياب</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            </tbody>
+          </table>
+
+          <!-- Duty Teachers Footer Table -->
+          <table class="official-table text-xs mt-2">
+            <tbody>
+              <tr>
+                <td class="font-bold w-[30%] bg-gray-50">المعلم المناوب بداية ونهاية العمل</td>
+                <td class="text-right px-4" contenteditable="true">اسم المعلم وتوقيعه: </td>
+              </tr>
+              <tr>
+                <td class="font-bold bg-gray-50">المعلم المناوب بداية ونهاية العمل</td>
+                <td class="text-right px-4" contenteditable="true">اسم المعلم وتوقيعه: </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Important Note Box -->
+          <div class="border border-black p-2 mt-2 text-xs text-right font-bold">
+            ملاحظة : يغلق الدوام مرتين في الفترة الأولى بعد بداية البرنامج الصباحي مباشرة وفي المرة الثانية عند بداية الحصة الأولى مباشرة
+          </div>
+        </div>
+
+        <!-- Document Footer -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>٩٦ / الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 19 ================= -->
+    <section id="form-19" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Top Header -->
+          <div class="flex justify-between items-start text-xs font-bold border-b border-black pb-2 mb-4">
+            <div>
+              <div>نموذج رقم ( ١٩ )</div>
+              <div class="mt-1">اسم النموذج: قرار حسم مجموع ساعات تأخر وخروج مبكر</div>
+            </div>
+            <div class="text-left">
+              <div>رمز النموذج : ( و. م . ع . ن. - ۰۲-۰۳)</div>
+            </div>
+          </div>
+
+          <!-- Top Metadata Grid Table -->
+          <table class="official-table text-xs font-bold mb-6">
+            <tbody>
+              <tr>
+                <td class="w-[15%] bg-gray-50">المدرسة</td>
+                <td class="w-[35%]" contenteditable="true"></td>
+                <td class="w-[15%] bg-gray-50">السجل المدني</td>
+                <td class="w-[35%]" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="official-table text-xs font-bold mb-6">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[25%]">الاسم</th>
+                <th class="w-[18%]">التخصص</th>
+                <th class="w-[22%]">المستوى / المرتبة</th>
+                <th class="w-[15%]">رقم الوظيفة</th>
+                <th class="w-[20%]">العمل الحالي</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="h-8">
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Decision Body Paragraph -->
+          <div class="text-sm leading-8 text-justify font-medium mb-6">
+            <p>
+              إن مدير المدرسة <span class="dots-line min-w-[250px]" contenteditable="true"></span><br>
+              بناء على صلاحياته ، وبناء على المادة (۲۱) من نظام الخدمة المدنية وبناءً على موافقة معالي الوزير على إعطاء بعض الصلاحيات لمديري المدارس بالقرار رقم ١۱۳۹ / ١ وتاريخ ١٧ / ٣ / ١٤٣١هـ ، ولبلوغ ساعات التأخر عن العمل والخروج المبكر من العمل ( <span class="bracket-input border-b border-black" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;</span> ) ساعة ، وحيث إن عذره غير مقبول ، وبمقتضى النظام .
+            </p>
+
+            <div class="font-bold my-4 text-center text-base">يقرر ما يلي</div>
+
+            <ol class="list-none space-y-3 pl-2">
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۱)</span>
+                <span>حسم مدة الغياب الموضحة بعاليه وعددها ( <span class="bracket-input border-b border-black font-bold" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;</span> ) يوماً من راتبه .</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۲)</span>
+                <span>على إدارة شؤون الموظفين ( تنفيذ الأنظمة ) تنفيذ إجراء الحسم واستبعادها من خدماته واصل القرار لملفه بالإدارة مع الأساس لملفه .</span>
+              </li>
+            </ol>
+
+            <div class="text-center font-bold text-base mt-6">والله الموفق</div>
+          </div>
+
+          <!-- Signatures Section -->
+          <div class="flex justify-between items-start mt-10 px-6 text-xs font-bold">
+            <div class="space-y-3">
+              <div>الرئيس المباشر</div>
+              <div>الاسم: <span class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التوقيع <span class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التاريخ : / / ١٤هـ</div>
+            </div>
+
+            <div class="border-2 border-dashed border-gray-400 w-28 h-28 flex items-center justify-center text-gray-400 rounded-lg">
+              الختم
+            </div>
+          </div>
+
+          <!-- Distribution Footer Links -->
+          <div class="mt-12 text-xs space-y-1.5 font-bold border-t border-gray-300 pt-4">
+            <div>صورة / للموظفين المتابعة تنفيذ الحسم ( تنفيذ الأنظمة )</div>
+            <div>صورة / المكتب التعليم</div>
+            <div>صورة لملفه بالمدرسة</div>
+          </div>
+        </div>
+
+        <!-- Document Footer Code -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>۹۸ / الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 21 ================= -->
+    <section id="form-21" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Top Header -->
+          <div class="flex justify-between items-start text-xs font-bold border-b border-black pb-2 mb-4">
+            <div>
+              <div>نموذج رقم ( ٢١ )</div>
+              <div class="mt-1">النموذج : قرار حسم غياب</div>
+            </div>
+            <div class="text-left">
+              <div>رمز النموذج : ( و. م . ع . ن . - ٠٢ - ٠٥ )</div>
+            </div>
+          </div>
+
+          <!-- School Info Header -->
+          <table class="official-table text-xs font-bold mb-4">
+            <tbody>
+              <tr>
+                <td class="w-[15%] bg-gray-50">المدرسة</td>
+                <td class="w-[35%]" contenteditable="true"></td>
+                <td class="w-[15%] bg-gray-50">السجل المدني</td>
+                <td class="w-[35%]" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Form Details Grid Table -->
+          <table class="official-table text-xs font-bold mb-6">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[18%]">الاسم</th>
+                <th class="w-[12%]">التخصص</th>
+                <th class="w-[14%]">المستوى / المرتبة</th>
+                <th class="w-[8%]">الدرجة</th>
+                <th class="w-[10%]">رقم الوظيفة</th>
+                <th class="w-[12%]">الوظيفة</th>
+                <th class="w-[10%]">عدد أيام الغياب</th>
+                <th class="w-[16%]">ليحدد الأيام الواجب حسمها</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="h-10">
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td colspan="7" class="text-left font-bold bg-gray-50">التاريخ</td>
+                <td contenteditable="true">/ / ١٤ هـ</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Decision Text Content -->
+          <div class="text-sm leading-8 text-justify font-medium mb-6">
+            <p>
+              إن قائد المدرسة.. <span class="dots-line min-w-[250px]" contenteditable="true"></span><br>
+              بناء على صلاحياته ، وبناء على المادة (۲۱) من نظام الخدمة المدنية ، وبناء على موافقة معالي الوزير على إعطاء بعض الصلاحيات لمديري المدارس بالقرار رقم ۱۱۳۹ / ۱ وتاريخ ١٤٢١/٣/١٧هـ ولغياب المعلم الموضح أسمه أعلاه ، حيث إن عذره غير مقبول ، وبمقتضى النظام .
+            </p>
+
+            <div class="font-bold my-4 text-center text-base">يقرر ما يلي :</div>
+
+            <ol class="list-none space-y-3 pl-2">
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۱)</span>
+                <span>حسم مدة الغياب الموضحة بعاليه وعددها ( <span class="bracket-input border-b border-black font-bold" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;</span> ) يوما من راتبه ..</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۲)</span>
+                <span>على إدارة شؤون الموظفين تنفيذ الأنظمة إجراء الحسم واستبعادها من خدماته وأصل القرار لملفه بالإدارة مع الأساس لملفه )</span>
+              </li>
+            </ol>
+
+            <div class="text-center font-bold text-base mt-6">والله الموفق</div>
+          </div>
+
+          <!-- Signatures Section -->
+          <div class="flex justify-between items-start mt-8 px-6 text-xs font-bold">
+            <div class="space-y-3">
+              <div>الرئيس المباشر</div>
+              <div>الاسم : <span class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التوقيع : <span class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التاريخ : / / ١٤هـ</div>
+            </div>
+
+            <div class="border-2 border-dashed border-gray-400 w-28 h-28 flex items-center justify-center text-gray-400 rounded-lg">
+              الختم
+            </div>
+          </div>
+
+          <!-- Footnote & Distribution Copies -->
+          <div class="mt-8 text-xs space-y-1.5 font-bold border-t border-gray-300 pt-3">
+            <div class="text-amber-900 font-extrabold mb-2">ملاحظة / لن يتم استلام قرار الحسم بدون المساءلة</div>
+            <div>صورة لشؤون الموظفين المتابعة تنفيذ الحسم ( تنفيذ الأنظمة ) .</div>
+            <div>صورة / المكتب التعليم .</div>
+            <div>صورة / لملفه بالمدرسة .</div>
+          </div>
+        </div>
+
+        <!-- Document Footer Page Number -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>١٠٠ / الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 22 ================= -->
+    <section id="form-22" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Form Header Bar -->
+          <div class="flex justify-between items-start text-xs font-bold border-b border-black pb-2 mb-3">
+            <div>
+              <div>نموذج رقم ( ٢٢ )</div>
+              <div class="mt-1">اسم النموذج : سجل استئذان الموظفين</div>
+            </div>
+            <div class="text-left">
+              <div>رمز النموذج : ( و. م . ع . ن . - ٠٢-٠٦ )</div>
+            </div>
+          </div>
+
+          <!-- Employee Profile Info Table -->
+          <table class="official-table text-xs font-bold mb-2">
+            <tbody>
+              <tr>
+                <td class="w-[15%] bg-gray-50">المدرسة</td>
+                <td class="w-[35%]" contenteditable="true"></td>
+                <td class="w-[15%] bg-gray-50">السجل المدني</td>
+                <td class="w-[35%]" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="official-table text-xs font-bold mb-3">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[25%]">الاسم</th>
+                <th class="w-[15%]">التخصص</th>
+                <th class="w-[18%]">المستوى / المرتبة</th>
+                <th class="w-[12%]">الدرجة</th>
+                <th class="w-[15%]">رقم الوظيفة</th>
+                <th class="w-[15%]">عدد أيام الغياب</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="h-6">
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Main Log Table (18 Rows) -->
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[12%]">التاريخ اليوم</th>
+                <th class="w-[8%]">الخروج زمن دقیقه</th>
+                <th class="w-[8%]">الخروج ساعة</th>
+                <th class="w-[10%]">التوقيع</th>
+                <th class="w-[24%]">مبررات الخروج</th>
+                <th class="w-[8%]">العودة زمن دقيقة</th>
+                <th class="w-[8%]">العودة ساعة</th>
+                <th class="w-[10%]">التوقيع</th>
+                <th class="w-[12%]">ملحوظات .</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row loop template -->
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            </tbody>
+          </table>
+
+          <!-- Footnote Required Text -->
+          <div class="text-xs font-bold mt-2">
+            * في مدارس البنات يتم كتابة اسم المحرم وصلة القرابة ورقم الهوية
+          </div>
+        </div>
+
+        <!-- Document Footer -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>١٠١</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 49 ================= -->
+    <section id="form-49" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Header Bar -->
+          <div class="flex justify-between items-start text-xs font-bold border-b border-black pb-2 mb-3">
+            <div>
+              <div>نموذج رقم ( ٤٩ )</div>
+              <div class="mt-1">اسم النموذج خطة الزيارات الصفية لقائد المدرسة</div>
+            </div>
+            <div class="text-left">
+              <div>رمز النموذج ( م. م . ع . ن - ۰۳-۰۱)</div>
+            </div>
+          </div>
+
+          <!-- Main Comprehensive Grid Table -->
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <!-- Top Header Row -->
+              <tr class="bg-gray-50">
+                <th rowspan="2" class="w-[18%]">اسم المعلم</th>
+                <th rowspan="2" class="w-[10%]">التخصص</th>
+                <th rowspan="2" class="w-[10%]">التنفيذ</th>
+                <th colspan="5" class="w-[31%] border-b border-black">الزيارة الأولى</th>
+                <th colspan="5" class="w-[31%] border-b border-black">الزيارة الثانية</th>
+              </tr>
+              <!-- Sub Header Row -->
+              <tr class="bg-gray-50">
+                <th>اليوم</th>
+                <th>التاريخ // ١٤</th>
+                <th>النشاط</th>
+                <th>الفصل</th>
+                <th>الوحدة</th>
+                <th>اليوم</th>
+                <th>التاريخ // ١٤</th>
+                <th>النشاط</th>
+                <th>الفصل</th>
+                <th>الوحدة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 Pair -->
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <!-- Row 2 Pair -->
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <!-- Row 3 Pair -->
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <!-- Row 4 Pair -->
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <!-- Row 5 Pair -->
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <!-- Row 6 Pair -->
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Leader Signature Section -->
+          <div class="flex justify-between items-center my-6 px-12 text-xs font-bold">
+            <div>قائد المدرسة : <span class="dots-line min-w-[200px]" contenteditable="true"></span></div>
+            <div>التوقيع : <span class="dots-line min-w-[200px]" contenteditable="true"></span></div>
+          </div>
+        </div>
+
+        <!-- Document Footer -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>١٣٢ / الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Script Logic -->
+  <script>
+    let currentTab = 'all';
+    let isInteractiveMode = false;
+
+    // Switch View Tab Function
+    function switchTab(tabId) {
+      currentTab = tabId;
+      
+      // Update Tab Navigation Active Styles
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-600', 'text-white');
+        btn.classList.add('bg-slate-800', 'text-slate-300');
+      });
+
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+        activeBtn.classList.add('bg-emerald-600', 'text-white');
+      }
+
+      // Show/Hide Page Sections
+      const pages = document.querySelectorAll('.form-page');
+      pages.forEach(page => {
+        if (tabId === 'all') {
+          page.classList.remove('hidden');
+        } else {
+          if (page.id === tabId) {
+            page.classList.remove('hidden');
+          } else {
+            page.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    // Toggle Editable Interactivity Mode
+    function toggleInteractivity() {
+      isInteractiveMode = !isInteractiveMode;
+      const statusText = document.getElementById('mode-status-text');
+      const container = document.getElementById('forms-container');
+
+      if (isInteractiveMode) {
+        container.classList.add('interactive-mode');
+        statusText.innerText = 'إيقاف وضع التعبئة (وضع العرض فقط)';
+        showNotification('تم تفعيل وضع التعبئة التفاعلي! يمكنك الآن الضغط على أي حقل للكتابة والتعديل.');
+      } else {
+        container.classList.remove('interactive-mode');
+        statusText.innerText = 'تفعيل الكتابة والتعبئة';
+        showNotification('تم العودة لوضع المعاينة النموذجية.');
+      }
+    }
+
+    // Print Current Active Form Page
+    function printCurrentForm() {
+      if (currentTab === 'all') {
+        window.print();
+      } else {
+        // Temporary hide all except current active
+        window.print();
+      }
+    }
+
+    // Print All Forms
+    function printAllForms() {
+      const prevTab = currentTab;
+      switchTab('all');
+      setTimeout(() => {
+        window.print();
+        switchTab(prevTab);
+      }, 200);
+    }
+
+    // Toast Notification Banner
+    function showNotification(message) {
+      const existingToast = document.getElementById('toast-msg');
+      if (existingToast) existingToast.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'toast-msg';
+      toast.className = 'no-print fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-5 py-2.5 rounded-xl shadow-2xl text-xs font-bold flex items-center gap-2 border border-slate-700 z-50 animate-bounce';
+      toast.innerHTML = `<i class="fa-solid fa-circle-info text-amber-400"></i> ${message}`;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        if (toast) toast.remove();
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="توثيق خطوات المرحلة الأولى لقاعدة بيانات Supabase في مشروع حضوري سمارت برو">
+  <title>حضوري سمارت برو — المرحلة الأولى: قاعدة بيانات Supabase</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --hsp-primary: #176b4d;
+      --hsp-primary-dark: #0f5138;
+      --hsp-primary-soft: #eaf6f1;
+      --hsp-accent: #c89b3c;
+      --hsp-bg: #f6f8f7;
+      --hsp-surface: #ffffff;
+      --hsp-border: #dfe7e3;
+      --hsp-text: #1f2d28;
+      --hsp-muted: #687871;
+      --hsp-danger: #b42318;
+      --hsp-warning: #a15c00;
+      --hsp-info: #155eef;
+      --hsp-shadow: 0 12px 30px rgba(31, 45, 40, .08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--hsp-bg);
+      color: var(--hsp-text);
+      line-height: 1.9;
+    }
+
+    .topbar {
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--hsp-border);
+      z-index: 1030;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--hsp-primary), #2a9a72);
+      color: white;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(23,107,77,.24);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,.14), transparent 28%),
+        linear-gradient(135deg, #0e4c37 0%, #176b4d 55%, #278a68 100%);
+      color: white;
+      padding: 5.5rem 0 4.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      padding: .45rem .85rem;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      font-size: .9rem;
+    }
+
+    .hero h1 {
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.35;
+    }
+
+    .hero p { color: rgba(255,255,255,.86); }
+
+    .surface {
+      background: var(--hsp-surface);
+      border: 1px solid var(--hsp-border);
+      border-radius: 20px;
+      box-shadow: var(--hsp-shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 7px;
+      height: 32px;
+      border-radius: 99px;
+      background: linear-gradient(var(--hsp-primary), #4eb18e);
+    }
+
+    .toc a {
+      color: var(--hsp-text);
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .7rem .8rem;
+      border-radius: 10px;
+      transition: .18s ease;
+    }
+
+    .toc a:hover {
+      background: var(--hsp-primary-soft);
+      color: var(--hsp-primary-dark);
+      transform: translateX(-3px);
+    }
+
+    .status-pill {
+      border-radius: 999px;
+      font-size: .78rem;
+      padding: .3rem .65rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .done { color: #116149; background: #e8f7f1; }
+    .planned { color: #8a4f00; background: #fff5df; }
+    .future { color: #1a56a8; background: #eaf2ff; }
+    .blocked { color: #9f1c16; background: #ffeceb; }
+
+    .timeline {
+      position: relative;
+      padding-right: 1.3rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      right: .28rem;
+      top: .5rem;
+      bottom: .5rem;
+      width: 2px;
+      background: var(--hsp-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 1.45rem 1.55rem 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      right: -.02rem;
+      top: .42rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--hsp-primary);
+      border: 3px solid var(--hsp-primary-soft);
+      box-shadow: 0 0 0 2px var(--hsp-primary);
+    }
+
+    .migration-card {
+      border: 1px solid var(--hsp-border);
+      border-radius: 16px;
+      overflow: hidden;
+      height: 100%;
+      background: white;
+    }
+
+    .migration-card .head {
+      padding: 1rem 1.1rem;
+      background: linear-gradient(135deg, #f4faf7, #ffffff);
+      border-bottom: 1px solid var(--hsp-border);
+    }
+
+    .migration-card .body { padding: 1rem 1.1rem 1.2rem; }
+
+    .mini-code, code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      direction: ltr;
+      unicode-bidi: plaintext;
+    }
+
+    .code-block {
+      direction: ltr;
+      text-align: left;
+      background: #10241d;
+      color: #d9f4e8;
+      border-radius: 14px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: .9rem;
+      border: 1px solid #204638;
+    }
+
+    .callout {
+      border-right: 5px solid var(--hsp-primary);
+      background: var(--hsp-primary-soft);
+      padding: 1rem 1.1rem;
+      border-radius: 14px;
+    }
+
+    .callout.warning {
+      border-right-color: #e09a23;
+      background: #fff8e8;
+    }
+
+    .callout.danger {
+      border-right-color: var(--hsp-danger);
+      background: #fff0ef;
+    }
+
+    .table thead th {
+      background: #f1f6f3;
+      color: var(--hsp-primary-dark);
+      border-bottom-color: var(--hsp-border);
+      font-weight: 800;
+    }
+
+    .table td, .table th { vertical-align: middle; }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: inline-grid;
+      place-items: center;
+      background: var(--hsp-primary);
+      color: #fff;
+      font-weight: 800;
+      margin-left: .65rem;
+      flex: 0 0 auto;
+    }
+
+    .footer {
+      border-top: 1px solid var(--hsp-border);
+      color: var(--hsp-muted);
+    }
+
+    .sticky-side {
+      position: sticky;
+      top: 92px;
+    }
+
+    @media (max-width: 991.98px) {
+      .sticky-side { position: static; }
+      .hero { padding: 4.5rem 0 3.5rem; }
+    }
+
+    @media print {
+      .topbar, .no-print { display: none !important; }
+      body { background: white; }
+      .surface, .migration-card { box-shadow: none; break-inside: avoid; }
+      .hero { background: #176b4d !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    pre, code { max-width: 100%; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; align-items: center; gap: .45rem; min-height: 42px; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-family: "Cairo", sans-serif; font-weight: 700; text-decoration: none !important; }
+    .site-home-nav__link:hover, .site-home-nav__link:focus { background: #0f5138; color: #fff !important; }
+    @media (max-width: 767.98px) {
+      body { max-width: 100vw; overflow-x: hidden; }
+      table { display: block; width: 100% !important; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { overflow-wrap: normal; }
+      .container, .container-fluid, main, section, article { max-width: 100%; }
+      button, .btn, a { max-width: 100%; }
+    }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+
+<body>
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي">
+    <div class="site-home-nav__inner">
+      <a class="site-home-nav__link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">⌂ الرئيسية</a>
+    </div>
+  </nav>
+  <nav class="navbar topbar sticky-top">
+    <div class="container py-2">
+      <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="#top">
+        <span class="brand-mark">HSP</span>
+        <span>
+          <strong class="d-block">حضوري سمارت برو</strong>
+          <small class="text-secondary">توثيق مرحلة قاعدة البيانات</small>
+        </span>
+      </a>
+      <button class="btn btn-outline-success btn-sm no-print" onclick="window.print()">طباعة / حفظ PDF</button>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="container">
+      <span class="hero-badge mb-3">المرحلة الأولى — قاعدة بيانات Supabase</span>
+      <h1 class="display-5 mb-3">سجل تنفيذي شامل لما تم إنجازه على موقع Supabase</h1>
+      <p class="lead mb-4">
+        يوثق هذا الملف خطوات إنشاء بيئة التطوير، وتنفيذ المهاجرات من 001 إلى 006،
+        والجداول والأنواع والسياسات الأمنية والقرارات المعمارية المرتبطة بمنصة الترخيص والاشتراكات.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge text-bg-light text-success px-3 py-2">البيئة: Development</span>
+        <span class="badge text-bg-light text-success px-3 py-2">المهاجرات المنفذة: 6</span>
+        <span class="badge text-bg-light text-success px-3 py-2">الجداول الحالية: 11</span>
+        <span class="badge text-bg-warning px-3 py-2">RLS النهائي: غير منفذ بعد</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container pb-5">
+    <div class="row g-4">
+      <aside class="col-lg-4">
+        <div class="surface p-3 sticky-side">
+          <h2 class="h5 fw-bold mb-3">فهرس الصفحة</h2>
+          <nav class="toc">
+            <a href="#scope"><span>1. النطاق والهدف</span><small>01</small></a>
+            <a href="#architecture"><span>2. المعمارية المعتمدة</span><small>02</small></a>
+            <a href="#projects"><span>3. مشاريع Supabase</span><small>03</small></a>
+            <a href="#execution"><span>4. خطوات التنفيذ</span><small>04</small></a>
+            <a href="#migrations"><span>5. المهاجرات 001–006</span><small>05</small></a>
+            <a href="#schema"><span>6. المخطط الحالي</span><small>06</small></a>
+            <a href="#security"><span>7. الأمان وRLS</span><small>07</small></a>
+            <a href="#decisions"><span>8. القرارات المعتمدة</span><small>08</small></a>
+            <a href="#validation"><span>9. نتائج التحقق</span><small>09</small></a>
+            <a href="#pending"><span>10. الأعمال المتبقية</span><small>10</small></a>
+            <a href="#next"><span>11. الخطوة التالية</span><small>11</small></a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="col-lg-8">
+        <section id="scope" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">النطاق والهدف</h2>
+          <p>
+            هذه المرحلة لا تبني نظام حضور جديدًا، ولا تنقل بيانات حضوري التشغيلية إلى السحابة.
+            هدفها إنشاء منصة خلفية آمنة لإدارة حسابات مستخدمي تطبيق حضوري سمارت برو،
+            والخطط، والاشتراكات، والأجهزة، وفحوص الترخيص، والإصدارات، والإعدادات، والصيانة، والتدقيق.
+          </p>
+          <div class="callout mt-4">
+            <strong>المبدأ الحاكم:</strong>
+            <span class="mini-code">Local First + Cloud License</span>
+            — البيانات التشغيلية تبقى على الجهاز، بينما تدير Supabase الهوية والترخيص والاشتراكات فقط.
+          </div>
+        </section>
+
+        <section id="architecture" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">المعمارية المعتمدة</h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="migration-card">
+                <div class="head fw-bold">Flutter App</div>
+                <div class="body">
+                  واجهة المستخدم، قواعد البيانات المحلية، الاستيراد، التقارير، وإدارة البيانات التشغيلية.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="migration-card">
+                <div class="head fw-bold">Supabase</div>
+                <div class="body">
+                  حسابات HSP، الخطط، الاشتراكات، الأجهزة، التراخيص، الإصدارات، الإعدادات، والتدقيق.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="migration-card">
+                <div class="head fw-bold">Admin Portal</div>
+                <div class="body">
+                  لوحة إدارة ويب مستقبلية لإدارة المستخدمين والاشتراكات والأجهزة والخطط والإصدارات.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="migration-card">
+                <div class="head fw-bold">GitHub Pages</div>
+                <div class="body">
+                  الموقع التعريفي، سياسة الخصوصية، المساعدة، والوثائق العامة فقط.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout danger mt-4">
+            <strong>ممنوع رفعه إلى Supabase:</strong>
+            كلمات مرور حضوري، Cookies، Access/Refresh Tokens، Authorization Headers،
+            جلسات نفاذ، بيانات الموظفين، وحركات الحضور والانصراف.
+          </div>
+        </section>
+
+        <section id="projects" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">مشاريع Supabase والبيئة</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead>
+                <tr>
+                  <th>المشروع</th>
+                  <th>الغرض</th>
+                  <th>الحالة الحالية</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>hudoori-smart-pro-dev</code></td>
+                  <td>التطوير، تنفيذ المهاجرات، الاختبار والتحقق</td>
+                  <td><span class="status-pill done">✅ مستخدم حاليًا</span></td>
+                </tr>
+                <tr>
+                  <td><code>hudoori-smart-pro-production</code></td>
+                  <td>الإنتاج بعد اكتمال الاختبارات وخطة النشر</td>
+                  <td><span class="status-pill planned">🟡 لم يُنقل إليه المخطط</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mb-0 text-secondary">
+            المنطقة المختارة: Frankfurt (Central EU). جميع التغييرات الحالية نُفذت في مشروع التطوير فقط.
+          </p>
+        </section>
+
+        <section id="execution" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">الخطوات التي نُفذت على موقع Supabase</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <h3 class="h5 fw-bold">إنشاء مشروع التطوير</h3>
+              <p class="mb-0">إنشاء مشروع <code>hudoori-smart-pro-dev</code> واستخدامه بوصفه البيئة الوحيدة للتطوير والاختبار.</p>
+            </div>
+            <div class="timeline-item">
+              <h3 class="h5 fw-bold">فتح SQL Editor</h3>
+              <p class="mb-0">تشغيل كل Migration بصورة مستقلة ومرتبة، وعدم دمج مراحل متعددة في تنفيذ واحد.</p>
+            </div>
+            <div class="timeline-item">
+              <h3 class="h5 fw-bold">تنفيذ المهاجرات من 001 إلى 006</h3>
+              <p class="mb-0">تم تنفيذ كل ملف بالترتيب، وكانت نتيجة كل عملية: <code>Success. No rows returned</code>.</p>
+            </div>
+            <div class="timeline-item">
+              <h3 class="h5 fw-bold">مراجعة الجداول والأنواع</h3>
+              <p class="mb-0">التحقق من إنشاء 11 جدولًا، والأنواع المشتركة، والقيود والفهارس والمشغلات المرتبطة بها.</p>
+            </div>
+            <div class="timeline-item">
+              <h3 class="h5 fw-bold">تفعيل الحماية الأولية</h3>
+              <p class="mb-0">تفعيل RLS على الجداول وسحب صلاحيات العميل مؤقتًا إلى حين كتابة سياسات RLS النهائية.</p>
+            </div>
+            <div class="timeline-item">
+              <h3 class="h5 fw-bold">إيقاف التنفيذ لمراجعة منطق الأعمال</h3>
+              <p class="mb-0">تأجيل Migration 007 وما بعدها حتى اعتماد سياسات التجربة، الأجهزة، الاشتراك، الاحتفاظ، والإدارة.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="migrations" class="mb-4">
+          <div class="surface p-4 p-md-5">
+            <h2 class="section-title h3">المهاجرات المنفذة</h2>
+            <div class="row g-3">
+
+              <div class="col-md-6">
+                <article class="migration-card">
+                  <div class="head d-flex justify-content-between align-items-center">
+                    <strong>Migration 001</strong>
+                    <span class="status-pill done">✅ منفذة</span>
+                  </div>
+                  <div class="body">
+                    <h3 class="h6 fw-bold">Extensions & Shared Types</h3>
+                    <ul class="mb-0">
+                      <li>تفعيل <code>pgcrypto</code>.</li>
+                      <li>إنشاء أنواع Enum المشتركة.</li>
+                      <li>إنشاء الدالة <code>public.set_updated_at()</code>.</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6">
+                <article class="migration-card">
+                  <div class="head d-flex justify-content-between align-items-center">
+                    <strong>Migration 002</strong>
+                    <span class="status-pill done">✅ منفذة</span>
+                  </div>
+                  <div class="body">
+                    <h3 class="h6 fw-bold">Profiles & Roles</h3>
+                    <ul class="mb-0">
+                      <li>جدول <code>profiles</code>.</li>
+                      <li>جدول <code>user_roles</code>.</li>
+                      <li>فهارس ومشغلات <code>updated_at</code>.</li>
+                      <li>تفعيل RLS وسحب صلاحيات العميل.</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6">
+                <article class="migration-card">
+                  <div class="head d-flex justify-content-between align-items-center">
+                    <strong>Migration 003</strong>
+                    <span class="status-pill done">✅ منفذة</span>
+                  </div>
+                  <div class="body">
+                    <h3 class="h6 fw-bold">Plans & Subscriptions</h3>
+                    <ul class="mb-0">
+                      <li>جدول <code>plans</code>.</li>
+                      <li>جدول <code>subscriptions</code>.</li>
+                      <li>قيود وفهارس الاشتراكات النشطة.</li>
+                      <li>مشغلات التحديث وRLS.</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6">
+                <article class="migration-card">
+                  <div class="head d-flex justify-content-between align-items-center">
+                    <strong>Migration 004</strong>
+                    <span class="status-pill done">✅ منفذة</span>
+                  </div>
+                  <div class="body">
+                    <h3 class="h6 fw-bold">Devices & License Checks</h3>
+                    <ul class="mb-0">
+                      <li>جدول <code>devices</code>.</li>
+                      <li>جدول <code>license_checks</code>.</li>
+                      <li>حالة الجهاز، الإصدار، والمنصة.</li>
+                      <li>نتائج وأسباب فحوص الترخيص.</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6">
+                <article class="migration-card">
+                  <div class="head d-flex justify-content-between align-items-center">
+                    <strong>Migration 005</strong>
+                    <span class="status-pill done">✅ منفذة</span>
+                  </div>
+                  <div class="body">
+                    <h3 class="h6 fw-bold">Releases & Settings</h3>
+                    <ul class="mb-0">
+                      <li>جدول <code>app_releases</code>.</li>
+                      <li>جدول <code>system_settings</code>.</li>
+                      <li>جدول <code>maintenance_windows</code>.</li>
+                      <li>الحد الأدنى للبناء والتحديث الإجباري والصيانة.</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6">
+                <article class="migration-card">
+                  <div class="head d-flex justify-content-between align-items-center">
+                    <strong>Migration 006</strong>
+                    <span class="status-pill done">✅ منفذة</span>
+                  </div>
+                  <div class="body">
+                    <h3 class="h6 fw-bold">Events & Audit</h3>
+                    <ul class="mb-0">
+                      <li>جدول <code>subscription_events</code>.</li>
+                      <li>جدول <code>audit_logs</code>.</li>
+                      <li>سجل تاريخي لحالات الاشتراك.</li>
+                      <li>تدقيق العمليات الإدارية والحساسة.</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section id="schema" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">المخطط الحالي في قاعدة بيانات التطوير</h2>
+
+          <h3 class="h5 fw-bold mt-4">الجداول الحالية — 11 جدولًا</h3>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>الجدول</th>
+                  <th>الوظيفة الأساسية</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td><code>profiles</code></td><td>الملف الأساسي لمستخدم HSP.</td></tr>
+                <tr><td>2</td><td><code>user_roles</code></td><td>أدوار customer/support/admin/owner.</td></tr>
+                <tr><td>3</td><td><code>plans</code></td><td>تعريف الخطط، المدة، السعر، وحد الأجهزة.</td></tr>
+                <tr><td>4</td><td><code>subscriptions</code></td><td>اشتراكات المستخدمين وحالاتها ومصادرها.</td></tr>
+                <tr><td>5</td><td><code>devices</code></td><td>الأجهزة المسجلة وحالاتها.</td></tr>
+                <tr><td>6</td><td><code>license_checks</code></td><td>نتائج فحوص الترخيص والأسباب.</td></tr>
+                <tr><td>7</td><td><code>app_releases</code></td><td>إصدارات التطبيق ومتطلبات التحديث.</td></tr>
+                <tr><td>8</td><td><code>system_settings</code></td><td>إعدادات النظام العامة.</td></tr>
+                <tr><td>9</td><td><code>maintenance_windows</code></td><td>نوافذ الصيانة ورسائلها.</td></tr>
+                <tr><td>10</td><td><code>subscription_events</code></td><td>السجل الزمني لتغيرات الاشتراك.</td></tr>
+                <tr><td>11</td><td><code>audit_logs</code></td><td>تدقيق العمليات الإدارية والحساسة.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="h5 fw-bold mt-4">أنواع Enum الحالية</h3>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>account_status</strong><br>
+                <code>active</code> · <code>suspended</code> · <code>closed</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>user_role</strong><br>
+                <code>customer</code> · <code>support</code> · <code>admin</code> · <code>owner</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>billing_period</strong><br>
+                <code>trial</code> · <code>monthly</code> · <code>annual</code> · <code>lifetime</code> · <code>custom</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>subscription_status</strong><br>
+                <code>trial</code> · <code>active</code> · <code>grace</code> · <code>expired</code> · <code>suspended</code> · <code>cancelled</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>subscription_source</strong><br>
+                <code>launch_offer</code> · <code>manual</code> · <code>google_play</code> · <code>website</code> · <code>promo</code> · <code>migration</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>device_status</strong><br>
+                <code>active</code> · <code>revoked</code> · <code>blocked</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>license_check_result</strong><br>
+                <code>allowed</code> · <code>denied</code> · <code>grace</code> · <code>error</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>release_channel</strong><br>
+                <code>internal</code> · <code>closed</code> · <code>production</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="callout">
+                <strong>app_release_status</strong><br>
+                <code>active</code> · <code>deprecated</code> · <code>blocked</code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="security" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">الأمان وRLS</h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="migration-card">
+                <div class="head fw-bold">ما تم تنفيذه</div>
+                <div class="body">
+                  <ul class="mb-0">
+                    <li>تفعيل RLS على الجداول الحالية.</li>
+                    <li>سحب صلاحيات <code>anon</code> و<code>authenticated</code> مؤقتًا.</li>
+                    <li>عدم وضع <code>service_role</code> في Flutter أو المتصفح.</li>
+                    <li>فصل حساب HSP عن جلسة حضوري الرسمية.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="migration-card">
+                <div class="head fw-bold">ما لم يُنفذ بعد</div>
+                <div class="body">
+                  <ul class="mb-0">
+                    <li>سياسات RLS النهائية لكل دور وجدول.</li>
+                    <li>Grants النهائية المتوافقة مع RLS.</li>
+                    <li>وظائف Edge Functions الفعلية.</li>
+                    <li>JWT validation وRate limiting العمليان.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="callout warning mt-4">
+            تفعيل RLS وحده لا يكفي. الوصول سيظل مقيدًا حتى تنفيذ Migration 008 الخاصة بالـGrants والسياسات النهائية.
+          </div>
+        </section>
+
+        <section id="decisions" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">القرارات المعمارية والتجارية المعتمدة</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>المجال</th>
+                  <th>القرار</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>ملكية الاشتراك</td><td>اشتراك فردي لمستخدم واحد في الإصدار الأول، ودعم المدرسة مستقبلًا.</td></tr>
+                <tr><td>مصادقة HSP</td><td>بريد إلكتروني وكلمة مرور مع تأكيد البريد.</td></tr>
+                <tr><td>مصادقة حضوري</td><td>منفصلة بالكامل داخل WebView الرسمي ولا تشارك جلسة مع HSP.</td></tr>
+                <tr><td>التجربة</td><td>14 يومًا، مرة واحدة لكل حساب ومرة واحدة لكل جهاز.</td></tr>
+                <tr><td>معرف الجهاز</td><td><code>installation_id</code> عشوائي، وليس IMEI أو MAC أو Android ID.</td></tr>
+                <tr><td>حد الأجهزة</td><td>مستمد من الخطة، مع استبدال جهاز يختاره المستخدم.</td></tr>
+                <tr><td>بعد انتهاء الاشتراك</td><td>تبقى القراءة والتعديل المحليان متاحين، ويُمنع الاستيراد.</td></tr>
+                <tr><td>التسجيل</td><td>يمكن فتحه أو إغلاقه عن بعد عبر <code>registration_enabled</code>.</td></tr>
+                <tr><td>الدفع</td><td>Google Play والموقع الإلكتروني مستقبلًا، وليس ضمن التنفيذ الحالي.</td></tr>
+                <tr><td>لوحة الإدارة</td><td>مطلوبة، والعمليات الحساسة تمر عبر Backend موثوق.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="validation" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">نتائج التنفيذ والتحقق</h2>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="migration-card text-center p-4">
+                <div class="display-6 fw-bold text-success">6/6</div>
+                <div class="text-secondary">مهاجرات منفذة</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="migration-card text-center p-4">
+                <div class="display-6 fw-bold text-success">11</div>
+                <div class="text-secondary">جدولًا حاليًا</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="migration-card text-center p-4">
+                <div class="display-6 fw-bold text-success">100%</div>
+                <div class="text-secondary">على dev فقط</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-block mt-4">Success. No rows returned</div>
+
+          <p class="mt-3 mb-0">
+            ظهرت النتيجة السابقة بعد تنفيذ كل Migration، ما يعني نجاح الأوامر التي لا تعيد صفوفًا.
+            هذا لا يُغني عن اختبارات Migration 010 والتحقق الوظيفي الشامل لاحقًا.
+          </p>
+        </section>
+
+        <section id="pending" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">الأعمال التي لم تُنفذ بعد</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>البند</th>
+                  <th>الحالة</th>
+                  <th>الملاحظة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Migration 007</td><td><span class="status-pill planned">🟡 مخططة</span></td><td>Helper Functions, Triggers, Schema Reconciliation.</td></tr>
+                <tr><td>Migration 008</td><td><span class="status-pill planned">🟡 مخططة</span></td><td>Grants وسياسات RLS النهائية.</td></tr>
+                <tr><td>Migration 009</td><td><span class="status-pill planned">🟡 مخططة</span></td><td>Seed Data.</td></tr>
+                <tr><td>Migration 010</td><td><span class="status-pill planned">🟡 مخططة</span></td><td>Verification Tests.</td></tr>
+                <tr><td>Edge Functions</td><td><span class="status-pill planned">🟡 مصممة فقط</span></td><td>لم تُنشأ أو تُنشر وظائف فعلية.</td></tr>
+                <tr><td>Flutter Integration</td><td><span class="status-pill planned">🟡 غير منفذة</span></td><td>لم يُربط التطبيق بحساب HSP والترخيص السحابي.</td></tr>
+                <tr><td>Admin Portal</td><td><span class="status-pill planned">🟡 غير منفذة</span></td><td>التصميم والتوثيق فقط.</td></tr>
+                <tr><td>Production</td><td><span class="status-pill blocked">⛔ لم يُنقل المخطط</span></td><td>لا توجد ادعاءات بأن الإنتاج جاهز.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="next" class="surface p-4 p-md-5 mb-4">
+          <h2 class="section-title h3">الخطوة التالية الموصى بها</h2>
+          <div class="d-flex align-items-start mb-3">
+            <span class="step-number">1</span>
+            <div>
+              <h3 class="h5 fw-bold mb-1">إغلاق مراجعة المخطط</h3>
+              <p class="mb-0">تثبيت القرارات الخاصة بالتجربة، التفرد، الاحتفاظ، الحذف، lifetime، وكاش الترخيص.</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-start mb-3">
+            <span class="step-number">2</span>
+            <div>
+              <h3 class="h5 fw-bold mb-1">Schema Reconciliation</h3>
+              <p class="mb-0">تحديد ما إذا كان جدول <code>trial_consumptions</code> سيُنشأ في Migration مستقلة أو ضمن Migration 007.</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-start">
+            <span class="step-number">3</span>
+            <div>
+              <h3 class="h5 fw-bold mb-1">بدء Migration 007</h3>
+              <p class="mb-0">كتابة الدوال والمشغلات والقيود بعد اعتماد الوثائق، ثم تنفيذها على dev فقط.</p>
+            </div>
+          </div>
+
+          <div class="callout mt-4">
+            <strong>الحالة العامة:</strong>
+            المرحلة الأولى لقاعدة البيانات مكتملة من ناحية إنشاء الأساس والمهاجرات 001–006،
+            لكنها ليست خلفية إنتاج مكتملة حتى الآن.
+          </div>
+        </section>
+
+        <section class="surface p-4 p-md-5">
+          <h2 class="section-title h3">ملاحظات التوثيق</h2>
+          <ul class="mb-0">
+            <li>هذا الملف يلخص ما ورد في المحادثة والتقارير التنفيذية حتى نهاية Migration 006.</li>
+            <li>لا يحتوي على مفاتيح Supabase أو أسرار أو بيانات اعتماد.</li>
+            <li>لا يدّعي تنفيذ RLS النهائي أو Edge Functions أو ربط Flutter أو نشر Production.</li>
+            <li>عند توفر ملفات SQL الأصلية، يمكن إضافة ملحق مستقل يتضمن الأوامر الكاملة لكل Migration.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>حضوري سمارت برو — توثيق المرحلة الأولى لقاعدة بيانات Supabase</span>
+      <span>إصدار الوثيقة 1.0</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

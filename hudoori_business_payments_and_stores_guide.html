@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل حضوري سمارت برو: التأسيس والمدفوعات والمتاجر</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E7D5B;
+            --secondary-color: #12304A;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+        }
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .sidebar h5 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .sidebar a {
+            display: block;
+            color: #666;
+            text-decoration: none;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar a:hover {
+            background-color: #f0f0f0;
+            color: var(--primary-color);
+            padding-right: 20px;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .badge-official {
+            background-color: var(--success-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+        
+        .badge-pending {
+            background-color: var(--warning-color);
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+        
+        .badge-variable {
+            background-color: var(--info-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+        
+        .badge-warning {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+        
+        .alert-box {
+            border-right: 4px solid var(--primary-color);
+            background-color: #f0f8f5;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .alert-box.warning {
+            border-right-color: var(--danger-color);
+            background-color: #fff5f5;
+        }
+        
+        .alert-box.info {
+            border-right-color: var(--info-color);
+            background-color: #f0f8ff;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .step-list li {
+            padding: 12px 0;
+            padding-right: 30px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .step-list li:before {
+            content: attr(data-step);
+            position: absolute;
+            right: 0;
+            top: 8px;
+            background: var(--primary-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .reference-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .reference-link:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .btn-print {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 5px;
+        }
+        
+        .btn-print:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+        
+        .btn-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .comparison-table {
+            font-size: 0.95rem;
+        }
+        
+        .comparison-table td {
+            vertical-align: middle;
+        }
+        
+        .checklist {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .checklist-item {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checklist-item input {
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .header-info {
+            background: #f0f8f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-right: 4px solid var(--primary-color);
+        }
+        
+        .header-info p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: static;
+                max-height: none;
+                margin-bottom: 20px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            .btn-top {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+        
+        @media print {
+            .navbar, .sidebar, .btn-print, .btn-top {
+                display: none !important;
+            }
+            
+            body {
+                background: white;
+            }
+            
+            .main-content {
+                box-shadow: none;
+                padding: 0;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            
+            table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    pre, code { max-width: 100%; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; align-items: center; gap: .45rem; min-height: 42px; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-family: "Cairo", sans-serif; font-weight: 700; text-decoration: none !important; }
+    .site-home-nav__link:hover, .site-home-nav__link:focus { background: #0f5138; color: #fff !important; }
+    @media (max-width: 767.98px) {
+      body { max-width: 100vw; overflow-x: hidden; }
+      table { display: block; width: 100% !important; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { overflow-wrap: normal; }
+      .container, .container-fluid, main, section, article { max-width: 100%; }
+      button, .btn, a { max-width: 100%; }
+    }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+<body>
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي">
+    <div class="site-home-nav__inner">
+      <a class="site-home-nav__link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">⌂ الرئيسية</a>
+    </div>
+  </nav>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand">📱 حضوري سمارت برو</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="ms-auto">
+                    <button class="btn-print" onclick="window.print()">🖨️ طباعة</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="sidebar">
+                    <h5>📑 المحتويات</h5>
+                    <a href="#executive-summary">الملخص التنفيذي</a>
+                    <a href="#freelance-doc">وثيقة العمل الحر</a>
+                    <a href="#bank-account">الحساب البنكي</a>
+                    <a href="#payment-gateways">بوابات الدفع</a>
+                    <a href="#saudi-regulations">الأنظمة السعودية</a>
+                    <a href="#google-play">Google Play</a>
+                    <a href="#apple-developer">Apple Developer</a>
+                    <a href="#chrome-store">Chrome Web Store</a>
+                    <a href="#webhook-architecture">التفعيل الآلي</a>
+                    <a href="#comparison">مقارنة شاملة</a>
+                    <a href="#recommendations">التوصيات</a>
+                    <a href="#checklist">قائمة التنفيذ</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="main-content">
+                    <!-- Header Info -->
+                    <div class="header-info">
+                        <p><strong>📅 تاريخ إعداد البحث:</strong> 27 يوليو 2026</p>
+                        <p><strong>🌍 النطاق الجغرافي:</strong> المملكة العربية السعودية</p>
+                        <p><strong>⚠️ تنبيه قانوني:</strong> هذا الدليل معلوماتي فقط ولا يشكل استشارة قانونية أو ضريبية ملزمة. يرجى التحقق من المتطلبات الحالية مع الجهات الرسمية.</p>
+                    </div>
+
+                    <!-- Executive Summary -->
+                    <h1 id="executive-summary">📊 الملخص التنفيذي</h1>
+                    <p>يهدف هذا الدليل إلى توضيح المسار الأمثل لتأسيس وتشغيل مشروع "حضوري سمارت برو" كنشاط رقمي فردي في السعودية. يغطي الدليل وثيقة العمل الحر، الحسابات البنكية، بوابات الدفع، والمتطلبات النظامية.</p>
+                    
+                    <div class="alert-box">
+                        <strong>✅ التوصية الأساسية:</strong> البدء بوثيقة العمل الحر + حساب بنكي للأعمال الحرة + بوابة دفع (Moyasar)، مع إمكانية الانتقال للمؤسسة الفردية لاحقاً عند الحاجة.
+                    </div>
+
+                    <!-- Freelance Document Section -->
+                    <h2 id="freelance-doc">🎓 وثيقة العمل الحر</h2>
+                    
+                    <h3>التعريف والكيان القانوني</h3>
+                    <p>وثيقة العمل الحر هي وثيقة رسمية تصدرها وزارة الموارد البشرية والتنمية الاجتماعية للأفراد السعوديين لممارسة العمل الحر في مهن محددة. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    
+                    <p><strong>الفرق عن المؤسسة الفردية:</strong></p>
+                    <ul>
+                        <li>الوثيقة ترتبط بالهوية الوطنية والمهنة (لا تمنح شخصية قانونية مستقلة)</li>
+                        <li>المؤسسة تتطلب سجلاً تجارياً واسماً تجارياً مسجلاً</li>
+                        <li>الوثيقة مجانية والمؤسسة تتطلب رسوماً سنوية</li>
+                    </ul>
+
+                    <h3>المهن البرمجية المتاحة</h3>
+                    <p>المهن التالية متاحة لمشروع حضوري سمارت برو: <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    <ul>
+                        <li>مطور تطبيقات (الخيار الأفضل)</li>
+                        <li>مطور برمجيات</li>
+                        <li>مطور مواقع</li>
+                        <li>محلل وتصميم النظم</li>
+                    </ul>
+
+                    <h3>الشروط والمتطلبات</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>المتطلب</th>
+                                <th>التفاصيل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>الجنسية</td>
+                                <td>سعودي الجنسية</td>
+                            </tr>
+                            <tr>
+                                <td>العمر</td>
+                                <td>18 سنة فما فوق</td>
+                            </tr>
+                            <tr>
+                                <td>حساب أبشر</td>
+                                <td>حساب مفعل ومصرح</td>
+                            </tr>
+                            <tr>
+                                <td>المؤهل (اختياري)</td>
+                                <td>دبلوم فما فوق في تخصص ذي علاقة</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>الصلاحية والتجديد</h3>
+                    <p>صلاحية الوثيقة: <strong>سنة واحدة</strong> قابلة للتجديد آلياً أو يدوياً عبر منصة العمل الحر. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+
+                    <h3>القدرات والقيود</h3>
+                    <p><strong>المسموح:</strong></p>
+                    <ul>
+                        <li>فتح حساب بنكي تجاري</li>
+                        <li>التعاقد مع بوابات الدفع</li>
+                        <li>إصدار فواتير</li>
+                        <li>بيع الاشتراكات البرمجية</li>
+                        <li>إمكانية إصدار حتى 5 وثائق في مهن مختلفة</li>
+                    </ul>
+                    <p><strong>غير المسموح:</strong></p>
+                    <ul>
+                        <li>توظيف عمالة</li>
+                        <li>فتح مكاتب أو محلات فعلية</li>
+                        <li>بعض العقود الحكومية الكبيرة (قد تتطلب سجل تجاري)</li>
+                    </ul>
+
+                    <!-- Bank Account Section -->
+                    <h2 id="bank-account">🏦 الحساب البنكي للعمل الحر</h2>
+                    
+                    <h3>نوع الحساب والمتطلبات</h3>
+                    <p>يجب فتح حساب "أعمال" أو "منشآت" مخصص للأفراد (وليس حساباً جارياً شخصياً عادياً). <span class="badge-official">متطلب رسمي مؤكد</span></p>
+
+                    <h3>البنوك الموصى بها</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>البنك</th>
+                                <th>المميزات</th>
+                                <th>الفتح</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>هلا (Hala)</strong></td>
+                                <td>متكاملة مع حلول دفع، تسوية فورية، رسوم منخفضة</td>
+                                <td>رقمي (دقائق)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>بنك البلاد</strong></td>
+                                <td>فتح رقمي كامل عبر نفاذ</td>
+                                <td>رقمي (دقائق)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>بنك الراجحي</strong></td>
+                                <td>حسابات متخصصة للأعمال الحرة</td>
+                                <td>رقمي/فرع</td>
+                            </tr>
+                            <tr>
+                                <td><strong>بنك الجزيرة</strong></td>
+                                <td>حساب "الجزيرة أعمال"</td>
+                                <td>رقمي/فرع</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>المستندات المطلوبة</h3>
+                    <ul>
+                        <li>الهوية الوطنية (سارية الصلاحية)</li>
+                        <li>وثيقة العمل الحر (سارية)</li>
+                        <li>العنوان الوطني</li>
+                        <li>بطاقة دفع دولية (في بعض الحالات)</li>
+                    </ul>
+
+                    <!-- Payment Gateways Section -->
+                    <h2 id="payment-gateways">💳 بوابات الدفع الإلكترونية</h2>
+                    
+                    <h3>مقارنة بوابات الدفع الرئيسية</h3>
+                    <div class="table-responsive">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>البوابة</th>
+                                    <th>قبول وثيقة العمل الحر</th>
+                                    <th>رسوم التأسيس</th>
+                                    <th>رسوم العمليات</th>
+                                    <th>Apple Pay / مدى</th>
+                                    <th>Webhooks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Moyasar</strong></td>
+                                    <td>✅ نعم (رسمياً)</td>
+                                    <td>مجاناً</td>
+                                    <td>2.5% + 1 ريال</td>
+                                    <td>✅ نعم</td>
+                                    <td>✅ متقدمة</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PayTabs</strong></td>
+                                    <td>✅ نعم (عبر Paymes)</td>
+                                    <td>قد تطلب رسوم</td>
+                                    <td>2.7% + 1 ريال</td>
+                                    <td>✅ نعم</td>
+                                    <td>✅ متوفرة</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tap Payments</strong></td>
+                                    <td>✅ نعم</td>
+                                    <td>مجاناً</td>
+                                    <td>2.0% - 2.75%</td>
+                                    <td>✅ نعم</td>
+                                    <td>✅ متوفرة</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Hala</strong></td>
+                                    <td>✅ نعم (متكاملة)</td>
+                                    <td>مجاناً</td>
+                                    <td>رسوم تنافسية</td>
+                                    <td>✅ نعم</td>
+                                    <td>✅ متوفرة</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Geidea</strong></td>
+                                    <td>✅ نعم</td>
+                                    <td>تختلف</td>
+                                    <td>حسب الاتفاق</td>
+                                    <td>✅ نعم</td>
+                                    <td>✅ متوفرة</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HyperPay</strong></td>
+                                    <td>⚠️ غالباً تشترط سجل</td>
+                                    <td>تتطلب عرض سعر</td>
+                                    <td>-</td>
+                                    <td>✅ نعم</td>
+                                    <td>✅ متوفرة</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert-box">
+                        <strong>💡 ملاحظة مهمة:</strong> معظم البوابات تتطلب حساباً بنكياً تجارياً (مرتبط بالوثيقة) لإتمام التسوية. تأكد من فتح الحساب البنكي أولاً.
+                    </div>
+
+                    <!-- Saudi Regulations Section -->
+                    <h2 id="saudi-regulations">⚖️ الأنظمة السعودية المرتبطة بالنشاط</h2>
+                    
+                    <h3>نظام التجارة الإلكترونية</h3>
+                    <p>ينطبق على أي موقع يبيع منتجات أو خدمات رقمية. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    <ul>
+                        <li>يجب توفير بيانات موفر الخدمة (الاسم، العنوان، وسائل التواصل) بشكل واضح</li>
+                        <li>توضيح سياسة الاستبدال والاسترجاع (البرمجيات الرقمية غالباً لا تُسترجع)</li>
+                        <li>توثيق المتجر في "المركز السعودي للأعمال"</li>
+                    </ul>
+
+                    <h3>نظام حماية البيانات الشخصية (PDPL)</h3>
+                    <p>دخل حيز التنفيذ الكامل في سبتمبر 2024. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    <ul>
+                        <li>يجب توفير سياسة خصوصية واضحة تشرح: ماذا تجمع؟ لماذا؟ وكيف تحمي البيانات؟</li>
+                        <li>الحصول على موافقة المستخدم الصريحة لجمع البيانات غير الضرورية</li>
+                        <li>حفظ سجلات الدفع وبيانات المستخدمين بأمان</li>
+                        <li>إمكانية حذف البيانات عند طلب المستخدم</li>
+                    </ul>
+
+                    <h3>الضريبة والزكاة</h3>
+                    <p><strong>ضريبة القيمة المضافة (VAT):</strong> <span class="badge-variable">متغير</span></p>
+                    <ul>
+                        <li>التسجيل إلزامي إذا تجاوزت المبيعات 375,000 ريال سنوياً</li>
+                        <li>التسجيل اختياري عند 187,500 ريال</li>
+                        <li>عند التسجيل، يجب إصدار فواتير ضريبية وتقديم إقرارات دورية</li>
+                    </ul>
+                    <p><strong>الزكاة:</strong> <span class="badge-pending">يحتاج تحققاً</span></p>
+                    <ul>
+                        <li>حامل وثيقة العمل الحر قد لا يخضع للزكاة كمنشأة تجارية في "زاتكا"</li>
+                        <li>لكن قد تُحتسب ضمن وعائه الزكوي الشخصي</li>
+                        <li><strong>يُنصح بالتحقق من هيئة الزكاة والضريبة والجمارك</strong></li>
+                    </ul>
+
+                    <!-- Google Play Section -->
+                    <h2 id="google-play">🎮 Google Play Console</h2>
+                    
+                    <h3>الحساب والرسوم</h3>
+                    <p>متاح للسعوديين. الرسوم: 25 دولار (مرة واحدة فقط). <span class="badge-official">متطلب رسمي مؤكد</span></p>
+
+                    <h3>المتطلبات الأساسية</h3>
+                    <ul>
+                        <li>هوية وطنية سارية</li>
+                        <li>رقم هاتف محقق</li>
+                        <li>بريد إلكتروني</li>
+                        <li>بطاقة دفع دولية (Visa/Mastercard)</li>
+                    </ul>
+
+                    <h3>الاختبار والنشر</h3>
+                    <p>الحسابات الشخصية الجديدة تتطلب: <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    <ul>
+                        <li>اختبار مغلق (20 مختبراً على الأقل)</li>
+                        <li>مدة الاختبار: 14 يوماً متواصلة على الأقل</li>
+                        <li>بعدها يمكن النشر للعموم</li>
+                    </ul>
+
+                    <h3>الاشتراكات والمدفوعات</h3>
+                    <p>يجب استخدام Google Play Billing للمنتجات الرقمية داخل التطبيق. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    <ul>
+                        <li>عمولة: 15% لأول مليون دولار سنوياً (ضمن برنامج الشركات الصغيرة)</li>
+                        <li>عمولة: 30% بعد ذلك (القاعدة العامة)</li>
+                    </ul>
+
+                    <!-- Apple Developer Section -->
+                    <h2 id="apple-developer">🍎 Apple Developer Program</h2>
+                    
+                    <h3>الحساب والرسوم</h3>
+                    <p>متاح للسعوديين. الرسوم: 99 دولار سنوياً. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+
+                    <h3>المتطلبات الأساسية</h3>
+                    <ul>
+                        <li>Apple ID مع مصادقة ثنائية</li>
+                        <li>هوية وطنية سارية</li>
+                        <li>بطاقة دفع</li>
+                        <li>العنوان الوطني</li>
+                    </ul>
+
+                    <h3>الاسم والعلامة التجارية</h3>
+                    <p>اسم صاحب الحساب يظهر كـ "Seller" في متجر التطبيقات. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+
+                    <h3>الاشتراكات والمدفوعات</h3>
+                    <p>يجب استخدام In-App Purchase. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    <ul>
+                        <li>عمولة: 15% ضمن برنامج الشركات الصغيرة</li>
+                        <li>عمولة: 30% كقاعدة عامة</li>
+                    </ul>
+
+                    <h3>D-U-N-S Number</h3>
+                    <p>غير مطلوب للحسابات الفردية، مطلوب فقط للمنظمات (المؤسسات/الشركات). <span class="badge-official">متطلب رسمي مؤكد</span></p>
+
+                    <!-- Chrome Web Store Section -->
+                    <h2 id="chrome-store">🌐 Chrome Web Store</h2>
+                    
+                    <h3>الحساب والرسوم</h3>
+                    <p>رسوم التسجيل: 5 دولار (مرة واحدة فقط). <span class="badge-official">متطلب رسمي مؤكد</span></p>
+
+                    <h3>المتطلبات الأساسية</h3>
+                    <ul>
+                        <li>بريد إلكتروني</li>
+                        <li>بطاقة دفع</li>
+                        <li>حساب Google</li>
+                    </ul>
+
+                    <h3>السياسات التقنية</h3>
+                    <ul>
+                        <li>الالتزام بـ Manifest V3 (الإصدار الحديث)</li>
+                        <li>سياسة "الغرض الواحد": الإضافة يجب أن تقدم وظيفة واحدة واضحة</li>
+                        <li>أقل قدر من الصلاحيات: لا تطلب صلاحيات أكثر من اللازم</li>
+                    </ul>
+
+                    <h3>المدفوعات والاشتراكات</h3>
+                    <p>Chrome Web Store لا يوفر نظام دفع داخلي حالياً. <span class="badge-official">متطلب رسمي مؤكد</span></p>
+                    <ul>
+                        <li>يجب استخدام بوابة دفع خارجية (مثل Moyasar أو Stripe)</li>
+                        <li>التحقق من الترخيص عبر API خاص بالإضافة</li>
+                        <li>تخزين حالة الترخيص محلياً في متصفح المستخدم</li>
+                    </ul>
+
+                    <!-- Webhook Architecture Section -->
+                    <h2 id="webhook-architecture">🔄 التفعيل الآلي بعد الدفع</h2>
+                    
+                    <h3>المعمارية المقترحة</h3>
+                    <p>نظام آمن وموثوق لتفعيل الاشتراكات تلقائياً بعد الدفع:</p>
+                    
+                    <ol class="step-list">
+                        <li data-step="1"><strong>طلب الدفع:</strong> يتم عبر Supabase Edge Function التي تستدعي API بوابة الدفع (مثل Moyasar) لإنشاء عملية دفع.</li>
+                        <li data-step="2"><strong>التوجيه:</strong> يُعاد توجيه المستخدم لصفحة الدفع الآمنة الخاصة بالبوابة.</li>
+                        <li data-step="3"><strong>الـ Webhook:</strong> عند اكتمال الدفع، ترسل البوابة إشعاراً (Webhook) إلى عنوان URL محدد مسبقاً.</li>
+                        <li data-step="4"><strong>التحقق:</strong> التحقق من توقيع الـ Webhook (Signature Verification) للتأكد من أنه مرسل من البوابة فعلاً.</li>
+                        <li data-step="5"><strong>المعالجة:</strong> التحقق من حالة الدفع والمبلغ والعملة ومعرف الطلب.</li>
+                        <li data-step="6"><strong>الـ Idempotency:</strong> منع تكرار تفعيل الاشتراك لنفس العملية.</li>
+                        <li data-step="7"><strong>التفعيل:</strong> تحديث جدول الاشتراكات وتعديل صلاحيات المستخدم.</li>
+                    </ol>
+
+                    <h3>تصميم الجداول المقترح</h3>
+                    <p><strong>جدول المدفوعات (payments):</strong></p>
+                    <ul>
+                        <li>id: معرف فريد</li>
+                        <li>user_id: معرف المستخدم</li>
+                        <li>amount: المبلغ</li>
+                        <li>status: حالة الدفع (pending, paid, failed)</li>
+                        <li>gateway_id: معرف العملية من البوابة</li>
+                        <li>created_at: وقت الإنشاء</li>
+                    </ul>
+                    <p><strong>جدول الاشتراكات (subscriptions):</strong></p>
+                    <ul>
+                        <li>id: معرف فريد</li>
+                        <li>user_id: معرف المستخدم</li>
+                        <li>plan_type: نوع الخطة</li>
+                        <li>expires_at: تاريخ انتهاء الاشتراك</li>
+                        <li>status: حالة الاشتراك (active, expired)</li>
+                    </ul>
+
+                    <h3>أفضل الممارسات الأمنية</h3>
+                    <ul>
+                        <li>✅ تخزين مفاتيح الأمان في Supabase Secrets (ليس في الكود)</li>
+                        <li>✅ التحقق من التوقيع الرقمي للـ Webhook</li>
+                        <li>✅ استخدام HTTPS فقط</li>
+                        <li>✅ تسجيل جميع محاولات الدفع (Audit Log)</li>
+                        <li>✅ عدم الاعتماد على صفحة "تم الدفع" للتفعيل (استخدام الـ Webhook فقط)</li>
+                        <li>✅ معالجة حالات الفشل والاسترجاع والإلغاء</li>
+                    </ul>
+
+                    <!-- Comparison Section -->
+                    <h2 id="comparison">📊 مقارنة شاملة: وثيقة العمل الحر vs المؤسسة الفردية</h2>
+                    
+                    <div class="table-responsive">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>المعيار</th>
+                                    <th>فرد دون وثيقة</th>
+                                    <th>وثيقة العمل الحر</th>
+                                    <th>المؤسسة الفردية</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>الشخصية القانونية</strong></td>
+                                    <td>فرد عادي</td>
+                                    <td>فرد + وثيقة</td>
+                                    <td>كيان قانوني مستقل</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>الاسم التجاري</strong></td>
+                                    <td>اسم الفرد فقط</td>
+                                    <td>اسم الفرد</td>
+                                    <td>اسم تجاري رسمي</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>الحساب البنكي</strong></td>
+                                    <td>حساب شخصي فقط</td>
+                                    <td>حساب أعمال</td>
+                                    <td>حساب تجاري</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>بوابات الدفع</strong></td>
+                                    <td>محدود</td>
+                                    <td>معظم البوابات</td>
+                                    <td>جميع البوابات</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>إصدار الفواتير</strong></td>
+                                    <td>غير رسمي</td>
+                                    <td>فواتير رسمية</td>
+                                    <td>فواتير رسمية</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>الضرائب والزكاة</strong></td>
+                                    <td>شخصي</td>
+                                    <td>قد تكون شخصية</td>
+                                    <td>تجاري</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>التعاقدات</strong></td>
+                                    <td>محدود</td>
+                                    <td>معظم التعاقدات</td>
+                                    <td>جميع التعاقدات</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>نشر التطبيقات</strong></td>
+                                    <td>محدود</td>
+                                    <td>متاح</td>
+                                    <td>متاح (أفضل)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>التوسع والتوظيف</strong></td>
+                                    <td>غير ممكن</td>
+                                    <td>غير ممكن</td>
+                                    <td>ممكن</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>التكلفة الأولية</strong></td>
+                                    <td>0 ريال</td>
+                                    <td>0 ريال</td>
+                                    <td>500-1000 ريال</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>التكلفة السنوية</strong></td>
+                                    <td>0 ريال</td>
+                                    <td>0 ريال</td>
+                                    <td>200-500 ريال</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Recommendations Section -->
+                    <h2 id="recommendations">✅ التوصيات النهائية</h2>
+                    
+                    <h3>المسار الموصى به (للبدء الفوري)</h3>
+                    <p><strong>البدء بوثيقة العمل الحر:</strong></p>
+                    <ol>
+                        <li>إصدار وثيقة العمل الحر (مهنة: مطور تطبيقات) عبر منصة العمل الحر</li>
+                        <li>فتح حساب بنكي للأعمال الحرة (هلا أو بنك البلاد)</li>
+                        <li>التعاقد مع Moyasar لبوابة الدفع</li>
+                        <li>تفعيل المدفوعات على الموقع وإضافة Chrome</li>
+                        <li>فتح حساب Google Play شخصي (للتطبيق Android)</li>
+                        <li>تأجيل Apple Developer إلى مرحلة لاحقة (إذا لزم الأمر)</li>
+                    </ol>
+
+                    <div class="alert-box">
+                        <strong>⏱️ الزمن المتوقع:</strong> 1-2 أسبوع للتجهيز الكامل
+                    </div>
+
+                    <h3>متى الانتقال للمؤسسة الفردية؟</h3>
+                    <p>انتقل للمؤسسة الفردية عند:</p>
+                    <ul>
+                        <li>الرغبة في توظيف فريق عمل</li>
+                        <li>الحاجة لاسم تجاري رسمي في المتاجر</li>
+                        <li>التوسع الكبير وزيادة المبيعات</li>
+                        <li>متطلبات عقود حكومية كبيرة</li>
+                    </ul>
+
+                    <h3>المخاطر والتحديات</h3>
+                    <ul>
+                        <li>⚠️ <strong>انتهاء الوثيقة:</strong> تأكد من تجديدها قبل انتهاء الصلاحية</li>
+                        <li>⚠️ <strong>الحساب البنكي:</strong> قد يُغلق إذا لم تستخدمه لفترة طويلة</li>
+                        <li>⚠️ <strong>الضرائب:</strong> تابع حد التسجيل في VAT (375,000 ريال)</li>
+                        <li>⚠️ <strong>البيانات الشخصية:</strong> التزم بـ PDPL من البداية</li>
+                    </ul>
+
+                    <h3>الأسئلة التي يجب طرحها على الجهات الرسمية</h3>
+                    <ul>
+                        <li>🔍 هل وثيقة العمل الحر كافية لفتح حساب بنكي تجاري؟</li>
+                        <li>🔍 ما هي الالتزامات الضريبية الدقيقة لحامل الوثيقة؟</li>
+                        <li>🔍 هل هناك تراخيص إضافية مطلوبة لبيع البرمجيات الرقمية؟</li>
+                        <li>🔍 كيف يتم التعامل مع بيانات المستخدمين بموجب PDPL؟</li>
+                        <li>🔍 هل يمكن نقل الاشتراكات من وثيقة إلى مؤسسة فردية لاحقاً؟</li>
+                    </ul>
+
+                    <!-- Checklist Section -->
+                    <h2 id="checklist">📋 قائمة التنفيذ</h2>
+                    
+                    <h3>المرحلة الأولى: التأسيس (الأسبوع الأول)</h3>
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check1">
+                            <label for="check1">التحقق من توفر مهنة "مطور تطبيقات" في منصة العمل الحر</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check2">
+                            <label for="check2">إصدار وثيقة العمل الحر عبر منصة العمل الحر</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check3">
+                            <label for="check3">فتح حساب بنكي للأعمال الحرة (هلا أو بنك البلاد)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check4">
+                            <label for="check4">الحصول على رقم IBAN التجاري</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check5">
+                            <label for="check5">التحقق من سياسات Moyasar لقبول وثيقة العمل الحر</label>
+                        </div>
+                    </div>
+
+                    <h3>المرحلة الثانية: الدفع والاشتراكات (الأسبوع الثاني)</h3>
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check6">
+                            <label for="check6">التعاقد مع Moyasar وإنشاء حساب تاجر</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check7">
+                            <label for="check7">إعداد Webhook لاستقبال إشعارات الدفع</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check8">
+                            <label for="check8">بناء Supabase Edge Function للتفعيل الآلي</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check9">
+                            <label for="check9">اختبار العملية من البداية للنهاية (Sandbox)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check10">
+                            <label for="check10">تفعيل المدفوعات على الموقع والإضافة</label>
+                        </div>
+                    </div>
+
+                    <h3>المرحلة الثالثة: المتاجر (الأسبوع الثالث)</h3>
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check11">
+                            <label for="check11">فتح حساب Google Play Developer (25 دولار)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check12">
+                            <label for="check12">رفع التطبيق للاختبار المغلق (20 مختبراً)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check13">
+                            <label for="check13">انتظار 14 يوماً من الاختبار المغلق</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check14">
+                            <label for="check14">نشر التطبيق للعموم على Google Play</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check15">
+                            <label for="check15">تسجيل إضافة Chrome Web Store (5 دولار)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check16">
+                            <label for="check16">نشر الإضافة على Chrome Web Store</label>
+                        </div>
+                    </div>
+
+                    <h3>المرحلة الرابعة: الامتثال النظامي (مستمر)</h3>
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check17">
+                            <label for="check17">إنشاء سياسة خصوصية وفقاً لـ PDPL</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check18">
+                            <label for="check18">إنشاء سياسة الاستبدال والاسترجاع</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check19">
+                            <label for="check19">توثيق المتجر في المركز السعودي للأعمال</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check20">
+                            <label for="check20">مراقبة حد VAT (375,000 ريال) والتسجيل عند الحاجة</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check21">
+                            <label for="check21">تجديد وثيقة العمل الحر قبل انتهاء الصلاحية</label>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="footer">
+                        <h3>📞 جهات التواصل المهمة</h3>
+                        <p><strong>منصة العمل الحر:</strong> 920002654</p>
+                        <p><strong>وزارة الموارد البشرية:</strong> 19911</p>
+                        <p><strong>هيئة الزكاة والضريبة والجمارك:</strong> 920000111</p>
+                        <p style="margin-top: 20px; font-size: 0.9rem;">
+                            <strong>تحديث أخير:</strong> 27 يوليو 2026 | 
+                            <strong>المرجع:</strong> المصادر الرسمية السعودية والمتاجر العالمية
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Show/hide back to top button
+        window.addEventListener('scroll', function() {
+            const btn = document.querySelector('.btn-top');
+            if (window.pageYOffset > 300) {
+                btn.style.display = 'flex';
+            } else {
+                btn.style.display = 'none';
+            }
+        });
+
+        // Smooth scrolling for sidebar links
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
