@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معاينة وطباعة النماذج الرسمية - الدليل الإجرائي (مدعوم بالذكاء الاصطناعي)</title>
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Tajawal', 'sans-serif'],
+          },
+          colors: {
+            gov: {
+              50: '#f0f7f6',
+              100: '#e0efe0',
+              800: '#1e3a8a',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f1f5f9;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Standard Official Table Styling for Print Replica */
+    .official-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+
+    .official-table th, 
+    .official-table td {
+      border: 1px solid #000;
+      padding: 4px 6px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .official-table th {
+      background-color: #f8fafc;
+      font-weight: 700;
+    }
+
+    /* Editable Field Mode Styling */
+    [contenteditable="true"] {
+      outline: none;
+      transition: background-color 0.2s;
+    }
+
+    .interactive-mode [contenteditable="true"]:hover {
+      background-color: #e0f2fe;
+    }
+
+    .interactive-mode [contenteditable="true"]:focus {
+      background-color: #fef08a;
+      box-shadow: 0 0 0 1px #ca8a04;
+    }
+
+    /* Screen Preview Container (A4 Page Representation) */
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 12mm 15mm 15mm 15mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* Print Specific Rules */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .a4-page {
+        width: 100% !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        margin: 0 !important;
+        padding: 10mm 12mm 12mm 12mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      .a4-page.hidden {
+        display: none !important;
+      }
+
+      .form-content {
+        flex-grow: 1;
+      }
+    }
+
+    /* Line Input Utilities for Replica Forms */
+    .dots-line {
+      border-bottom: 1px dotted #000;
+      display: inline-block;
+      min-width: 80px;
+      padding: 0 4px;
+    }
+    
+    .bracket-input {
+      display: inline-block;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    /* Glassmorphism AI Floating Panel */
+    .ai-modal-backdrop {
+      background-color: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    pre, code { max-width: 100%; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; align-items: center; gap: .45rem; min-height: 42px; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-family: "Cairo", sans-serif; font-weight: 700; text-decoration: none !important; }
+    .site-home-nav__link:hover, .site-home-nav__link:focus { background: #0f5138; color: #fff !important; }
+    @media (max-width: 767.98px) {
+      body { max-width: 100vw; overflow-x: hidden; }
+      table { display: block; width: 100% !important; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th, td { overflow-wrap: normal; }
+      button, .btn, a { max-width: 100%; }
+    }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex flex-col">
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي">
+    <div class="site-home-nav__inner">
+      <a class="site-home-nav__link" href="./index.html" aria-label="العودة إلى الصفحة الرئيسية">⌂ الرئيسية</a>
+    </div>
+  </nav>
+
+  <!-- Top Navigation & Control Bar (Hidden on Print) -->
+  <header class="no-print bg-slate-900 text-white sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- App Title & Icon -->
+        <div class="flex items-center gap-3">
+          <div class="bg-emerald-600 text-white p-2.5 rounded-lg shadow-sm">
+            <i class="fa-solid fa-print text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-lg font-bold tracking-tight text-white">منصة معاينة وطباعة النماذج الرسمية</h1>
+              <span class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI
+              </span>
+            </div>
+            <p class="text-xs text-slate-400">الدليل الإجرائي لمدارس التعليم العام (الإصدار الثالث)</p>
+          </div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          
+          <button onclick="openAiModal()" class="flex items-center gap-2 px-3.5 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-lg shadow-lg shadow-purple-900/30 transition transform active:scale-95">
+            <i class="fa-solid fa-robot text-amber-300"></i>
+            <span>مساعد Gemini الإداري</span>
+          </button>
+
+          <button id="toggle-mode-btn" onclick="toggleInteractivity()" class="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition">
+            <i class="fa-solid fa-pen-to-square text-amber-400"></i>
+            <span id="mode-status-text">تفعيل الكتابة والتعبئة</span>
+          </button>
+
+          <button onclick="printCurrentForm()" class="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shadow transition">
+            <i class="fa-solid fa-print"></i>
+            <span>طباعة النموذج الحالي</span>
+          </button>
+
+          <button onclick="printAllForms()" class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg shadow transition">
+            <i class="fa-sharp fa-solid fa-files"></i>
+            <span>طباعة الكل (٦ نماذج)</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Form Selector Tabs -->
+      <nav class="flex items-center gap-2 mt-4 pt-3 border-t border-slate-800 overflow-x-auto text-xs font-medium">
+        <button onclick="switchTab('all')" id="tab-all" class="tab-btn px-3 py-2 rounded-md bg-emerald-600 text-white whitespace-nowrap transition">
+          <i class="fa-solid fa-layer-group ml-1"></i> عرض جميع النماذج
+        </button>
+        <button onclick="switchTab('form-17')" id="tab-form-17" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (17) - سجل العمل الرسمي
+        </button>
+        <button onclick="switchTab('form-17b')" id="tab-form-17b" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (17ب) - سجل العمل الرسمي (ب)
+        </button>
+        <button onclick="switchTab('form-19')" id="tab-form-19" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (19) - قرار حسم تأخر وخروج
+        </button>
+        <button onclick="switchTab('form-21')" id="tab-form-21" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (21) - قرار حسم غياب
+        </button>
+        <button onclick="switchTab('form-22')" id="tab-form-22" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (22) - سجل استئذان الموظفين
+        </button>
+        <button onclick="switchTab('form-49')" id="tab-form-49" class="tab-btn px-3 py-2 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+          نموذج (49) - خطة الزيارات الصفية
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Forms Viewport Container -->
+  <main id="forms-container" class="flex-1 py-6 px-2 md:px-0">
+
+    <!-- ================= FORM 17 ================= -->
+    <section id="form-17" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Unified 6-column Metadata Table -->
+          <table class="official-table text-xs font-bold mb-3">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[15%]">رمز النموذج</td>
+                <td class="w-[18%]" contenteditable="true">و.م.ع. ن. - ۰۲-۰۱</td>
+                <td class="bg-gray-50 w-[15%]">اسم النموذج</td>
+                <td class="w-[22%]" contenteditable="true">سجل العمل الرسمي</td>
+                <td class="bg-gray-50 w-[15%]">رقم النموذج</td>
+                <td class="w-[15%]" contenteditable="true">۱۷</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 8-column Date & Academic Info Table -->
+          <table class="official-table text-xs font-bold mb-3">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[12%]">العام الدراسي</td>
+                <td class="w-[13%]" id="f17-year" contenteditable="true"></td>
+                <td class="bg-gray-50 w-[12%]">الفصل الدراسي</td>
+                <td class="w-[13%]" id="f17-term" contenteditable="true"></td>
+                <td class="bg-gray-50 w-[12%]">اليوم</td>
+                <td class="w-[13%]" id="f17-day" contenteditable="true"></td>
+                <td class="bg-gray-50 w-[12%]">الموافق</td>
+                <td class="w-[13%]" id="f17-date" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Section 1 Title -->
+          <div class="bg-gray-100 border border-black text-center text-xs font-bold py-1 mb-1">
+            الحاضرون قبل بداية الاصطفاف الصباحي
+          </div>
+
+          <!-- Main Table without Signature Columns and with "اسم الموظف" -->
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[4%]">م</th>
+                <th class="w-[26%]">اسم الموظف</th>
+                <th class="w-[10%]">الوظيفة</th>
+                <th class="w-[5%]">وقت الحضور</th>
+                <th class="w-[5%]">وقت الخروج</th>
+                <th class="w-[4%] border-r-2 border-r-black">م</th>
+                <th class="w-[26%]">اسم الموظف</th>
+                <th class="w-[10%]">الوظيفة</th>
+                <th class="w-[5%]">وقت الحضور</th>
+                <th class="w-[5%]">وقت الخروج</th>
+              </tr>
+            </thead>
+            <tbody id="f17-present-body">
+              <tr><td>1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>4</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">4</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>5</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">5</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>6</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">6</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>7</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">7</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>8</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">8</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>9</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">9</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>10</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">10</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>11</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">11</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>12</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">12</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>13</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">13</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>14</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">14</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>15</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td class="border-r-2 border-r-black">15</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            </tbody>
+          </table>
+
+          <!-- Section 2: Absent Employees -->
+          <div class="bg-gray-100 border border-black text-center text-xs font-bold py-1 mt-2 mb-1">
+            الموظفون الغائبون
+          </div>
+
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[5%]">م</th>
+                <th class="w-[35%]">اسم الموظف</th>
+                <th class="w-[20%]">الوظيفة</th>
+                <th class="w-[40%]">سبب الغياب</th>
+              </tr>
+            </thead>
+            <tbody id="f17-absent-body">
+              <tr><td>1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            </tbody>
+          </table>
+
+          <!-- Duty Teachers Footer Table -->
+          <table class="official-table text-xs mt-2">
+            <tbody>
+              <tr>
+                <td class="font-bold w-[30%] bg-gray-50">المعلم المناوب بداية ونهاية العمل</td>
+                <td class="text-right px-4">اسم المعلم: <span id="f17-duty1" contenteditable="true"></span></td>
+              </tr>
+              <tr>
+                <td class="font-bold bg-gray-50">المعلم المناوب بداية ونهاية العمل</td>
+                <td class="text-right px-4">اسم المعلم: <span id="f17-duty2" contenteditable="true"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Document Footer without numbers and prefix -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 17b ================= -->
+    <section id="form-17b" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Unified 6-column Metadata Table -->
+          <table class="official-table text-xs font-bold mb-3">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[15%]">رمز النموذج</td>
+                <td class="w-[18%]" contenteditable="true">و.م.ع. ن. - ۰۲-۰۱</td>
+                <td class="bg-gray-50 w-[15%]">اسم النموذج</td>
+                <td class="w-[22%]" contenteditable="true">سجل العمل الرسمي (ب)</td>
+                <td class="bg-gray-50 w-[15%]">رقم النموذج</td>
+                <td class="w-[15%]" contenteditable="true">۱۷ ب</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 8-column Date & Academic Info Table -->
+          <table class="official-table text-xs font-bold mb-3">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[12%]">العام الدراسي</td>
+                <td class="w-[13%]" id="f17b-year" contenteditable="true"></td>
+                <td class="bg-gray-50 w-[12%]">الفصل الدراسي</td>
+                <td class="w-[13%]" id="f17b-term" contenteditable="true"></td>
+                <td class="bg-gray-50 w-[12%]">اليوم</td>
+                <td class="w-[13%]" id="f17b-day" contenteditable="true"></td>
+                <td class="bg-gray-50 w-[12%]">الموافق</td>
+                <td class="w-[13%]" id="f17b-date" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Section 1 Title -->
+          <div class="bg-gray-100 border border-black text-center text-xs font-bold py-1 mb-1">
+            الحاضرون قبل بداية الاصطفاف الصباحي
+          </div>
+
+          <!-- Specific Columns Table for Form 17b: م | اسم الموظف | الوظيفة | وقت الحضور | وقت الانصراف | ملاحظات -->
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[5%]">م</th>
+                <th class="w-[35%]">اسم الموظف</th>
+                <th class="w-[15%]">الوظيفة</th>
+                <th class="w-[12%]">وقت الحضور</th>
+                <th class="w-[12%]">وقت الانصراف</th>
+                <th class="w-[21%]">ملاحظات</th>
+              </tr>
+            </thead>
+            <tbody id="f17b-present-body">
+              <tr><td>1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>4</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>5</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>6</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>7</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>8</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>9</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>10</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>11</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>12</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>13</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>14</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>15</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            </tbody>
+          </table>
+
+          <!-- Section 2: Absent Employees -->
+          <div class="bg-gray-100 border border-black text-center text-xs font-bold py-1 mt-2 mb-1">
+            الموظفون الغائبون
+          </div>
+
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[5%]">م</th>
+                <th class="w-[35%]">اسم الموظف</th>
+                <th class="w-[20%]">الوظيفة</th>
+                <th class="w-[40%]">سبب الغياب</th>
+              </tr>
+            </thead>
+            <tbody id="f17b-absent-body">
+              <tr><td>1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td>3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            </tbody>
+          </table>
+
+          <!-- Duty Teachers Footer Table -->
+          <table class="official-table text-xs mt-2">
+            <tbody>
+              <tr>
+                <td class="font-bold w-[30%] bg-gray-50">المعلم المناوب بداية ونهاية العمل</td>
+                <td class="text-right px-4">اسم المعلم: <span id="f17b-duty1" contenteditable="true"></span></td>
+              </tr>
+              <tr>
+                <td class="font-bold bg-gray-50">المعلم المناوب بداية ونهاية العمل</td>
+                <td class="text-right px-4">اسم المعلم: <span id="f17b-duty2" contenteditable="true"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Document Footer without numbers and prefix -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 19 ================= -->
+    <section id="form-19" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Unified 6-column Metadata Table -->
+          <table class="official-table text-xs font-bold mb-4">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[15%]">رمز النموذج</td>
+                <td class="w-[18%]" contenteditable="true">و.م.ع. ن. - ۰۲-۰۳</td>
+                <td class="bg-gray-50 w-[15%]">اسم النموذج</td>
+                <td class="w-[22%]" contenteditable="true">قرار حسم مجموع ساعات تأخر وخروج مبكر</td>
+                <td class="bg-gray-50 w-[15%]">رقم النموذج</td>
+                <td class="w-[15%]" contenteditable="true">۱۹</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Top Metadata Grid Table -->
+          <table class="official-table text-xs font-bold mb-6">
+            <tbody>
+              <tr>
+                <td class="w-[15%] bg-gray-50">المدرسة</td>
+                <td class="w-[35%]" id="f19-school" contenteditable="true"></td>
+                <td class="w-[15%] bg-gray-50">السجل المدني</td>
+                <td class="w-[35%]" id="f19-national-id" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="official-table text-xs font-bold mb-6">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[25%]">الاسم</th>
+                <th class="w-[18%]">التخصص</th>
+                <th class="w-[22%]">المستوى / المرتبة</th>
+                <th class="w-[15%]">رقم الوظيفة</th>
+                <th class="w-[20%]">العمل الحالي</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="h-8">
+                <td id="f19-name" contenteditable="true"></td>
+                <td id="f19-specialization" contenteditable="true"></td>
+                <td id="f19-level" contenteditable="true"></td>
+                <td id="f19-job-no" contenteditable="true"></td>
+                <td id="f19-current-job" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Decision Body Paragraph -->
+          <div class="text-sm leading-8 text-justify font-medium mb-6">
+            <p>
+              إن مدير المدرسة <span id="f19-principal" class="dots-line min-w-[250px]" contenteditable="true"></span><br>
+              بناء على صلاحياته ، وبناء على المادة (۲۱) من نظام الخدمة المدنية وبناءً على موافقة معالي الوزير على إعطاء بعض الصلاحيات لمديري المدارس بالقرار رقم ١۱۳۹ / ١ وتاريخ ١٧ / ٣ / ١٤٣١هـ ، ولبلوغ ساعات التأخر عن العمل والخروج المبكر من العمل ( <span id="f19-hours" class="bracket-input border-b border-black font-bold" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;</span> ) ساعة ، وحيث إن عذره غير مقبول ، وبمقتضى النظام .
+            </p>
+
+            <div class="font-bold my-4 text-center text-base">يقرر ما يلي</div>
+
+            <ol class="list-none space-y-3 pl-2">
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۱)</span>
+                <span>حسم مدة الغياب الموضحة بعاليه وعددها ( <span id="f19-deduct-days" class="bracket-input border-b border-black font-bold" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;</span> ) يوماً من راتبه .</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۲)</span>
+                <span>على إدارة شؤون الموظفين ( تنفيذ الأنظمة ) تنفيذ إجراء الحسم واستبعادها من خدماته واصل القرار لملفه بالإدارة مع الأساس لملفه .</span>
+              </li>
+            </ol>
+
+            <div class="text-center font-bold text-base mt-6">والله الموفق</div>
+          </div>
+
+          <!-- Signatures Section -->
+          <div class="flex justify-between items-start mt-10 px-6 text-xs font-bold">
+            <div class="space-y-3">
+              <div>الرئيس المباشر</div>
+              <div>الاسم: <span id="f19-principal-sign" class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التوقيع <span class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التاريخ : / / ١٤هـ</div>
+            </div>
+
+            <div class="border-2 border-dashed border-gray-400 w-28 h-28 flex items-center justify-center text-gray-400 rounded-lg">
+              الختم
+            </div>
+          </div>
+
+          <!-- Distribution Footer Links -->
+          <div class="mt-12 text-xs space-y-1.5 font-bold border-t border-gray-300 pt-4">
+            <div>صورة / للموظفين المتابعة تنفيذ الحسم ( تنفيذ الأنظمة )</div>
+            <div>صورة / المكتب التعليم</div>
+            <div>صورة لملفه بالمدرسة</div>
+          </div>
+        </div>
+
+        <!-- Document Footer without numbers and prefix -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 21 ================= -->
+    <section id="form-21" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Unified 6-column Metadata Table -->
+          <table class="official-table text-xs font-bold mb-4">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[15%]">رمز النموذج</td>
+                <td class="w-[18%]" contenteditable="true">و.م.ع. ن. - ۰۲-۰۵</td>
+                <td class="bg-gray-50 w-[15%]">اسم النموذج</td>
+                <td class="w-[22%]" contenteditable="true">قرار حسم غياب</td>
+                <td class="bg-gray-50 w-[15%]">رقم النموذج</td>
+                <td class="w-[15%]" contenteditable="true">۲۱</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- School Info Header -->
+          <table class="official-table text-xs font-bold mb-4">
+            <tbody>
+              <tr>
+                <td class="w-[15%] bg-gray-50">المدرسة</td>
+                <td class="w-[35%]" id="f21-school" contenteditable="true"></td>
+                <td class="w-[15%] bg-gray-50">السجل المدني</td>
+                <td class="w-[35%]" id="f21-national-id" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Form Details Grid Table -->
+          <table class="official-table text-xs font-bold mb-6">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[18%]">الاسم</th>
+                <th class="w-[12%]">التخصص</th>
+                <th class="w-[14%]">المستوى / المرتبة</th>
+                <th class="w-[8%]">الدرجة</th>
+                <th class="w-[10%]">رقم الوظيفة</th>
+                <th class="w-[12%]">الوظيفة</th>
+                <th class="w-[10%]">عدد أيام الغياب</th>
+                <th class="w-[16%]">ليحدد الأيام الواجب حسمها</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="h-10">
+                <td id="f21-name" contenteditable="true"></td>
+                <td id="f21-specialization" contenteditable="true"></td>
+                <td id="f21-level" contenteditable="true"></td>
+                <td id="f21-grade" contenteditable="true"></td>
+                <td id="f21-job-no" contenteditable="true"></td>
+                <td id="f21-job-title" contenteditable="true"></td>
+                <td id="f21-absent-days" contenteditable="true"></td>
+                <td id="f21-deduct-days" contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td colspan="7" class="text-left font-bold bg-gray-50">التاريخ</td>
+                <td id="f21-date" contenteditable="true">/ / ١٤ هـ</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Decision Text Content -->
+          <div class="text-sm leading-8 text-justify font-medium mb-6">
+            <p>
+              إن قائد المدرسة.. <span id="f21-principal" class="dots-line min-w-[250px]" contenteditable="true"></span><br>
+              بناء على صلاحياته ، وبناء على المادة (۲۱) من نظام الخدمة المدنية ، وبناء على موافقة معالي الوزير على إعطاء بعض الصلاحيات لمديري المدارس بالقرار رقم ۱۱۳۹ / ۱ وتاريخ ١٤٢١/٣/١٧هـ ولغياب المعلم الموضح أسمه أعلاه ، حيث إن عذره غير مقبول ، وبمقتضى النظام .
+            </p>
+
+            <div class="font-bold my-4 text-center text-base">يقرر ما يلي :</div>
+
+            <ol class="list-none space-y-3 pl-2">
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۱)</span>
+                <span>حسم مدة الغياب الموضحة بعاليه وعددها ( <span id="f21-deduct-days-body" class="bracket-input border-b border-black font-bold" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;</span> ) يوما من راتبه ..</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold ml-2">(۲)</span>
+                <span>على إدارة شؤون الموظفين تنفيذ الأنظمة إجراء الحسم واستبعادها من خدماته وأصل القرار لملفه بالإدارة مع الأساس لملفه )</span>
+              </li>
+            </ol>
+
+            <div class="text-center font-bold text-base mt-6">والله الموفق</div>
+          </div>
+
+          <!-- Signatures Section -->
+          <div class="flex justify-between items-start mt-8 px-6 text-xs font-bold">
+            <div class="space-y-3">
+              <div>الرئيس المباشر</div>
+              <div>الاسم : <span id="f21-principal-sign" class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التوقيع : <span class="dots-line min-w-[150px]" contenteditable="true"></span></div>
+              <div>التاريخ : / / ١٤هـ</div>
+            </div>
+
+            <div class="border-2 border-dashed border-gray-400 w-28 h-28 flex items-center justify-center text-gray-400 rounded-lg">
+              الختم
+            </div>
+          </div>
+
+          <!-- Footnote & Distribution Copies -->
+          <div class="mt-8 text-xs space-y-1.5 font-bold border-t border-gray-300 pt-3">
+            <div class="text-amber-900 font-extrabold mb-2">ملاحظة / لن يتم استلام قرار الحسم بدون المساءلة</div>
+            <div>صورة لشؤون الموظفين المتابعة تنفيذ الحسم ( تنفيذ الأنظمة ) .</div>
+            <div>صورة / المكتب التعليم .</div>
+            <div>صورة / لملفه بالمدرسة .</div>
+          </div>
+        </div>
+
+        <!-- Document Footer without numbers and prefix -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 22 ================= -->
+    <section id="form-22" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Unified 6-column Metadata Table -->
+          <table class="official-table text-xs font-bold mb-3">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[15%]">رمز النموذج</td>
+                <td class="w-[18%]" contenteditable="true">و.م.ع. ن. - ۰۲-۰۶</td>
+                <td class="bg-gray-50 w-[15%]">اسم النموذج</td>
+                <td class="w-[22%]" contenteditable="true">سجل استئذان الموظفين</td>
+                <td class="bg-gray-50 w-[15%]">رقم النموذج</td>
+                <td class="w-[15%]" contenteditable="true">۲۲</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Employee Profile Info Table -->
+          <table class="official-table text-xs font-bold mb-2">
+            <tbody>
+              <tr>
+                <td class="w-[15%] bg-gray-50">المدرسة</td>
+                <td class="w-[35%]" id="f22-school" contenteditable="true"></td>
+                <td class="w-[15%] bg-gray-50">السجل المدني</td>
+                <td class="w-[35%]" id="f22-national-id" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="official-table text-xs font-bold mb-3">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[25%]">الاسم</th>
+                <th class="w-[15%]">التخصص</th>
+                <th class="w-[18%]">المستوى / المرتبة</th>
+                <th class="w-[12%]">الدرجة</th>
+                <th class="w-[15%]">رقم الوظيفة</th>
+                <th class="w-[15%]">عدد أيام الغياب</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="h-6">
+                <td id="f22-name" contenteditable="true"></td>
+                <td id="f22-specialization" contenteditable="true"></td>
+                <td id="f22-level" contenteditable="true"></td>
+                <td id="f22-grade" contenteditable="true"></td>
+                <td id="f22-job-no" contenteditable="true"></td>
+                <td id="f22-absent-days" contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Main Log Table -->
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="w-[12%]">التاريخ اليوم</th>
+                <th class="w-[8%]">الخروج زمن دقیقه</th>
+                <th class="w-[8%]">الخروج ساعة</th>
+                <th class="w-[10%]">التوقيع</th>
+                <th class="w-[24%]">مبررات الخروج</th>
+                <th class="w-[8%]">العودة زمن دقيقة</th>
+                <th class="w-[8%]">العودة ساعة</th>
+                <th class="w-[10%]">التوقيع</th>
+                <th class="w-[12%]">ملحوظات .</th>
+              </tr>
+            </thead>
+            <tbody id="f22-log-body">
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+              <tr><td contenteditable="true">/</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+            </tbody>
+          </table>
+
+          <!-- Footnote Required Text -->
+          <div class="text-xs font-bold mt-2">
+            * في مدارس البنات يتم كتابة اسم المحرم وصلة القرابة ورقم الهوية
+          </div>
+        </div>
+
+        <!-- Document Footer without numbers and prefix -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORM 49 ================= -->
+    <section id="form-49" class="a4-page form-page text-black">
+      <div class="form-content flex flex-col justify-between h-full">
+        <div>
+          <!-- Unified 6-column Metadata Table -->
+          <table class="official-table text-xs font-bold mb-3">
+            <tbody>
+              <tr>
+                <td class="bg-gray-50 w-[15%]">رمز النموذج</td>
+                <td class="w-[18%]" contenteditable="true">م.م.ع. ن. - ۰۳-۰۱</td>
+                <td class="bg-gray-50 w-[15%]">اسم النموذج</td>
+                <td class="w-[22%]" contenteditable="true">خطة الزيارات الصفية لقائد المدرسة</td>
+                <td class="bg-gray-50 w-[15%]">رقم النموذج</td>
+                <td class="w-[15%]" contenteditable="true">٤٩</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Main Comprehensive Grid Table -->
+          <table class="official-table text-center text-[10px]">
+            <thead>
+              <tr class="bg-gray-50">
+                <th rowspan="2" class="w-[18%]">اسم المعلم</th>
+                <th rowspan="2" class="w-[10%]">التخصص</th>
+                <th rowspan="2" class="w-[10%]">التنفيذ</th>
+                <th colspan="5" class="w-[31%] border-b border-black">الزيارة الأولى</th>
+                <th colspan="5" class="w-[31%] border-b border-black">الزيارة الثانية</th>
+              </tr>
+              <tr class="bg-gray-50">
+                <th>اليوم</th>
+                <th>التاريخ // ١٤</th>
+                <th>النشاط</th>
+                <th>الفصل</th>
+                <th>الوحدة</th>
+                <th>اليوم</th>
+                <th>التاريخ // ١٤</th>
+                <th>النشاط</th>
+                <th>الفصل</th>
+                <th>الوحدة</th>
+              </tr>
+            </thead>
+            <tbody id="f49-plan-body">
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+
+              <tr>
+                <td rowspan="2" contenteditable="true"></td>
+                <td rowspan="2" contenteditable="true"></td>
+                <td class="font-bold">في الموعد</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+              <tr>
+                <td class="font-bold">تعديل</td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+                <td contenteditable="true"></td><td contenteditable="true">// ١٤</td><td contenteditable="true"></td><td contenteditable="true">/</td><td contenteditable="true"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Leader Signature Section -->
+          <div class="flex justify-between items-center my-6 px-12 text-xs font-bold">
+            <div>قائد المدرسة : <span id="f49-principal" class="dots-line min-w-[200px]" contenteditable="true"></span></div>
+            <div>التوقيع : <span class="dots-line min-w-[200px]" contenteditable="true"></span></div>
+          </div>
+        </div>
+
+        <!-- Document Footer without numbers and prefix -->
+        <div class="border-t border-black pt-2 mt-4 text-xs font-bold flex justify-between items-center">
+          <div>الدليل الإجرائي لمدارس التعليم العام للعام الدراسي ١٤٣٦ - ١٤٣٧ هـ - الإصدار الثالث</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= GEMINI AI ASSISTANT MODAL ================= -->
+  <div id="ai-modal" class="no-print fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div class="ai-modal-backdrop absolute inset-0" onclick="closeAiModal()"></div>
+    
+    <div class="relative bg-slate-900 border border-slate-700 text-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/50">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">مساعد Gemini الإداري والتربوي</h3>
+            <p class="text-xs text-slate-400">توليد بيانات النماذج، صياغة القرارات، والتدقيق النظامي الذكي</p>
+          </div>
+        </div>
+        <button onclick="closeAiModal()" class="text-slate-400 hover:text-white transition p-1 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- AI Tabs Bar -->
+      <div class="flex border-b border-slate-800 bg-slate-900/80 px-6 text-xs font-bold">
+        <button id="ai-tab-autofill" onclick="switchAiTab('autofill')" class="py-3 px-4 border-b-2 border-purple-500 text-purple-400 flex items-center gap-2 transition">
+          <i class="fa-solid fa-bolt"></i> تعبئة النموذج ذكياً
+        </button>
+        <button id="ai-tab-draft" onclick="switchAiTab('draft')" class="py-3 px-4 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+          <i class="fa-solid fa-pen-nib"></i> صياغة مبرر / قرار
+        </button>
+        <button id="ai-tab-audit" onclick="switchAiTab('audit')" class="py-3 px-4 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+          <i class="fa-solid fa-clipboard-check"></i> فحص نظامي للنموذج
+        </button>
+      </div>
+
+      <!-- Modal Body Content -->
+      <div class="p-6 overflow-y-auto space-y-4 text-xs">
+        
+        <!-- Tab 1: AI Auto-fill -->
+        <div id="ai-view-autofill" class="space-y-4">
+          <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
+            <label class="block font-bold text-slate-200 mb-1">النموذج النشط المستهدف:</label>
+            <div id="ai-target-form-label" class="text-emerald-400 font-bold">نموذج (17) - سجل العمل الرسمي</div>
+          </div>
+
+          <!-- Preset Prompt Quick Chips -->
+          <div>
+            <label class="block text-slate-400 font-medium mb-2">أمثلة وسيناريوهات سريعة للتعبئة:</label>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="applyScenarioPreset('f17_full')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
+                ⚡ سجل دوام اليوم (نموذج 17)
+              </button>
+              <button onclick="applyScenarioPreset('f17b_full')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
+                ⚡ سجل دوام اليوم (نموذج 17ب)
+              </button>
+              <button onclick="applyScenarioPreset('f19_late')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
+                ⚡ قرار حسم ٧ ساعات تأخر وخروج مبكر
+              </button>
+              <button onclick="applyScenarioPreset('f21_absent')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
+                ⚡ قرار حسم غياب ٣ أيام لمعلم
+              </button>
+              <button onclick="applyScenarioPreset('f22_permissions')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
+                ⚡ سجل استئذان لموظف
+              </button>
+              <button onclick="applyScenarioPreset('f49_visits')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
+                ⚡ خطة زيارات صفية كاملة
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label for="ai-autofill-prompt" class="block font-bold text-slate-200 mb-1">أو اكتب وصف الحالة / البيانات المراد توليدها:</label>
+            <textarea id="ai-autofill-prompt" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500" placeholder="مثال: قم بتعبئة النموذج ببيانات رسمية كاملة..."></textarea>
+          </div>
+
+          <button onclick="triggerGeminiAutofill()" id="btn-generate-autofill" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>توليد وتعبئة النموذج تلقائياً</span>
+          </button>
+        </div>
+
+        <!-- Tab 2: Draft Decision -->
+        <div id="ai-view-draft" class="space-y-4 hidden">
+          <div>
+            <label for="ai-draft-prompt" class="block font-bold text-slate-200 mb-1">الموضوع أو حالة القرار الإداري المطلوب صياغته:</label>
+            <textarea id="ai-draft-prompt" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500" placeholder="مثال: صياغة مبرر نظامي لعدم قبول عذر معلم تأخر عن الدوام لـ 10 ساعات متفرقة..."></textarea>
+          </div>
+
+          <button onclick="triggerGeminiDrafting()" id="btn-generate-draft" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-pen-nib"></i>
+            <span>توليد الصياغة النظامية</span>
+          </button>
+
+          <div id="ai-draft-output-container" class="hidden space-y-2">
+            <label class="block font-bold text-amber-400">النص النظامي المقترح:</label>
+            <div id="ai-draft-output" class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-200 whitespace-pre-wrap leading-relaxed"></div>
+            <button onclick="copyDraftText()" class="text-xs text-purple-400 hover:text-purple-300 font-bold flex items-center gap-1">
+              <i class="fa-solid fa-copy"></i> نسخ النص للحافظة
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 3: Form Audit -->
+        <div id="ai-view-audit" class="space-y-4 hidden">
+          <p class="text-slate-300 leading-relaxed">
+            يقوم ذكاء Gemini بمراجعة الحقول المسجلة في النموذج المعروض حالياً للتحقق من سلامة الأرقام والتاريخ واكتشاف الحقول المفقودة قبل الطباعة.
+          </p>
+
+          <button onclick="triggerGeminiAudit()" id="btn-generate-audit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-magnifying-glass font-bold"></i>
+            <span>بدء الفحص والتدقيق الآن</span>
+          </button>
+
+          <div id="ai-audit-output-container" class="hidden space-y-2">
+            <label class="block font-bold text-emerald-400">تقرير المراجعة والتدقيق:</label>
+            <div id="ai-audit-output" class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-slate-200 leading-relaxed space-y-2"></div>
+          </div>
+        </div>
+
+        <!-- AI Loading Spinner Indicator -->
+        <div id="ai-loading" class="hidden py-6 text-center space-y-3">
+          <div class="inline-block animate-spin text-purple-400 text-3xl">
+            <i class="fa-solid fa-circle-notch"></i>
+          </div>
+          <p class="text-xs font-bold text-slate-300 animate-pulse">جاري معالجة الطلب والتواصل مع Gemini AI...</p>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 bg-slate-950 border-t border-slate-800 text-[10px] text-slate-500 flex justify-between items-center">
+        <span>نموذج الذكاء الاصطناعي: gemini-3-flash-preview</span>
+        <button onclick="closeAiModal()" class="text-slate-400 hover:text-white">إغلاق</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Interactive Script Logic -->
+  <script>
+    let currentTab = 'all';
+    let isInteractiveMode = false;
+    let currentAiTab = 'autofill';
+
+    // Switch View Tab Function
+    function switchTab(tabId) {
+      currentTab = tabId;
+      
+      // Update Tab Navigation Active Styles
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-600', 'text-white');
+        btn.classList.add('bg-slate-800', 'text-slate-300');
+      });
+
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+        activeBtn.classList.add('bg-emerald-600', 'text-white');
+      }
+
+      // Show/Hide Page Sections
+      const pages = document.querySelectorAll('.form-page');
+      pages.forEach(page => {
+        if (tabId === 'all') {
+          page.classList.remove('hidden');
+        } else {
+          if (page.id === tabId) {
+            page.classList.remove('hidden');
+          } else {
+            page.classList.add('hidden');
+          }
+        }
+      });
+
+      updateAiTargetFormLabel();
+    }
+
+    function updateAiTargetFormLabel() {
+      const label = document.getElementById('ai-target-form-label');
+      if (!label) return;
+      const names = {
+        'all': 'عرض كافة النماذج',
+        'form-17': 'نموذج (17) - سجل العمل الرسمي',
+        'form-17b': 'نموذج (17ب) - سجل العمل الرسمي (ب)',
+        'form-19': 'نموذج (19) - قرار حسم تأخر وخروج',
+        'form-21': 'نموذج (21) - قرار حسم غياب',
+        'form-22': 'نموذج (22) - سجل استئذان الموظفين',
+        'form-49': 'نموذج (49) - خطة الزيارات الصفية'
+      };
+      label.innerText = names[currentTab] || 'النموذج المحدد';
+    }
+
+    // Toggle Editable Interactivity Mode
+    function toggleInteractivity() {
+      isInteractiveMode = !isInteractiveMode;
+      const statusText = document.getElementById('mode-status-text');
+      const container = document.getElementById('forms-container');
+
+      if (isInteractiveMode) {
+        container.classList.add('interactive-mode');
+        statusText.innerText = 'إيقاف وضع التعبئة (وضع العرض فقط)';
+        showNotification('تم تفعيل وضع التعبئة التفاعلي! يمكنك الآن الضغط على أي حقل للكتابة والتعديل.');
+      } else {
+        container.classList.remove('interactive-mode');
+        statusText.innerText = 'تفعيل الكتابة والتعبئة';
+        showNotification('تم العودة لوضع المعاينة النموذجية.');
+      }
+    }
+
+    // Print Current Active Form Page
+    function printCurrentForm() {
+      window.print();
+    }
+
+    // Print All Forms
+    function printAllForms() {
+      const prevTab = currentTab;
+      switchTab('all');
+      setTimeout(() => {
+        window.print();
+        switchTab(prevTab);
+      }, 200);
+    }
+
+    // Toast Notification Banner
+    function showNotification(message) {
+      const existingToast = document.getElementById('toast-msg');
+      if (existingToast) existingToast.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'toast-msg';
+      toast.className = 'no-print fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-5 py-2.5 rounded-xl shadow-2xl text-xs font-bold flex items-center gap-2 border border-slate-700 z-50 animate-bounce';
+      toast.innerHTML = `<i class="fa-solid fa-circle-info text-amber-400"></i> ${message}`;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        if (toast) toast.remove();
+      }, 3500);
+    }
+
+    // AI Modal Controls
+    function openAiModal() {
+      document.getElementById('ai-modal').classList.remove('hidden');
+      updateAiTargetFormLabel();
+    }
+
+    function closeAiModal() {
+      document.getElementById('ai-modal').classList.add('hidden');
+    }
+
+    function switchAiTab(tab) {
+      currentAiTab = tab;
+      ['autofill', 'draft', 'audit'].forEach(t => {
+        const btn = document.getElementById(`ai-tab-${t}`);
+        const view = document.getElementById(`ai-view-${t}`);
+        if (t === tab) {
+          btn.className = "py-3 px-4 border-b-2 border-purple-500 text-purple-400 flex items-center gap-2 transition";
+          view.classList.remove('hidden');
+        } else {
+          btn.className = "py-3 px-4 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition";
+          view.classList.add('hidden');
+        }
+      });
+    }
+
+    // Call Gemini API with Exponential Backoff
+    async function callGeminiAPI(payload, retries = 3, delay = 1000) {
+      const apiKey = ""; // API key populated dynamically in environment runtime
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      for (let attempt = 0; attempt < retries; attempt++) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error status: ${response.status}`);
+          }
+
+          const result = await response.json();
+          return result;
+        } catch (err) {
+          if (attempt === retries - 1) throw err;
+          await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, attempt)));
+        }
+      }
+    }
+
+    function applyScenarioPreset(presetKey) {
+      const promptInput = document.getElementById('ai-autofill-prompt');
+      if (presetKey === 'f17_full') {
+        switchTab('form-17');
+        promptInput.value = "قم بتعبئة سجل دوام اليوم لعام 1445هـ الفصل الدراسي الثاني يوم الثلاثاء. أضف 8 معلمين حاضرين بأوقات حضور وخروج مناسبة مع الغائبين والمعلم المناوب.";
+      } else if (presetKey === 'f17b_full') {
+        switchTab('form-17b');
+        promptInput.value = "قم بتعبئة سجل دوام نموذج 17ب لعام 1445هـ مع تسجيل وقت الحضور ووقت الانصراف والملاحظات لكل معلم بشكل كامل.";
+      } else if (presetKey === 'f19_late') {
+        switchTab('form-19');
+        promptInput.value = "صياغة وتعبئة قرار حسم تأخر وخروج مبكر للمدرسة المتوسطة النموذجية. الموظف: محمد بن عبدالله العتيبي، تخصص رياضيات، المستوى الخامس، رقم الوظيفة 10421. إجمالي ساعات التأخر الخروج: 7 ساعات، ويحسم عنها يوم واحد. قائد المدرسة: د. عبدالحكيم الغامدي.";
+      } else if (presetKey === 'f21_absent') {
+        switchTab('form-21');
+        promptInput.value = "قرار حسم غياب بمدرسة ابن خلدون الابتدائية. المعلم: سعد بن فهد الدوسري، تخصص علوم، المستوى السادس، الدرجة 3، رقم الوظيفة 8840. عدد أيام الغياب: 3 أيام. القائد: سلطان القحطاني.";
+      } else if (presetKey === 'f22_permissions') {
+        switchTab('form-22');
+        promptInput.value = "تعبئة سجل استئذان الموظف إبراهيم الحارثي معلم لغة عربية. سجل 4 حالات استئذان لمراجعة مستشفى بمدة 45 دقيقة لكل منها وأوقات خروج وعودة منتظمة.";
+      } else if (presetKey === 'f49_visits') {
+        switchTab('form-49');
+        promptInput.value = "توليد خطة زيارات صفية كاملة لقائد المدرسة لـ 5 معلمين تشمل الزيارة الأولى والثانية والفصول والوحدات الدراسية.";
+      }
+    }
+
+    async function triggerGeminiAutofill() {
+      let activeForm = currentTab;
+      if (activeForm === 'all') activeForm = 'form-17';
+
+      const userPromptText = document.getElementById('ai-autofill-prompt').value.trim() || "قم بتعبئة هذا النموذج ببيانات رسمية واقعية كاملة ودقيقة ومناسبة للتعليم العام في السعودية.";
+      const loadingEl = document.getElementById('ai-loading');
+      const btnEl = document.getElementById('btn-generate-autofill');
+
+      loadingEl.classList.remove('hidden');
+      btnEl.disabled = true;
+
+      try {
+        let systemPrompt = "";
+        let responseSchema = {};
+
+        if (activeForm === 'form-17' || activeForm === 'form-17b') {
+          systemPrompt = "أنت مساعد إداري مدرسي متتقدم. قم بتوليد بيانات سجل الدوام اليومي باللغة العربية بدقة وحجم مناسب.";
+          responseSchema = {
+            type: "OBJECT",
+            properties: {
+              year: { type: "STRING" },
+              term: { type: "STRING" },
+              day: { type: "STRING" },
+              date: { type: "STRING" },
+              duty1: { type: "STRING" },
+              duty2: { type: "STRING" },
+              presentList: {
+                type: "ARRAY",
+                items: {
+                  type: "OBJECT",
+                  properties: {
+                    name: { type: "STRING" },
+                    job: { type: "STRING" },
+                    timeIn: { type: "STRING" },
+                    timeOut: { type: "STRING" },
+                    notes: { type: "STRING" }
+                  }
+                }
+              },
+              absentList: {
+                type: "ARRAY",
+                items: {
+                  type: "OBJECT",
+                  properties: {
+                    name: { type: "STRING" },
+                    job: { type: "STRING" },
+                    reason: { type: "STRING" }
+                  }
+                }
+              }
+            },
+            required: ["year", "term", "day", "date", "presentList", "absentList"]
+          };
+        } else if (activeForm === 'form-19') {
+          systemPrompt = "أنت مساعد إداري مدرسي. قم بتوليد بيانات قرار حسم تأخر وخروج مبكر (نموذج 19) باللغة العربية بأسلوب رسمي.";
+          responseSchema = {
+            type: "OBJECT",
+            properties: {
+              school: { type: "STRING" },
+              nationalId: { type: "STRING" },
+              name: { type: "STRING" },
+              specialization: { type: "STRING" },
+              level: { type: "STRING" },
+              jobNo: { type: "STRING" },
+              currentJob: { type: "STRING" },
+              principalName: { type: "STRING" },
+              hours: { type: "STRING" },
+              deductDays: { type: "STRING" }
+            },
+            required: ["school", "nationalId", "name", "principalName", "hours", "deductDays"]
+          };
+        } else if (activeForm === 'form-21') {
+          systemPrompt = "أنت مساعد إداري مدرسي. قم بتوليد بيانات قرار حسم غياب (نموذج 21) باللغة العربية.";
+          responseSchema = {
+            type: "OBJECT",
+            properties: {
+              school: { type: "STRING" },
+              nationalId: { type: "STRING" },
+              name: { type: "STRING" },
+              specialization: { type: "STRING" },
+              level: { type: "STRING" },
+              grade: { type: "STRING" },
+              jobNo: { type: "STRING" },
+              jobTitle: { type: "STRING" },
+              absentDays: { type: "STRING" },
+              deductDays: { type: "STRING" },
+              date: { type: "STRING" },
+              principalName: { type: "STRING" }
+            },
+            required: ["school", "nationalId", "name", "absentDays", "deductDays", "principalName"]
+          };
+        } else if (activeForm === 'form-22') {
+          systemPrompt = "قم بتوليد سجل استئذان موظف (نموذج 22) ببيانات وحالات خروج وعودة مع المبررات.";
+          responseSchema = {
+            type: "OBJECT",
+            properties: {
+              school: { type: "STRING" },
+              nationalId: { type: "STRING" },
+              name: { type: "STRING" },
+              specialization: { type: "STRING" },
+              level: { type: "STRING" },
+              grade: { type: "STRING" },
+              jobNo: { type: "STRING" },
+              absentDays: { type: "STRING" },
+              logs: {
+                type: "ARRAY",
+                items: {
+                  type: "OBJECT",
+                  properties: {
+                    date: { type: "STRING" },
+                    exitMin: { type: "STRING" },
+                    exitHour: { type: "STRING" },
+                    reason: { type: "STRING" },
+                    returnMin: { type: "STRING" },
+                    returnHour: { type: "STRING" },
+                    notes: { type: "STRING" }
+                  }
+                }
+              }
+            }
+          };
+        } else if (activeForm === 'form-49') {
+          systemPrompt = "قم بتوليد خطة الزيارات الصفية لقائد المدرسة (نموذج 49) لعدة معلمين في تخصصات متنوعة.";
+          responseSchema = {
+            type: "OBJECT",
+            properties: {
+              principalName: { type: "STRING" },
+              teachers: {
+                type: "ARRAY",
+                items: {
+                  type: "OBJECT",
+                  properties: {
+                    name: { type: "STRING" },
+                    specialization: { type: "STRING" },
+                    v1Day: { type: "STRING" },
+                    v1Date: { type: "STRING" },
+                    v1Activity: { type: "STRING" },
+                    v1Class: { type: "STRING" },
+                    v1Unit: { type: "STRING" },
+                    v2Day: { type: "STRING" },
+                    v2Date: { type: "STRING" },
+                    v2Activity: { type: "STRING" },
+                    v2Class: { type: "STRING" },
+                    v2Unit: { type: "STRING" }
+                  }
+                }
+              }
+            }
+          };
+        }
+
+        const payload = {
+          contents: [{ parts: [{ text: userPromptText }] }],
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          generationConfig: {
+            responseMimeType: "application/json",
+            responseSchema: responseSchema
+          }
+        };
+
+        const result = await callGeminiAPI(payload);
+        const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (jsonText) {
+          const data = JSON.parse(jsonText);
+          populateFormData(activeForm, data);
+          showNotification('تم تعبئة كافة حقول النموذج بنجاح ببيانات الذكاء الاصطناعي!');
+          closeAiModal();
+        } else {
+          showNotification('تعذر استخراج البيانات. يرجى المحاولة مرة أخرى.');
+        }
+
+      } catch (err) {
+        console.error(err);
+        showNotification('حدث خطأ أثناء التواصل مع الذكاء الاصطناعي Gemini.');
+      } finally {
+        loadingEl.classList.add('hidden');
+        btnEl.disabled = false;
+      }
+    }
+
+    function populateFormData(formId, data) {
+      if (formId === 'form-17' || formId === 'form-17b') {
+        const prefix = formId === 'form-17' ? 'f17' : 'f17b';
+        if (data.year) document.getElementById(`${prefix}-year`).innerText = data.year;
+        if (data.term) document.getElementById(`${prefix}-term`).innerText = data.term;
+        if (data.day) document.getElementById(`${prefix}-day`).innerText = data.day;
+        if (data.date) document.getElementById(`${prefix}-date`).innerText = data.date;
+        if (data.duty1) document.getElementById(`${prefix}-duty1`).innerText = data.duty1;
+        if (data.duty2) document.getElementById(`${prefix}-duty2`).innerText = data.duty2;
+
+        if (Array.isArray(data.presentList)) {
+          const rows = document.querySelectorAll(`#${prefix}-present-body tr`);
+          data.presentList.forEach((item, idx) => {
+            if (idx < rows.length) {
+              const tds = rows[idx].querySelectorAll('td[contenteditable="true"]');
+              if (formId === 'form-17') {
+                if (tds.length >= 4) {
+                  tds[0].innerText = item.name || '';
+                  tds[1].innerText = item.job || '';
+                  tds[2].innerText = item.timeIn || '06:50';
+                  tds[3].innerText = item.timeOut || '13:15';
+                }
+              } else if (formId === 'form-17b') {
+                if (tds.length >= 5) {
+                  tds[0].innerText = item.name || '';
+                  tds[1].innerText = item.job || '';
+                  tds[2].innerText = item.timeIn || '06:50';
+                  tds[3].innerText = item.timeOut || '13:15';
+                  tds[4].innerText = item.notes || 'حضور منتظم';
+                }
+              }
+            }
+          });
+        }
+
+        if (Array.isArray(data.absentList)) {
+          const rows = document.querySelectorAll(`#${prefix}-absent-body tr`);
+          data.absentList.forEach((item, idx) => {
+            if (idx < rows.length) {
+              const tds = rows[idx].querySelectorAll('td[contenteditable="true"]');
+              if (tds.length >= 3) {
+                tds[0].innerText = item.name || '';
+                tds[1].innerText = item.job || '';
+                tds[2].innerText = item.reason || '';
+              }
+            }
+          });
+        }
+      } else if (formId === 'form-19') {
+        if (data.school) document.getElementById('f19-school').innerText = data.school;
+        if (data.nationalId) document.getElementById('f19-national-id').innerText = data.nationalId;
+        if (data.name) document.getElementById('f19-name').innerText = data.name;
+        if (data.specialization) document.getElementById('f19-specialization').innerText = data.specialization;
+        if (data.level) document.getElementById('f19-level').innerText = data.level;
+        if (data.jobNo) document.getElementById('f19-job-no').innerText = data.jobNo;
+        if (data.currentJob) document.getElementById('f19-current-job').innerText = data.currentJob;
+        if (data.principalName) {
+          document.getElementById('f19-principal').innerText = data.principalName;
+          document.getElementById('f19-principal-sign').innerText = data.principalName;
+        }
+        if (data.hours) document.getElementById('f19-hours').innerText = data.hours;
+        if (data.deductDays) document.getElementById('f19-deduct-days').innerText = data.deductDays;
+      } else if (formId === 'form-21') {
+        if (data.school) document.getElementById('f21-school').innerText = data.school;
+        if (data.nationalId) document.getElementById('f21-national-id').innerText = data.nationalId;
+        if (data.name) document.getElementById('f21-name').innerText = data.name;
+        if (data.specialization) document.getElementById('f21-specialization').innerText = data.specialization;
+        if (data.level) document.getElementById('f21-level').innerText = data.level;
+        if (data.grade) document.getElementById('f21-grade').innerText = data.grade;
+        if (data.jobNo) document.getElementById('f21-job-no').innerText = data.jobNo;
+        if (data.jobTitle) document.getElementById('f21-job-title').innerText = data.jobTitle;
+        if (data.absentDays) document.getElementById('f21-absent-days').innerText = data.absentDays;
+        if (data.deductDays) {
+          document.getElementById('f21-deduct-days').innerText = data.deductDays;
+          document.getElementById('f21-deduct-days-body').innerText = data.deductDays;
+        }
+        if (data.date) document.getElementById('f21-date').innerText = data.date;
+        if (data.principalName) {
+          document.getElementById('f21-principal').innerText = data.principalName;
+          document.getElementById('f21-principal-sign').innerText = data.principalName;
+        }
+      } else if (formId === 'form-22') {
+        if (data.school) document.getElementById('f22-school').innerText = data.school;
+        if (data.nationalId) document.getElementById('f22-national-id').innerText = data.nationalId;
+        if (data.name) document.getElementById('f22-name').innerText = data.name;
+        if (data.specialization) document.getElementById('f22-specialization').innerText = data.specialization;
+        if (data.level) document.getElementById('f22-level').innerText = data.level;
+        if (data.grade) document.getElementById('f22-grade').innerText = data.grade;
+        if (data.jobNo) document.getElementById('f22-job-no').innerText = data.jobNo;
+        if (data.absentDays) document.getElementById('f22-absent-days').innerText = data.absentDays;
+
+        if (Array.isArray(data.logs)) {
+          const rows = document.querySelectorAll('#f22-log-body tr');
+          data.logs.forEach((item, idx) => {
+            if (idx < rows.length) {
+              const tds = rows[idx].querySelectorAll('td[contenteditable="true"]');
+              if (tds.length >= 9) {
+                tds[0].innerText = item.date || '1445/05/10';
+                tds[1].innerText = item.exitMin || '30';
+                tds[2].innerText = item.exitHour || '09';
+                tds[3].innerText = 'موقع';
+                tds[4].innerText = item.reason || 'مراجعة أصلية';
+                tds[5].innerText = item.returnMin || '15';
+                tds[6].innerText = item.returnHour || '10';
+                tds[7].innerText = 'موقع';
+                tds[8].innerText = item.notes || 'مقبول';
+              }
+            }
+          });
+        }
+      } else if (formId === 'form-49') {
+        if (data.principalName) document.getElementById('f49-principal').innerText = data.principalName;
+
+        if (Array.isArray(data.teachers)) {
+          const rows = document.querySelectorAll('#f49-plan-body tr');
+          data.teachers.forEach((item, idx) => {
+            const rowPairIndex = idx * 2;
+            if (rowPairIndex < rows.length) {
+              const r1 = rows[rowPairIndex];
+              const r2 = rows[rowPairIndex + 1];
+
+              const r1Editable = r1.querySelectorAll('td[contenteditable="true"]');
+              const r2Editable = r2?.querySelectorAll('td[contenteditable="true"]');
+
+              if (r1Editable.length >= 12) {
+                r1Editable[0].innerText = item.name || '';
+                r1Editable[1].innerText = item.specialization || '';
+                r1Editable[2].innerText = item.v1Day || 'الأحد';
+                r1Editable[3].innerText = item.v1Date || '1445/05/01';
+                r1Editable[4].innerText = item.v1Activity || 'درس نموذجي';
+                r1Editable[5].innerText = item.v1Class || '1/2';
+                r1Editable[6].innerText = item.v1Unit || 'الأولى';
+
+                r1Editable[7].innerText = item.v2Day || 'الأربعاء';
+                r1Editable[8].innerText = item.v2Date || '1445/06/10';
+                r1Editable[9].innerText = item.v2Activity || 'متابعة أداء';
+                r1Editable[10].innerText = item.v2Class || '1/2';
+                r1Editable[11].innerText = item.v2Unit || 'الثالثة';
+              }
+            }
+          });
+        }
+      }
+    }
+
+    // AI Tab 2: Draft Official Decision
+    async function triggerGeminiDrafting() {
+      const prompt = document.getElementById('ai-draft-prompt').value.trim();
+      if (!prompt) {
+        showNotification('يرجى كتابة موضوع القرار أو المبرر المطلوب صياغته.');
+        return;
+      }
+
+      const loadingEl = document.getElementById('ai-loading');
+      const btnEl = document.getElementById('btn-generate-draft');
+      const container = document.getElementById('ai-draft-output-container');
+      const output = document.getElementById('ai-draft-output');
+
+      loadingEl.classList.remove('hidden');
+      btnEl.disabled = true;
+      container.classList.add('hidden');
+
+      try {
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          systemInstruction: {
+            parts: [{
+              text: "أنت خبير قانوني وإداري في أنظمة ولوائح وزارة التعليم السعودية والخدمة المدنية. اكتب صياغة رسمية محكمة وموجزة لقرار إداري أو تفنيد عذر بأسلوب لغوي رصين وبنود واضحة."
+            }]
+          }
+        };
+
+        const result = await callGeminiAPI(payload);
+        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (text) {
+          output.innerText = text;
+          container.classList.remove('hidden');
+        } else {
+          showNotification('لم يتم الحصول على استجابة.');
+        }
+      } catch (err) {
+        console.error(err);
+        showNotification('حدث خطأ أثناء الصياغة.');
+      } finally {
+        loadingEl.classList.add('hidden');
+        btnEl.disabled = false;
+      }
+    }
+
+    function copyDraftText() {
+      const text = document.getElementById('ai-draft-output').innerText;
+      if (text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showNotification('تم نسخ النص الصياغي للحافظة بنجاح!');
+      }
+    }
+
+    // AI Tab 3: Audit Current Form Content
+    async function triggerGeminiAudit() {
+      let activeForm = currentTab;
+      if (activeForm === 'all') activeForm = 'form-17';
+
+      const section = document.getElementById(activeForm);
+      if (!section) return;
+
+      const formHtmlText = section.innerText;
+      const loadingEl = document.getElementById('ai-loading');
+      const btnEl = document.getElementById('btn-generate-audit');
+      const container = document.getElementById('ai-audit-output-container');
+      const output = document.getElementById('ai-audit-output');
+
+      loadingEl.classList.remove('hidden');
+      btnEl.disabled = true;
+      container.classList.add('hidden');
+
+      try {
+        const payload = {
+          contents: [{
+            parts: [{
+              text: `قم بمراجعة ودراسة نص هذا النموذج الإداري واستخراج الملاحظات والتوصيات الإدارية والنظامية:\n\n${formHtmlText}`
+            }]
+          }],
+          systemInstruction: {
+            parts: [{
+              text: "أنت مفتش ومدقق إداري بوزارة التعليم. قم بفحص النموذج واذكر في نقاط مختصرة: 1) الحقول المكتملة والمفقودة. 2) مدى التوافق مع لائحة الانضباط الوظيفي. 3) توصيات سريعة قبل طباعة النموذج وتوقيعه."
+            }]
+          }
+        };
+
+        const result = await callGeminiAPI(payload);
+        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (text) {
+          output.innerText = text;
+          container.classList.remove('hidden');
+        } else {
+          showNotification('تعذر استخراج التقرير.');
+        }
+      } catch (err) {
+        console.error(err);
+        showNotification('حدث خطأ أثناء المراجعة والتدقيق.');
+      } finally {
+        loadingEl.classList.add('hidden');
+        btnEl.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
