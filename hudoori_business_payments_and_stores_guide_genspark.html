@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>دليل حضوري سمارت برو: التأسيس، المدفوعات، والمتاجر</title>
+  <meta name="description" content="دليل تنفيذي عربي لتأسيس وتشغيل نشاط رقمي فردي في السعودية لبيع اشتراكات برمجية ونشر تطبيقات ومتجر Chrome.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root{--brand:#2E7D5B;--navy:#12304A;--bg:#f7faf8;--card:#ffffff;--text:#153042;--muted:#5d6b77;--border:#d9e5de;--accent:#e8f4ee;}
+    body.dark{--bg:#0f1b22;--card:#16242d;--text:#e9f2f7;--muted:#b4c0c8;--border:#28404d;--accent:#173327;}
+    html{scroll-behavior:smooth} body{font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text)}
+    .navbar{background:rgba(18,48,74,.96)!important;backdrop-filter:blur(8px)} .navbar-brand{font-weight:800}
+    .hero{background:linear-gradient(135deg,var(--navy),#1b4c70 58%,var(--brand));color:#fff;padding:5.5rem 0 3rem}
+    .hero .lead{opacity:.95}.meta-chip{display:inline-flex;gap:.35rem;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.45rem .8rem;margin:.2rem;font-size:.92rem}
+    .layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:1.2rem}.side{position:sticky;top:86px;max-height:calc(100vh - 100px);overflow:auto}
+    .toc,.cardx{background:var(--card);border:1px solid var(--border);border-radius:1rem;box-shadow:0 10px 30px rgba(18,48,74,.06)}
+    .toc a{display:block;color:var(--text);text-decoration:none;padding:.55rem .75rem;border-radius:.75rem}.toc a:hover{background:var(--accent)}
+    main section{scroll-margin-top:88px;margin-bottom:1rem}.section-title{display:flex;align-items:center;gap:.7rem}.section-title .num{width:2.2rem;height:2.2rem;border-radius:50%;display:inline-grid;place-items:center;background:var(--brand);color:#fff;font-weight:800}
+    .subtle{color:var(--muted)} .table-responsive{border-radius:1rem;border:1px solid var(--border)} table{margin:0}.table thead th{background:#eef5f1;color:#17394f} body.dark .table thead th{background:#1c323d;color:#edf6fb} body.dark .table, body.dark .table td, body.dark .table th{--bs-table-bg:transparent;color:var(--text)}
+    .badge-state{border-radius:999px;padding:.38rem .68rem;font-weight:700;font-size:.82rem;display:inline-block}.official{background:#dff4e8;color:#11633d}.verify{background:#fff2cc;color:#8a6700}.variable{background:#e7eefc;color:#184e9b}.recommend{background:#e7f1ff;color:#0d5cab}.warn{background:#fde7e7;color:#a12c2c}
+    .callout{border-right:5px solid var(--brand);background:var(--card);padding:1rem;border-radius:1rem;border:1px solid var(--border)}
+    .mini{font-size:.92rem}.checklist li{margin-bottom:.35rem}.source-list li{margin-bottom:.4rem}.flow svg{max-width:100%;height:auto}.muted-box{background:var(--accent);border:1px dashed var(--border);border-radius:1rem;padding:.9rem}
+    .floating{position:fixed;left:18px;bottom:18px;display:flex;flex-direction:column;gap:.5rem;z-index:1030}.floating .btn{border-radius:999px}
+    footer{padding:2rem 0 4rem}
+    @media (max-width: 991.98px){.layout{grid-template-columns:1fr}.side{position:static;max-height:none}}
+    @media (max-width: 390px){.hero{padding-top:5rem}.h1, h1{font-size:1.55rem}.table{font-size:.84rem}.meta-chip{font-size:.78rem;padding:.35rem .6rem}}
+    @media print{.navbar,.floating,.side,.btn-print-hide{display:none!important}.hero{padding:1rem 0;background:#fff;color:#000}body{background:#fff;color:#000}.toc,.cardx,.callout{box-shadow:none}.layout{display:block}a{text-decoration:none;color:#000}}
+  </style>
+  <style id="shared-responsive-style">
+    html { direction: rtl; }
+    body { min-width: 0; overflow-wrap: anywhere; font-family: "Cairo", system-ui, sans-serif !important; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    .site-home-nav { width: 100%; background: rgba(255,255,255,.96); border-bottom: 1px solid #dce7e3; box-shadow: 0 2px 10px rgba(20,50,40,.06); }
+    .site-home-nav__inner { width: min(1140px, calc(100% - 24px)); margin: 0 auto; padding: .65rem 0; }
+    .site-home-nav__link { display: inline-flex; min-height: 42px; align-items: center; padding: .5rem 1rem; border-radius: .75rem; background: #176b4d; color: #fff !important; font-weight: 700; text-decoration: none !important; }
+    @media (max-width: 767.98px) { body { max-width: 100vw; overflow-x: hidden; } table { display: block; width: 100% !important; overflow-x: auto; } }
+    @media print { .site-home-nav { display: none !important; } }
+  </style>
+</head>
+<body>
+  <nav class="site-home-nav" aria-label="التنقل الرئيسي"><div class="site-home-nav__inner"><a class="site-home-nav__link" href="./index.html">⌂ الرئيسية</a></div></nav>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container-fluid container-xl">
+    <a class="navbar-brand" href="#top">حضوري سمارت برو</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#summary">الملخص التنفيذي</a></li>
+        <li class="nav-item"><a class="nav-link" href="#payment-architecture">المعمارية</a></li>
+        <li class="nav-item"><a class="nav-link" href="#decision">القرار التنفيذي</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sources">المصادر</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="hero" id="top">
+  <div class="container-xl">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-8">
+        <h1 class="display-6 fw-bold mb-3">دليل تأسيس وتشغيل نشاط رقمي فردي في السعودية لبيع اشتراكات برمجية ونشر تطبيقات ومتجر Chrome</h1>
+        <p class="lead mb-3">هذا الدليل أُعد لمشروع <strong>حضوري سمارت برو</strong> بناءً على بحث ويب فعلي حديث، مع أولوية للمصادر الحكومية السعودية والوثائق الرسمية للمتاجر وبوابات الدفع. الهدف منه دعم القرار التنفيذي، وليس تقديم استشارة قانونية أو ضريبية ملزمة.</p>
+        <div>
+          <span class="meta-chip"><i class="bi bi-calendar-check"></i> تاريخ إعداد البحث: 2026-07-26</span>
+          <span class="meta-chip"><i class="bi bi-geo-alt"></i> النطاق: المملكة العربية السعودية</span>
+          <span class="meta-chip"><i class="bi bi-shield-check"></i> آخر تحقق: 2026-07-26</span>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="cardx p-3 text-dark">
+          <h2 class="h5 fw-bold">منهجية التصنيف</h2>
+          <p class="mini mb-2"><span class="badge-state official">مؤكد رسميًا</span> نص أو صفحة رسمية تم التحقق منها مباشرة.</p>
+          <p class="mini mb-2"><span class="badge-state verify">يحتاج تحققًا</span> لم نستخرج النص الكامل أو توجد فجوة تنفيذية/تعاقدية.</p>
+          <p class="mini mb-2"><span class="badge-state variable">متغير</span> رسوم أو شروط تعتمد على التعاقد أو المنطقة أو برنامج خاص.</p>
+          <p class="mini mb-0"><span class="badge-state recommend">توصية</span> استنتاج عملي من البحث، وليس متطلبًا نظاميًا بحد ذاته.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container-xl py-4">
+  <div class="layout">
+    <aside class="side">
+      <div class="toc p-3">
+        <h2 class="h6 fw-bold mb-3">محتويات الدليل</h2>
+        <a href="#summary">الملخص التنفيذي</a>
+        <a href="#freelance">1) وثيقة العمل الحر</a>
+        <a href="#banking">2) الحساب البنكي</a>
+        <a href="#gateways">3) بوابات الدفع</a>
+        <a href="#payment-architecture">4) التفعيل الآلي بعد الدفع</a>
+        <a href="#regulations">5) الأنظمة السعودية</a>
+        <a href="#google-play">6) Google Play</a>
+        <a href="#apple">7) Apple Developer / App Store</a>
+        <a href="#chrome">8) Chrome Web Store</a>
+        <a href="#stores-compare">9) مقارنة المتاجر</a>
+        <a href="#decision">10) القرار التنفيذي</a>
+        <a href="#sources">فهرس المصادر</a>
+      </div>
+    </aside>
+    <main>
+      <section id="summary" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">★</span><h2 class="h4 m-0">الملخص التنفيذي</h2></div>
+        <div class="row g-3">
+          <div class="col-lg-8">
+            <p>الخلاصة العملية من هذا البحث: <span class="badge-state recommend">توصية</span> يمكن بدء الإطلاق الأولي لمشروع حضوري سمارت برو عبر <strong>وثيقة العمل الحر + حساب بنكي مناسب + بوابة دفع تقبل العمل الحر رسميًا أو تعاقديًا</strong> للموقع وإضافة Chrome، مع فتح <strong>حساب Google Play شخصي</strong> إذا كان الهدف إطلاق Android سريعًا. لكن عند الحاجة إلى <strong>اسم بائع مؤسسي ظاهر، قبول أوسع لدى البنوك/البوابات، أو مسار iOS باسم العلامة بدل الاسم الشخصي</strong> يصبح التحول إلى <strong>مؤسسة فردية</strong> أقوى تشغيليًا وقانونيًا. </p>
+            <div class="callout mini">
+              <strong>حكم مختصر:</strong> ابدأ الآن بوثيقة العمل الحر إذا كانت أولويتك السرعة واختبار السوق، لكن خطط مبكرًا لنقطة انتقال إلى مؤسسة فردية قبل التوسع الكبير أو قبل إطلاق iOS إذا كان مهمًا أن يظهر اسم العلامة كبائع بدل الاسم الشخصي.
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="muted-box h-100">
+              <h3 class="h6 fw-bold">أهم 5 نتائج</h3>
+              <ol class="mini mb-0">
+                <li>وثيقة العمل الحر ليست سجلًا تجاريًا ولا شخصية اعتبارية مستقلة.</li>
+                <li>بوابة <strong>Moyasar</strong> تُظهر قبولًا رسميًا للعمل الحر، بينما بوابات أخرى تتطلب/ترجح السجل التجاري أو تحتاج تأكيدًا.</li>
+                <li>Google Play يفرض Play Billing داخل التطبيق للسلع والخدمات الرقمية.</li>
+                <li>Apple يفرض In-App Purchase للخصائص الرقمية داخل التطبيق، وحساب الفرد يُظهر الاسم الشخصي كبائع.</li>
+                <li>Chrome Web Store لا ينبغي اعتباره قناة دفع؛ الاشتراك يباع عادةً من موقعك مع ترخيص خارجي.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="freelance" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">1</span><h2 class="h4 m-0">وثيقة العمل الحر</h2></div>
+        <p><span class="badge-state official">مؤكد رسميًا</span> وزارة الموارد البشرية والتنمية الاجتماعية تعرض خدمة إصدار/تجديد وثيقة العمل الحر كخدمة إلكترونية، وقرارًا وزاريًا يقرر أن التصريح مدته سنة قابلة للتجديد. كما تُظهر المنصة معلومات عملية مهمة: الوثيقة حاليًا <strong>بلا رسوم</strong>، ويستطيع المستفيد امتلاك <strong>حتى 5 وثائق</strong> لمهن مختلفة، وتوجد مزايا مثل فتح حساب بنكي، واستخدام حلول الدفع والفوترة الإلكترونية، والتسجيل في المتاجر الإلكترونية. </p>
+        <ul class="checklist">
+          <li><strong>طبيعتها:</strong> <span class="badge-state official">مؤكد رسميًا</span> وثيقة/تصريح لمزاولة نشاط مستقل؛ <strong>ليست</strong> سجلًا تجاريًا ولا شركة ولا مؤسسة بذاتها.</li>
+          <li><strong>الأهلية الأساسية:</strong> سعودي، العمر 18+، حساب أبشر فعّال، واستيفاء متطلبات الإثبات داخل المنصة بحسب المهنة. </li>
+          <li><strong>المدة والتجديد:</strong> سنة واحدة قابلة للتجديد. </li>
+          <li><strong>الرسوم الحالية:</strong> مجانية حاليًا بحسب صفحات HRSD/المنصة.</li>
+          <li><strong>الفواتير والمدفوعات:</strong> تسمح عمليًا بفتح حساب وبالاستفادة من وسائل الدفع والفوترة، لكن هذا لا يغني عن التزامات الزكاة/الضريبة متى انطبقت.</li>
+          <li><strong>المهن التقنية المناسبة:</strong> <span class="badge-state verify">يحتاج تحققًا</span> لم نستخرج في هذه الجلسة القائمة الحية الكاملة لمسميات المهن التقنية من داخل منصة العمل الحر؛ لذا يجب تأكيد المسمى المتاح وقت الإصدار داخل المنصة.</li>
+          <li><strong>توصية اختيار المسمى:</strong> <span class="badge-state recommend">توصية</span> اختر أقرب مسمى مباشر يغطي نموذج الربح لا التنفيذ فقط، مثل «تطوير التطبيقات» أو «تطوير البرمجيات» إن كان ظاهرًا؛ وتجنب مسمى شديد الضيق لا يعكس بيع اشتراك SaaS.</li>
+        </ul>
+        <div class="table-responsive mt-3">
+          <table class="table table-bordered align-middle">
+            <thead><tr><th>المقارنة</th><th>فرد بلا وثيقة</th><th>فرد بوثيقة عمل حر</th><th>مؤسسة فردية</th><th>شركة</th></tr></thead>
+            <tbody>
+              <tr><th>الشخصية القانونية</th><td>لا إطار مهني واضح</td><td>نشاط مستقل موثق لكن بلا شخصية اعتبارية مستقلة</td><td>كيان تجاري مرتبط بالمالك</td><td>كيان اعتباري/تنظيمي أقوى بحسب الشكل</td></tr>
+              <tr><th>الاسم التجاري</th><td>ضعيف الترسيم</td><td>قد تسوّق بعلامتك لكن الوثيقة ليست اسمًا تجاريًا</td><td>أفضل لإدارة الاسم التجاري</td><td>الأقوى للعلامة والتوسع</td></tr>
+              <tr><th>الحساب البنكي</th><td>غالبًا شخصي فقط</td><td>ممكن لدى بعض البنوك رسميًا</td><td>أوسع قبولًا</td><td>أوسع قبولًا</td></tr>
+              <tr><th>بوابات الدفع</th><td>صعب</td><td>ممكن لكن محدود نسبيًا</td><td>أفضل وأوسع</td><td>الأفضل</td></tr>
+              <tr><th>إصدار الفواتير</th><td>ضعيف تنظيميًا</td><td>ممكن مع الالتزامات النظامية عند الانطباق</td><td>أوضح</td><td>أوضح</td></tr>
+              <tr><th>الضرائب/الزكاة</th><td>قد تنشأ عند وجود نشاط اقتصادي</td><td>تنطبق بحسب النشاط والحدود</td><td>أوضح محاسبيًا</td><td>أوضح محاسبيًا</td></tr>
+              <tr><th>التعاقدات</th><td>أضعف</td><td>متوسط</td><td>أفضل</td><td>أفضل جدًا</td></tr>
+              <tr><th>Google Play / Apple</th><td>ممكن كفرد</td><td>ممكن كفرد</td><td>يمهد لمسار مؤسسي</td><td>الأفضل لاسم البائع المؤسسي</td></tr>
+              <tr><th>التوسع والتوظيف</th><td>محدود</td><td>محدود</td><td>أفضل</td><td>الأفضل</td></tr>
+              <tr><th>المخاطر والمسؤولية</th><td>مرتفعة على الشخص</td><td>مرتفعة على الشخص</td><td>مرتبطة بالمالك بقوة</td><td>تعتمد على الشكل القانوني</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3 mini">
+          <strong>متى يصبح الانتقال للمؤسسة الفردية أفضل؟</strong> عندما تحتاج اسم بائع/كيان أوضح، أو بوابة تتطلب سجلًا تجاريًا، أو اعتمادًا بنكيًا/تعاقديًا أعلى، أو خطة توسع تشمل موظفين أو iOS باسم العلامة بدل الاسم الشخصي.
+        </div>
+      </section>
+
+      <section id="banking" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">2</span><h2 class="h4 m-0">الحساب البنكي للعمل الحر</h2></div>
+        <p>لا ينبغي افتراض أن كل بنك يعامل حامل وثيقة العمل الحر بالطريقة نفسها. الصفحات الرسمية تُظهر تباينًا واضحًا: بعض البنوك لديها صفحة صريحة لحاملي الوثيقة، وبعضها يعرض فقط حسابات أعمال عامة دون نص واضح على العمل الحر.</p>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered align-middle">
+            <thead><tr><th>البنك</th><th>هل توجد صفحة صريحة للعمل الحر؟</th><th>ما الذي يظهر رسميًا؟</th><th>IBAN/الفتح الرقمي</th><th>ملاحظات عملية</th></tr></thead>
+            <tbody>
+              <tr><td>الإنماء</td><td><span class="badge-state official">نعم</span></td><td>حساب مخصص لحاملي وثيقة العمل الحر مع تتبع أرصدة، تحويلات، سداد، مدفوعات حكومية، وكشوف نقاط البيع</td><td>فتح رقمي عبر النفاذ الوطني، والحساب يُفتح فورًا وفق الصفحة</td><td>أفضل مرشح أولي إذا أردت مسارًا موثقًا رسميًا لحامل الوثيقة</td></tr>
+              <tr><td>الراجحي</td><td><span class="badge-state official">نعم</span></td><td>صفحة فتح حساب الأعمال تعرض خيارات: منشأة فردية، شركة ذات مالك واحد، العمل الحر، شركة متعددة الملاك</td><td>فتح رقمي ظاهر</td><td>يلزم سؤال البنك عن اسم الحساب الظاهر وربط بوابات الدفع</td></tr>
+              <tr><td>بنك البلاد</td><td><span class="badge-state verify">غير صريح للعمل الحر</span></td><td>فتح حساب جاري رقمي للمنشآت مع كشف عمليات التجارة الإلكترونية وIBAN ورسالة ترحيبية</td><td>نعم، فتح رقمي وإرسال IBAN</td><td>مناسب أكثر كحساب منشأة؛ يلزم سؤال مباشر عن قبول وثيقة العمل الحر</td></tr>
+              <tr><td>بنك الرياض</td><td><span class="badge-state verify">غير صريح للعمل الحر</span></td><td>حساب جارٍ للأعمال بميزات مراقبة معاملات وإشعارات وأون لاين الرياض</td><td>يوجد طلب أون لاين لكن مع خطوات طباعة/تحقق توقيع</td><td>تحتاج تأكيد نوع الحساب الممكن لحامل الوثيقة</td></tr>
+              <tr><td>SAB / الأول</td><td><span class="badge-state verify">غير صريح للعمل الحر</span></td><td>فتح حساب أعمال رقمي مع رفع إثبات الهوية ووثائق العمل التجاري</td><td>نعم</td><td>الصفحة تتحدث عن وثائق عمل تجاري؛ ترجح مسار المنشأة أكثر من العمل الحر</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout mt-3 mini">
+          <strong>أسئلة إلزامية للبنك قبل الفتح:</strong> هل الحساب باسم شخصي أم اسم نشاط؟ هل يُسمح بربط بوابة دفع؟ ما المستندات؟ ماذا يحدث إذا انتهت الوثيقة؟ هل هناك حدود على المدفوعات الواردة أو نشاط الاشتراكات الرقمية؟
+        </div>
+      </section>
+
+      <section id="gateways" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">3</span><h2 class="h4 m-0">بوابات الدفع الإلكترونية المناسبة</h2></div>
+        <p>أهم نتيجة هنا أن <strong>القبول النظامي/التعاقدي للعمل الحر يختلف جذريًا بين البوابات</strong>. لذلك يجب التفريق بين بوابة <em>تعلن قبول العمل الحر صراحةً</em>، وبوابة <em>تتطلب سجلًا تجاريًا أو حسابًا مؤسسيًا</em>، وبوابة <em>لا تنشر شروطًا كافية وتحتاج تأكيدًا مباشرًا</em>.</p>
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle">
+            <thead><tr>
+              <th>البوابة</th><th>قبول وثيقة العمل الحر</th><th>الحاجة لسجل تجاري</th><th>الرسوم</th><th>الاشتراكات/التكرار</th><th>Webhooks / API / Sandbox</th><th>تعليق عملي</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>Moyasar</td><td><span class="badge-state official">نعم</span></td><td>بديل: سجل تجاري أو رخصة/وثيقة عمل حر + حساب بنكي تجاري سعودي</td><td><span class="badge-state variable">تتطلب عرض سعر</span></td><td>Tokenization + Webhooks موثقة</td><td>موثقة رسميًا</td><td>أقوى مرشح مبدئيًا للموقع وChrome مع العمل الحر</td></tr>
+              <tr><td>Amazon Payment Services</td><td><span class="badge-state official">لا يظهر قبول العمل الحر</span></td><td>نعم: رخصة/سجل + حساب بنكي Corporate</td><td><span class="badge-state official">معلنة جزئيًا</span> مدى 1%، STC Pay 0.9%، Apple Pay بالسعر القياسي، بلا رسوم إعداد/تكامل في الخطة القياسية</td><td>Webhooks + Refunds + وثائق قوية</td><td>موثقة رسميًا</td><td>ممتاز تقنيًا لكنه أنسب للمنشأة من حامل الوثيقة</td></tr>
+              <tr><td>PayTabs</td><td><span class="badge-state verify">يحتاج تأكيدًا</span></td><td>صفحة KYC للسعودية تعرض Trade License وبنك وIBAN</td><td><span class="badge-state variable">تتطلب عرض سعر</span></td><td>Recurring موثق</td><td>توثيق فني جيد</td><td>لا تعتمد على قبول العمل الحر قبل تأكيد مكتوب من المبيعات</td></tr>
+              <tr><td>HyperPay</td><td><span class="badge-state verify">يحتاج تأكيدًا</span></td><td>المستندات تختلف حسب البنك/الدولة</td><td><span class="badge-state variable">تتطلب عرض سعر</span></td><td>Recurring + Tokenization + Server-to-Server</td><td>توثيق جيد</td><td>قوي تقنيًا لكن القبول التعاقدي يجب حسمه مبكرًا</td></tr>
+              <tr><td>Geidea</td><td><span class="badge-state verify">غير مثبت</span></td><td>تميل لمسار السجل التجاري</td><td><span class="badge-state variable">تتطلب عرض سعر</span></td><td>Subscription API + Tokenization</td><td>توثيق متقدم</td><td>مرشح جيد بعد قيام مؤسسة أو عند موافقة مكتوبة</td></tr>
+              <tr><td>Tap Payments</td><td><span class="badge-state verify">غير مثبت</span></td><td>تميل لوثائق شركة/عنوان رسمي</td><td><span class="badge-state variable">تتطلب عرض سعر</span></td><td>Webhooks + Idempotency + recurring lifecycle</td><td>موثق تقنيًا</td><td>لا تبدأ به قبل تأكيد قبول العمل الحر</td></tr>
+              <tr><td>MyFatoorah</td><td><span class="badge-state verify">غير محسوم من المصادر الحالية</span></td><td>غير كافٍ من المصادر الحالية</td><td><span class="badge-state variable">تتطلب عرض سعر</span></td><td>Recurring V2 + partial refunds</td><td>توثيق جيد</td><td>تقنيًا جيد لكن قبولك التعاقدي يجب اختباره بالمبيعات</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row g-3 mt-1">
+          <div class="col-lg-6"><div class="muted-box mini"><strong>الأكثر جاهزية الآن:</strong> Moyasar للمسار القائم على وثيقة العمل الحر، وAPS للمسار القائم على منشأة/حساب مؤسسي.</div></div>
+          <div class="col-lg-6"><div class="muted-box mini"><strong>قاعدة تنفيذية:</strong> إذا كانت الرسوم غير منشورة في مصدر رسمي، اعتبرها <strong>تتطلب عرض سعر</strong> ولا تبنِ عليها نموذجك المالي النهائي.</div></div>
+        </div>
+      </section>
+
+      <section id="payment-architecture" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">4</span><h2 class="h4 m-0">معمارية آمنة للتفعيل الآلي بعد الدفع مع Supabase</h2></div>
+        <p>أفضل ممارسة لمشروع SaaS/ترخيص مثل حضوري سمارت برو هي أن يكون <strong>الخادم هو مصدر الحقيقة</strong>، وليس شاشة «تم الدفع». </p>
+        <div class="flow mb-3">
+          <svg viewBox="0 0 1100 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="مخطط تدفق الدفع والتفعيل">
+            <defs><style>.b{fill:#fff;stroke:#2E7D5B;stroke-width:2}.t{font:700 18px Cairo,sans-serif;fill:#12304A}.s{font:600 14px Cairo,sans-serif;fill:#345}.a{stroke:#12304A;stroke-width:2;marker-end:url(#m)} .bg{fill:#f3faf6;stroke:#b9d7c8;stroke-width:1}</style><marker id="m" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#12304A"/></marker></defs>
+            <rect x="20" y="20" width="1060" height="500" rx="18" class="bg"/>
+            <rect x="60" y="80" width="170" height="70" rx="14" class="b"/><text x="145" y="110" text-anchor="middle" class="t">العميل</text><text x="145" y="132" text-anchor="middle" class="s">Android / Web / Chrome</text>
+            <rect x="290" y="80" width="220" height="70" rx="14" class="b"/><text x="400" y="110" text-anchor="middle" class="t">Edge Function</text><text x="400" y="132" text-anchor="middle" class="s">create_payment_intent</text>
+            <rect x="570" y="80" width="210" height="70" rx="14" class="b"/><text x="675" y="110" text-anchor="middle" class="t">بوابة الدفع</text><text x="675" y="132" text-anchor="middle" class="s">Checkout / Tokenization</text>
+            <rect x="840" y="80" width="180" height="70" rx="14" class="b"/><text x="930" y="110" text-anchor="middle" class="t">صفحة الدفع</text><text x="930" y="132" text-anchor="middle" class="s">Redirect/Hosted</text>
+            <rect x="570" y="240" width="210" height="70" rx="14" class="b"/><text x="675" y="270" text-anchor="middle" class="t">Webhook</text><text x="675" y="292" text-anchor="middle" class="s">تحقق توقيع + حدث</text>
+            <rect x="290" y="240" width="220" height="70" rx="14" class="b"/><text x="400" y="270" text-anchor="middle" class="t">Webhook Handler</text><text x="400" y="292" text-anchor="middle" class="s">Idempotency + Verify API</text>
+            <rect x="60" y="240" width="170" height="70" rx="14" class="b"/><text x="145" y="270" text-anchor="middle" class="t">Postgres</text><text x="145" y="292" text-anchor="middle" class="s">payments / events</text>
+            <rect x="290" y="390" width="220" height="70" rx="14" class="b"/><text x="400" y="420" text-anchor="middle" class="t">Subscription Engine</text><text x="400" y="442" text-anchor="middle" class="s">entitlements / devices</text>
+            <rect x="570" y="390" width="210" height="70" rx="14" class="b"/><text x="675" y="420" text-anchor="middle" class="t">Audit Log</text><text x="675" y="442" text-anchor="middle" class="s">أثر كامل لكل حدث</text>
+            <rect x="840" y="390" width="180" height="70" rx="14" class="b"/><text x="930" y="420" text-anchor="middle" class="t">لوحة الإدارة</text><text x="930" y="442" text-anchor="middle" class="s">مراجعة/استرداد/نزاع</text>
+            <line x1="230" y1="115" x2="290" y2="115" class="a"/><line x1="510" y1="115" x2="570" y2="115" class="a"/><line x1="780" y1="115" x2="840" y2="115" class="a"/>
+            <line x1="675" y1="150" x2="675" y2="240" class="a"/><line x1="570" y1="275" x2="510" y2="275" class="a"/><line x1="290" y1="275" x2="230" y2="275" class="a"/>
+            <line x1="400" y1="310" x2="400" y2="390" class="a"/><line x1="510" y1="425" x2="570" y2="425" class="a"/><line x1="780" y1="425" x2="840" y2="425" class="a"/>
+          </svg>
+        </div>
+        <ol class="checklist">
+          <li>إنشاء <code>payment_intent</code> من الخادم فقط، وتخزين user_id وplan_id وamount وcurrency وgateway_reference وstatus="created".</li>
+          <li>إعادة رابط الدفع/الـ checkout فقط للعميل.</li>
+          <li>استقبال الـ webhook على Edge Function منفصلة، مع التحقق من التوقيع/السر، والتحقق من عنوان المصدر إن كانت البوابة تدعمه.</li>
+          <li>قبل أي تفعيل: استدعِ API البوابة عند الحاجة لاسترداد الحالة النهائية والاعتماد على <strong>gateway_reference</strong> و<em>event id</em>.</li>
+          <li>تحقق من <strong>المبلغ + العملة + الخطة + المستخدم + البيئة live/test</strong>.</li>
+          <li>طبق <strong>Idempotency</strong> عبر جدول للأحداث الفريدة أو قيد فريد على event_id حتى لا يُعالج الإشعار مرتين.</li>
+          <li>فعّل الاشتراك فقط بعد حالة مدفوعة/مؤكدة، وليس بعد صفحة return_url.</li>
+          <li>سجل عمليات refund / void / recurring_failed / chargeback في الجداول وسجل التدقيق.</li>
+        </ol>
+        <div class="table-responsive mt-3">
+          <table class="table table-bordered align-middle">
+            <thead><tr><th>الجدول المقترح</th><th>حقول أساسية</th><th>الغرض</th></tr></thead>
+            <tbody>
+              <tr><td>payment_intents</td><td>id, user_id, plan_id, amount, currency, status, gateway, external_id</td><td>سجل الطلب قبل الدفع</td></tr>
+              <tr><td>payment_events</td><td>id, event_id UNIQUE, intent_id, payload_json, received_at, verified</td><td>تخزين الويبهوكات ومنع التكرار</td></tr>
+              <tr><td>subscriptions</td><td>id, user_id, plan_id, starts_at, ends_at, status, source</td><td>حالة الاشتراك الفعّالة</td></tr>
+              <tr><td>entitlements</td><td>id, subscription_id, feature_code, limit_value</td><td>ميزات الخطة</td></tr>
+              <tr><td>devices</td><td>id, user_id, device_fingerprint, status, last_seen</td><td>إدارة الأجهزة المرخصة</td></tr>
+              <tr><td>refunds_disputes</td><td>id, payment_id, type, amount, status</td><td>الاستردادات والنزاعات</td></tr>
+              <tr><td>audit_logs</td><td>id, actor, action, target_type, target_id, meta_json</td><td>أثر تدقيقي كامل</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row g-3 mt-1">
+          <div class="col-lg-6"><div class="callout mini"><strong>مخاطر أمنية يجب تغطيتها:</strong> إعادة معالجة webhook، تفعيل على return URL، خلط بيئة test/live، الثقة في المبلغ القادم من العميل، تخزين secrets في الواجهة، وتجاوزات الأجهزة دون سجل تدقيق.</div></div>
+          <div class="col-lg-6"><div class="callout mini"><strong>أبسط نسخة أولى آمنة:</strong> بيع من الموقع/Chrome ببوابة واحدة، مدفوعات one-time أو recurring بسيط، Edge Functions منفصلة لـ create-intent وhandle-webhook، وجداول واضحة مع event_id فريد.</div></div>
+        </div>
+      </section>
+
+      <section id="regulations" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">5</span><h2 class="h4 m-0">الأنظمة السعودية المرتبطة بالنشاط</h2></div>
+        <ul class="checklist">
+          <li><strong>التجارة الإلكترونية:</strong> <span class="badge-state official">مؤكد رسميًا</span> يجب عرض وسائل الاتصال، وسياسة الخصوصية، وآلية الشكاوى، والرقم الضريبي إن وجد، وبيانات السجل/التوثيق إن وجدت.</li>
+          <li><strong>الإعلانات الإلكترونية:</strong> يجب توضيح أنها مادة إعلانية، واسم مقدم الخدمة ووسائل التواصل، وإتاحة وسيلة لإيقاف الرسائل الدعائية.</li>
+          <li><strong>حماية البيانات الشخصية PDPL:</strong> يلزم إشعار المستخدم بالغرض والمدة والحقوق، وتنفيذ طلبات الحقوق خلال 30 يومًا مع إمكانية تمديد 30 يومًا إضافية في حالات معينة، وإتلاف البيانات عند انتهاء الغرض أو طلب الحذف متى انطبق النظام.</li>
+          <li><strong>حذف الحساب والبيانات:</strong> <span class="badge-state recommend">توصية</span> اجعل في الموقع ولوحة الحساب تدفقًا واضحًا لحذف الحساب والبيانات أو طلب ذلك، لأن هذا مطلوب أيضًا من Google/Apple عند وجود حسابات مستخدمين.</li>
+          <li><strong>التسرب/الاختراق:</strong> عند حصول تسرب بيانات، يجب إشعار الجهة المختصة بحسب النظام واللوائح.</li>
+          <li><strong>ضريبة القيمة المضافة:</strong> ZATCA لديها خدمة تسجيل للأفراد الذين يمارسون نشاطًا اقتصاديًا. <span class="badge-state verify">يحتاج تحققًا محاسبيًا</span> تحديد إلزامية التسجيل لك فعليًا يعتمد على حجم التوريدات وحالتك.</li>
+          <li><strong>الفوترة الإلكترونية:</strong> إذا كنت من المكلفين المشمولين، فالفواتير يجب أن تصدر وتحفظ إلكترونيًا، والفواتير المبسطة مناسبة غالبًا لـ B2C، بينما B2B تتطلب فاتورة ضريبية.</li>
+          <li><strong>نقل البيانات خارج المملكة:</strong> <span class="badge-state verify">يحتاج تحققًا</span> إذا كانت بيانات Supabase أو مزوداتك خارج المملكة، راجع ضوابط نقل البيانات الشخصية خارج المملكة والعقود القياسية ذات الصلة.</li>
+        </ul>
+        <div class="callout mini mt-3">
+          <strong>أسئلة يجب رفعها إلى محاسب/مستشار قانوني:</strong> هل نشاطك يستلزم تسجيل VAT الآن أم لاحقًا؟ هل الفوترة الإلكترونية منطبقة عليك في تاريخ الإطلاق؟ ما سياسة الاحتفاظ الواجبة لسجلات الدفع والدعم؟ وما صياغة الشروط وسياسة الاسترداد الأنسب لبيع اشتراك برمجي؟
+        </div>
+      </section>
+      <section id="google-play" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">6</span><h2 class="h4 m-0">Google Play</h2></div>
+        <ul class="checklist">
+          <li><strong>السعودية مدعومة:</strong> <span class="badge-state official">مؤكد رسميًا</span> السعودية موجودة ضمن الدول المدعومة للتسجيل كمطور/تاجر، والعملة الافتراضية SAR مع ملاحظة أن الدفعات قد تكون USD أو EUR.</li>
+          <li><strong>رسوم التسجيل:</strong> <span class="badge-state official">25 دولارًا مرة واحدة</span>.</li>
+          <li><strong>أنواع الحساب:</strong> شخصي أو مؤسسة؛ الوظيفتان متقاربتان، لكن <strong>حساب المؤسسة يتطلب D‑U‑N‑S</strong>.</li>
+          <li><strong>متطلبات الفرد في السعودية:</strong> هوية حكومية + إثبات عنوان.</li>
+          <li><strong>الحسابات الشخصية الجديدة:</strong> اختبار مغلق بحد أدنى 12 مختبرًا لمدة 14 يومًا مستمرة قبل التقديم للوصول إلى الإنتاج.</li>
+          <li><strong>بيانات المطور الظاهرة:</strong> البريد الظاهر دائمًا، وبعض بيانات المطور تختلف حسب نوع الحساب.</li>
+          <li><strong>Play Billing:</strong> إلزامي لبيع السلع والخدمات الرقمية داخل التطبيق، بما فيها الاشتراكات والبرمجيات السحابية والخصائص المدفوعة.</li>
+          <li><strong>الخصوصية وData Safety:</strong> إلزاميان، مع رابط سياسة خصوصية عام غير PDF وغير محجوب جغرافيًا.</li>
+          <li><strong>حذف الحساب:</strong> إذا أنشأ التطبيق حسابات مستخدمين، يجب توفير مسار حذف داخل التطبيق + رابط ويب للحذف.</li>
+          <li><strong>App Bundle / Signing:</strong> يجب توقيع AAB برفع key وتهيئة Play App Signing.</li>
+          <li><strong>الرسوم على المبيعات في السعودية حاليًا:</strong> بحسب صفحة الرسوم الرسمية للأسواق غير الخاضعة بعد للتحديث العالمي، 15% لأول 1M USD سنويًا، و30% لما زاد، والاشتراكات المتجددة 15%.</li>
+        </ul>
+        <div class="callout mini mt-3">
+          <strong>التوصية الواضحة:</strong> إذا كان هدفك إطلاق Android بسرعة، فافتح <strong>حسابًا شخصيًا الآن</strong>. العيب الأساسي هو شرط الاختبار المغلق، واحتمال ظهور بيانات فردية بدل هوية مؤسسية. إذا كان اسم الناشر المؤسسي مهمًا جدًا من اليوم الأول، فانتظر حتى تنشئ كيانًا قانونيًا + D‑U‑N‑S ثم افتح حساب مؤسسة.
+        </div>
+      </section>
+
+      <section id="apple" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">7</span><h2 class="h4 m-0">Apple Developer و App Store</h2></div>
+        <ul class="checklist">
+          <li><strong>رسوم البرنامج:</strong> <span class="badge-state official">99 دولارًا سنويًا</span>.</li>
+          <li><strong>الفرد مقابل المنظمة:</strong> إذا سجلت كفرد/sole proprietor فـ<strong>اسمك القانوني الشخصي</strong> يظهر كبائع في App Store. إذا سجلت كمنظمة يظهر الاسم القانوني للمنظمة.</li>
+          <li><strong>المنظمة:</strong> تتطلب كيانًا قانونيًا وD‑U‑N‑S وبريد عمل مرتبط بالدومين وموقعًا عامًا فعالًا.</li>
+          <li><strong>In‑App Purchase:</strong> Apple يوجب استخدامه لفتح الخصائص أو المحتوى أو الاشتراكات الرقمية داخل التطبيق.</li>
+          <li><strong>الروابط الخارجية:</strong> استثناء reader apps لا يناسب عادةً SaaS عام مثل حضوري سمارت برو.</li>
+          <li><strong>App Privacy:</strong> يجب الإفصاح عن كل البيانات التي تجمعها أنت أو مزودوك الخارجيون وتحديث الإجابات عند تغير الممارسات.</li>
+          <li><strong>حذف الحساب:</strong> إذا كان التطبيق ينشئ حسابات، يجب توفير حذف الحساب من داخل التطبيق.</li>
+          <li><strong>الاشتراكات:</strong> تضبط في App Store Connect، باستخدام StoreKit وApp Store Server Notifications / API.</li>
+          <li><strong>TestFlight:</strong> حتى 100 مختبر داخلي و10,000 مختبر خارجي، مع مراجعة لأول build خارجي.</li>
+          <li><strong>العمولة المخفضة:</strong> Small Business Program يمنح 15% على التطبيقات المدفوعة وIn‑App Purchases لمن عائداتهم ≤ 1M USD ويستوفون الشروط.</li>
+        </ul>
+        <div class="callout mini mt-3">
+          <strong>التوصية:</strong> إذا كان iOS مؤجلًا فعلًا، فلا تجمد الإطلاق بسببه. وعند اقتراب الإطلاق: إن كان مهمًا أن يظهر اسم العلامة كبائع، فأنشئ كيانًا قانونيًا أولًا ثم Apple Organization. أما إذا كان الإطلاق التجريبي السريع أهم من الاسم المؤسسي، فيمكن البدء بفرد مع وعي أن اسمك الشخصي سيظهر كبائع.
+        </div>
+      </section>
+
+      <section id="chrome" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">8</span><h2 class="h4 m-0">Chrome Web Store</h2></div>
+        <ul class="checklist">
+          <li><strong>حساب المطور:</strong> يتطلب تسجيل مطور في CWS ورسوم تسجيل لمرة واحدة. نتائج البحث الرسمية المتقاطعة تشير إلى <strong>5 دولارات</strong>، بينما صفحة التسجيل نفسها تؤكد وجود رسوم لمرة واحدة دون إظهار الرقم داخل النص المستخرج.</li>
+          <li><strong>البريد:</strong> يوصى باستخدام بريد مخصص للنشر، ولا يمكن تغيير بريد الحساب بعد الإنشاء.</li>
+          <li><strong>النشر:</strong> رفع ملف ZIP صالح، ثم تعبئة Store Listing وPrivacy وDistribution وTest instructions، ثم Submit for Review.</li>
+          <li><strong>Manifest V3:</strong> هو المسار الحالي. لا يجوز استخدام <code>eval()</code> أو <code>new Function()</code> أو تحميل كود مستضاف عن بعد كمنطق للإضافة.</li>
+          <li><strong>الأذونات:</strong> التزم بأقل قدر من الصلاحيات، واستخدم optional permissions حيث أمكن لتقليل التحذيرات.</li>
+          <li><strong>الخصوصية:</strong> إذا كانت الإضافة تتعامل مع بيانات مستخدمين، فيجب سياسة خصوصية دقيقة ومحدثة.</li>
+          <li><strong>الغرض الواحد:</strong> يجب أن تكون الإضافة ذات غرض واضح ومحدد، وألا تجمع وظائف متباعدة بشكل يربك المراجعة.</li>
+          <li><strong>المدفوعات:</strong> <span class="badge-state recommend">توصية عملية</span> لا تبنِ نموذج الدفع على المتجر نفسه. بع الاشتراك من موقعك، واجعل الإضافة تعتمد على تسجيل الدخول والتحقق من الترخيص من خادمك.</li>
+        </ul>
+        <div class="muted-box mini mt-3">
+          <strong>Checklist قبل الرفع:</strong> وصف عربي/إنجليزي واضح، لقطات شاشة، أيقونات، سياسة خصوصية، single purpose واضح، أقل أذونات، لا remote code، تعليمات اختبار لو كان هناك تسجيل دخول، وصف صريح إذا كانت بعض المزايا مدفوعة.
+        </div>
+      </section>
+
+      <section id="stores-compare" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">9</span><h2 class="h4 m-0">مقارنة المتاجر ومسار التنفيذ</h2></div>
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle">
+            <thead><tr><th>البند</th><th>Google Play</th><th>Apple App Store</th><th>Chrome Web Store</th></tr></thead>
+            <tbody>
+              <tr><th>نوع الحساب</th><td>شخصي / مؤسسة</td><td>فرد / منظمة</td><td>حساب مطور</td></tr>
+              <tr><th>الرسوم</th><td>25$ مرة واحدة</td><td>99$ سنويًا</td><td>رسوم لمرة واحدة؛ نتائج البحث الرسمية تشير إلى 5$</td></tr>
+              <tr><th>D‑U‑N‑S</th><td>للمؤسسة</td><td>للمنظمة</td><td>غير مطلوب</td></tr>
+              <tr><th>الهوية</th><td>هوية + عنوان، حسب النوع</td><td>تحقق Apple + 2FA + متطلبات نوع الحساب</td><td>بريد حساب مطور ورسوم ونماذج المتجر</td></tr>
+              <tr><th>الاختبارات</th><td>خاصة الشخصية الجديدة: 12/14 يومًا</td><td>TestFlight داخلي/خارجي</td><td>قنوات توزيع ومراجعة</td></tr>
+              <tr><th>حزمة النشر</th><td>AAB + Play App Signing</td><td>بناء iOS + App Store Connect</td><td>ZIP + Manifest V3</td></tr>
+              <tr><th>نظام الدفع</th><td>Play Billing للرقمي داخل التطبيق</td><td>In‑App Purchase للرقمي داخل التطبيق</td><td>لا تعتمد عليه للدفع؛ استخدم موقعك</td></tr>
+              <tr><th>الخصوصية</th><td>Privacy policy + Data safety</td><td>App Privacy</td><td>Privacy policy + user data disclosures</td></tr>
+              <tr><th>أبرز سبب رفض</th><td>دفع خارجي مخالف، بيانات سلامة غير دقيقة</td><td>تجاوز IAP أو حذف حساب غير كافٍ</td><td>أذونات مبالغ بها أو remote code أو غرض غير واضح</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="decision" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">10</span><h2 class="h4 m-0">القرار التنفيذي المقترح لمشروع حضوري سمارت برو</h2></div>
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="cardx p-3 h-100">
+              <h3 class="h5 fw-bold">المسار الأول: البدء بوثيقة العمل الحر</h3>
+              <ol class="checklist mini">
+                <li>إصدار الوثيقة واختيار أقرب مسمى تقني متاح.</li>
+                <li>فتح حساب بنكي من بنك يذكر العمل الحر صراحةً (الإنماء أو الراجحي أولًا).</li>
+                <li>التفاوض مع Moyasar أولًا، ثم بدائل بعد تأكيد مكتوب.</li>
+                <li>إطلاق الموقع وإضافة Chrome ببيع مباشر من الموقع.</li>
+                <li>فتح Google Play Personal إذا كان Android قريب الإطلاق.</li>
+              </ol>
+              <p class="mini mb-0"><strong>المزايا:</strong> أسرع، أقل احتكاكًا، مناسب لاختبار السوق. <br><strong>القيود:</strong> قبول أضيق لبعض البوابات، اسم بائع غير مؤسسي، ومرونة أقل لاحقًا.</p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cardx p-3 h-100">
+              <h3 class="h5 fw-bold">المسار الثاني: إنشاء مؤسسة فردية</h3>
+              <ol class="checklist mini">
+                <li>إصدار السجل/المؤسسة وفتح حساب أعمال مؤسسي.</li>
+                <li>التعاقد مع بوابات تشترط السجل التجاري أو Corporate bank account.</li>
+                <li>التجهيز لمسار Apple Organization واسم بائع مؤسسي.</li>
+                <li>ترتيب محاسبي أوضح للفوترة والضرائب والتوسع.</li>
+              </ol>
+              <p class="mini mb-0"><strong>المزايا:</strong> قبول أوسع، اسم أقوى، جاهزية أعلى للتوسع. <br><strong>العيوب:</strong> إبطاء الإطلاق الأولي وزيادة الإجراءات الآن.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout mt-3 mini">
+          <strong>التوصية النهائية:</strong> ابدأ الآن بمسار <strong>وثيقة العمل الحر</strong> إذا كان هدفك التحقق السريع من السوق، لكن ضع <strong>معيار انتقال</strong> واضحًا إلى مؤسسة فردية عند أول واحد من الآتي: (1) رفض/تعقيد بنكي أو بوابة، (2) الحاجة إلى اسم مؤسسي في Apple أو التعاقدات، (3) بدء مبيعات منتظمة تستدعي تنظيمًا محاسبيًا أشد.
+        </div>
+        <div class="row g-3 mt-1">
+          <div class="col-lg-6">
+            <div class="muted-box mini h-100">
+              <h3 class="h6 fw-bold">التكاليف المؤكدة</h3>
+              <ul class="mb-0">
+                <li>Google Play: 25$ مرة واحدة.</li>
+                <li>Apple Developer Program: 99$ سنويًا.</li>
+                <li>Chrome Web Store: رسوم تسجيل لمرة واحدة؛ نتائج البحث الرسمية تشير إلى 5$.</li>
+                <li>وثيقة العمل الحر: مجانية حاليًا.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="muted-box mini h-100">
+              <h3 class="h6 fw-bold">تكاليف تحتاج عرض سعر/تأكيد</h3>
+              <ul class="mb-0">
+                <li>معظم رسوم بوابات الدفع (عدا المنشور رسميًا مثل بعض رسوم APS).</li>
+                <li>باقات الحسابات المصرفية وخدمات نقاط البيع/التجارة الإلكترونية.</li>
+                <li>أي تكاليف محاسبية/قانونية/امتثال PDPL أو استضافة بيانات.</li>
+                <li>رسوم السجل التجاري/المؤسسة الفردية: وردت في نتائج البحث الرسمية لـ business.sa لكن تعذر استخراج الصفحة مباشرة؛ تحتاج تأكيدًا وقت التنفيذ.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="sources" class="cardx p-4">
+        <div class="section-title mb-3"><span class="num">⌘</span><h2 class="h4 m-0">فهرس المصادر الأساسية</h2></div>
+        <p class="mini subtle">جميع تواريخ الاطلاع: 2026-07-26. عند غياب تاريخ التحديث في الصفحة، ذُكر «غير ظاهر». الروابط الخارجية تفتح في تبويب جديد.</p>
+        <ol class="source-list mini">
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.hrsd.gov.sa/ministry-services/services/%D8%AA%D8%AC%D8%AF%D9%8A%D8%AF-%D9%88%D8%AB%D9%8A%D9%82%D8%A9-%D8%A7%D9%84%D8%B9%D9%85%D9%84-%D8%A7%D9%84%D8%AD%D8%B1">وزارة الموارد البشرية – خدمة تجديد وثيقة العمل الحر</a> — الجهة: HRSD — التحديث الظاهر: 2019-12-01 (تاريخ إصدار الخدمة ظاهر).</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.hrsd.gov.sa/knowledge-centre/decisions-and-regulations/ministerial-decisions/808083">وزارة الموارد البشرية – القرار الوزاري 99439</a> — HRSD — التحديث/النشر الظاهر: 2021-02-18.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.hrsd.gov.sa/en/ministry-services/services/1065686">HRSD English service page</a> — HRSD — الرسوم: مجانية، القناة: منصة العمل الحر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://zatca.gov.sa/ar/eServices/Pages/eServices-002.aspx">ZATCA – التسجيل في ضريبة القيمة المضافة للأفراد</a> — ZATCA — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://zatca.gov.sa/ar/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx">ZATCA – ما هي الفوترة الإلكترونية</a> — ZATCA — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://zatca.gov.sa/ar/E-Invoicing/Introduction/Guidelines/Documents/E-Invoicing-Detailed-Guidelines.pdf">ZATCA – الدليل التفصيلي للفوترة الإلكترونية</a> — ZATCA — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://sdaia.gov.sa/ar/SDAIA/about/Documents/PersonalData.pdf">SDAIA – نظام حماية البيانات الشخصية</a> — SDAIA — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://sdaia.gov.sa/ar/Research/Documents/ExecutiveRegulations.pdf">SDAIA – اللائحة التنفيذية لنظام حماية البيانات الشخصية</a> — SDAIA — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://mc.gov.sa/ar/guides/MerchantGuide/Documents/MCIDoc.pdf">وزارة التجارة – دليل التاجر</a> — MC — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/6112435?hl=en">Google Play Console – إنشاء حساب المطور</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/13634885?hl=en">Google Play – أنواع الحسابات</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/13628312?hl=en">Google Play – متطلبات بيانات الحساب</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/15633622?hl=en&co=GENIE.CountryCode%3DSA">Google Play – وثائق التحقق للسعودية</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/14151465?hl=en">Google Play – شرط الاختبار المغلق</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/9306917?hl=en">Google Play – الدول المدعومة</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/10281818?hl=en">Google Play – سياسة المدفوعات الرقمية</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/112622?hl=en">Google Play – رسوم الخدمة</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/10787469?hl=en">Google Play – Data Safety</a> — Google — التحديث: راجع change log الداخلي.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.google.com/googleplay/android-developer/answer/13327111?hl=en">Google Play – حذف الحساب والبيانات</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.android.com/google/play/billing">Android Developers – Google Play Billing</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.android.com/studio/publish/app-signing">Android Developers – App Signing</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/programs/enroll/">Apple Developer Program – Enrollment</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/help/account/membership/program-enrollment/">Apple – Program enrollment details</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/in-app-purchase/">Apple – In-App Purchase</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/app-store/subscriptions/">Apple – Subscriptions</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/support/offering-account-deletion-in-your-app/">Apple – Account deletion</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/app-store/app-privacy-details/">Apple – App Privacy Details</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/testflight/">Apple – TestFlight</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.apple.com/app-store/small-business-program/">Apple – Small Business Program</a> — Apple — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.chrome.com/docs/webstore/register">Chrome Web Store – Register</a> — Google — آخر تحديث ظاهر: 2024-02-13.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.chrome.com/docs/webstore/publish">Chrome Web Store – Publish</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.chrome.com/docs/webstore/program-policies/policies">Chrome Web Store – Program policies</a> — Google — آخر تحديث ظاهر: 2025-05-22.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions">Chrome Extensions – Declare permissions</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developer.chrome.com/docs/extensions/develop/migrate/improve-security">Chrome Extensions – Improve security / MV3</a> — Google — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://moyasar.com/ar/resources/faqs/">Moyasar – FAQ</a> — Moyasar — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://docs.moyasar.com/api/other/webhooks/webhook-reference">Moyasar Docs – Webhooks</a> — Moyasar — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://docs.moyasar.com/category/tokenization">Moyasar Docs – Tokenization</a> — Moyasar — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://support.paytabs.com/en/support/solutions/articles/60000716510-what-kyc-documents-are-required-to-activate-my-paytabs-account-">PayTabs – KYC for KSA</a> — PayTabs — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.hyperpay.com/billing/">HyperPay – Recurring Billing</a> — HyperPay — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.hyperpay.com/integration-guide/">HyperPay – Integration Guide</a> — HyperPay — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://docs.geidea.net/docs/subscriptions">Geidea – Subscriptions</a> — Geidea — التحديث الظاهر: Updated about 1 year ago.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://docs.geidea.net/docs/tokenization">Geidea – Tokenization</a> — Geidea — التحديث الظاهر: Updated about 1 year ago.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://developers.tap.company/docs/webhook">Tap – Webhook</a> — Tap — التحديث الظاهر: Updated 5 months ago.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://paymentservices.amazon.com/pricing">Amazon Payment Services – Pricing</a> — APS — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://paymentservices.amazon.com/docs/managing-payments/tracking-a-payment/webhooks">APS – Webhooks</a> — APS — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://paymentservices.amazon.com/support-center/faq?kw=risk">APS – Merchant onboarding FAQ</a> — APS — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://docs.myfatoorah.com/docs/recurring-payment">MyFatoorah – Recurring Payment</a> — MyFatoorah — التحديث الظاهر: Updated 5 months ago.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://docs.myfatoorah.com/docs/refund">MyFatoorah – Refund</a> — MyFatoorah — التحديث الظاهر: Updated 5 months ago.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://alinma.com/Corporate/Accounts-and-Corporate-Services/Freelancers">بنك الإنماء – حساب حاملي وثيقة العمل الحر</a> — Alinma — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.alrajhibank.com.sa/ar/Business/Open-Your-Business-Account">الراجحي – فتح حساب أعمال</a> — Al Rajhi — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.bankalbilad.com/ar/sme/accounts/Pages/DigiAccountForCorporate.aspx">بنك البلاد – فتح الحساب الجاري رقميًا للمنشآت</a> — Bank Albilad — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.riyadbank.com/ar/business-banking/accounts-cards/current-account">بنك الرياض – الحساب الجاري للأعمال</a> — Riyad Bank — التحديث: غير ظاهر.</li>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://www.sab.com/ar/sme/accounts/open-an-account/">SAB/الأول – فتح حساب أعمال</a> — SAB — التحديث: غير ظاهر.</li>
+        </ol>
+        <div class="callout mini mt-3">
+          <strong>ما لم نتمكن من التحقق منه مباشرة:</strong> الصفحات الحية لبعض خدمات business.sa الخاصة بالمؤسسة الفردية وتعريف/توثيق المتجر تعذر سحبها آليًا في هذه الجلسة؛ لذلك أي رسوم/شروط تخص السجل التجاري الواردة هنا يجب اعتبارها <span class="badge-state verify">بحاجة إلى تأكيد مباشر</span> عند التنفيذ الفعلي.
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="floating btn-print-hide">
+  <button class="btn btn-success" onclick="window.print()"><i class="bi bi-printer"></i></button>
+  <button class="btn btn-outline-light border" onclick="document.body.classList.toggle('dark')"><i class="bi bi-circle-half"></i></button>
+  <a class="btn btn-primary" href="#top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<footer class="container-xl">
+  <div class="cardx p-4">
+    <h2 class="h5 fw-bold">خلاصة تسليم داخل الملف</h2>
+    <ul class="mini mb-0">
+      <li>المسار المرجح الآن: وثيقة العمل الحر + بنك يقبل العمل الحر + بوابة دفع مرنة (Moyasar مرشح أول).</li>
+      <li>المسار المرجح لاحقًا: مؤسسة فردية إذا احتجت Apple Organization أو قبولًا أوسع لدى البوابات والبنوك.</li>
+      <li>لـ Android: خطط من البداية لتكامل Play Billing إذا كانت المزايا الرقمية تُباع داخل التطبيق.</li>
+      <li>لـ Chrome والموقع: اجعل الدفع خارجيًا من موقعك، والتمكين من خلال webhook + Supabase.</li>
+    </ul>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+</body>
+</html>
